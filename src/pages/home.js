@@ -18,7 +18,7 @@ const HOME = () => {
       <div>
         <center>
           <br /><br /><br />
-          <img src="https://img.freepik.com/free-psd/kindergarten-template-landing-page_23-2148613412.jpg?t=st=1678675138~exp=1678675738~hmac=c33e2148fd46cf82e075048e4c2157476d473043250590d6c4915ce18cc605bc" alt = "사진" width="1000px" />
+          <img src="https://img.freepik.com/free-psd/kindergarten-template-landing-page_23-2148613412.jpg?t=st=1678675138~exp=1678675738~hmac=c33e2148fd46cf82e075048e4c2157476d473043250590d6c4915ce18cc605bc" alt="사진" width="1000px" />
         </center>
       </div>
     </div>
