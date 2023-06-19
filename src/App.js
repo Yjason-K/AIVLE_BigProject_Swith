@@ -127,7 +127,7 @@ function App() {
               <Route path="/" element={<Navigate to="/main" replace />} />
               <Route path="/main" element={<HOME />} />
               <Route path="/newpost" element={<NEWPOST />} />
-              <Route path="/edit" element={<POSTEDIT />} />
+              <Route path="/edit/:id" element={<POSTEDIT />} />
               <Route path="/post/:id" element={<POST />} />
               <Route path="/postlist" element={<POSTLIST />} />
               <Route path="/faq" element={<FAQ />} />
