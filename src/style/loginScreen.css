@@ -5,6 +5,11 @@
   height: 60vh;
 }
 
+.findpwd {
+  width: 30%;
+  margin: 10em auto;
+}
+
 .form-remember input[type=checkbox] {
     display: inline-block;
     width: auto;
@@ -114,7 +119,7 @@
     z-index: 1;
   }
   
-  @media screen and (min-height: 0px) { /* 일반적인 창크기 */
+  @media screen and (min-height: 0px) {
       .loginFrame {
         position: relative;
         display: flex;
@@ -197,7 +202,7 @@
       margin-top: -10px;
     }
     
-    .idInput, .pwInput, .emailInput, .serialnumberInput, .phoneInput, .nameInput{
+    .idInput, .pwInput, .confirmPasswordInput, .emailInput, .newPasswordInput, .serialnumberInput, .phoneInput, .nameInput{
       padding: 10px;
       width: 80%;
       margin-top: 15px;
@@ -210,9 +215,9 @@
     }
   
     .idInput:focus, .pwInput:focus, .emailInput:focus, .serialnumberInput:focus, .phoneInput:focus, .nameInput:focus{
-      border-color: #4A90E2; /* 테두리 색상 변경 */
-      box-shadow: 0 0 10px #4A90E2; /* 그림자 효과 추가 */
-      outline: none; /* 기본 브라우저 아웃라인 제거 */
+      border-color: #4A90E2;
+      box-shadow: 0 0 10px #4A90E2; 
+      outline: none;
   }
 
     .forgotNameInput {
@@ -224,7 +229,22 @@
     .pwInput {
       margin-top: 10px;
     }
-    
+
+    .pwdchange{
+      position: relative;
+      margin-top: 15px;
+      width: 80%;
+      height: 40px;
+      border: none;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 10px;
+      font-weight: 700;
+      background-color : #23a6d5; 
+      color: rgb(196, 233, 255);
+      transition: all ease-in-out 0.2s;
+    }
+
     .sbButton{
       position: relative;
       bottom: -30px;
@@ -350,7 +370,7 @@
       margin-top: 20px;
     }
 
-    @media screen and (min-height: 0px) { /* 일반적인 창크기 */
+    @media screen and (min-height: 0px) {
       .loginFrame_login {
         position: relative;
         display: flex;
