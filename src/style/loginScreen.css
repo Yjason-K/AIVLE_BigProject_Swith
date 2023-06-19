@@ -29,6 +29,10 @@
   .registerArea {
     margin-top : 75px;
   }
+
+  .editArea {
+    margin-top : 75px;
+  }
   
   .socialLogin {
     position: relative;
@@ -119,6 +123,22 @@
     z-index: 1;
   }
   
+  .mypageFrame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 400px;
+    top: 50px;
+    width: 400px;
+    height: 800px;
+    background-color: white;
+    border-radius: 10px 0px 0px 10px;
+    box-shadow: -5px 5px 15px -5px black;
+    opacity: 0.9;
+    margin-right: 50px;
+  }
+
   @media screen and (min-height: 0px) {
       .loginFrame {
         position: relative;
@@ -163,6 +183,13 @@
       }
     
       .registerArea{
+        width: 80%;
+        position: relative;
+        border-radius: 30px;
+        text-align: center;
+      }
+
+      .editArea{
         width: 80%;
         position: relative;
         border-radius: 30px;
@@ -304,6 +331,16 @@
   
     .registerArea::before {
       content: 'REGISTER';
+      position: absolute;
+      top: -40px;
+      color:rgb(59, 134, 255);
+      left: 20px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .editArea::before {
+      content: '회원정보수정';
       position: absolute;
       top: -40px;
       color:rgb(59, 134, 255);
