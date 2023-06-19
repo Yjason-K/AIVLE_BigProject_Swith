@@ -34,7 +34,7 @@ const MYPAGE = () => {
       if (verified) {
         return <center>
           <br /><br /><br />
-          <img src="https://blog.kakaocdn.net/dn/bHzCFD/btri1duRXGM/C98W6o4czhKgDOx274FOaK/img.png" alt = "사진" width="1000px" />
+          <img src="https://blog.kakaocdn.net/dn/bHzCFD/btri1duRXGM/C98W6o4czhKgDOx274FOaK/img.png" alt="사진" width="1000px" />
         </center>
       }
       return (
