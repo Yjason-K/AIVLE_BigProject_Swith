@@ -18,7 +18,7 @@ const FAQ = () => {
       <div>
         <center>
           <br /><br /><br />
-          <img src="https://img.freepik.com/premium-vector/faq-page-template-frequently-asked-question-banner-user-support-web-page-question-mark-and-pattern_668430-320.jpg" width="1000px" />
+          <img src="https://img.freepik.com/premium-vector/faq-page-template-frequently-asked-question-banner-user-support-web-page-question-mark-and-pattern_668430-320.jpg" alt = "사진" width="1000px" />
         </center>
       </div>
     </div>

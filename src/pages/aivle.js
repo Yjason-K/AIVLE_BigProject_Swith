@@ -18,7 +18,7 @@ const AIVLE = () => {
       <div>
         <center>
           <br /><br /><br />
-          <img src="https://imgscf.slidemembers.com/docs/1/1/426/pitch_team_team_introduction_ppt_deck_425777.jpg" width="1000px" />
+          <img src="https://imgscf.slidemembers.com/docs/1/1/426/pitch_team_team_introduction_ppt_deck_425777.jpg" alt = "설명" width="1000px" />
         </center>
       </div>
     </div>

@@ -18,7 +18,7 @@ const SERVICE = () => {
       <div>
         <center>
           <br /><br /><br />
-          <img src="https://imgscf.slidemembers.com/docs/1/1/354/service_introduction_page_template_353420.jpg" width="1000px" />
+          <img src="https://imgscf.slidemembers.com/docs/1/1/354/service_introduction_page_template_353420.jpg" alt = "사진" width="1000px" />
         </center>
       </div>
     </div>
