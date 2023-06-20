@@ -154,12 +154,15 @@
         box-shadow: -5px 5px 15px -5px black;
         opacity: 0.9;
         margin-right: 50px;
+        margin-top:auto;
+        
       }
 
         
       .terms_of_service{
         position: relative;
         top: 140px;
+        margin-top:auto;
       }
   
       .platform{
@@ -421,6 +424,7 @@
         border-radius: 10px 0px 0px 10px;
         box-shadow: -5px 5px 15px -5px black;
         opacity: 0.9;
+        margin-top:auto;
       }
   
       .platform_login{
@@ -434,6 +438,7 @@
         box-shadow: -10px 5px 25px -5px black;
         overflow: hidden;
         z-index: -1;
+        margin-top:auto;
       }
   
       .registerArea_login{

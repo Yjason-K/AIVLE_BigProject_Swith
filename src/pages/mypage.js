@@ -10,7 +10,6 @@ const MYPAGE = () => {
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [serialNumber, setSerialNumber] = useState('');
   const [ageNumber, setAgeNumber] = useState('');
@@ -20,8 +19,6 @@ const MYPAGE = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const emailRegex = /\S+@\S+\.\S+/;
-
   useEffect(() => {
     if (session && session !== "null") {
       setSessionId(true);
@@ -30,7 +27,6 @@ const MYPAGE = () => {
       if (foundUser) {
         setCurrentUser(foundUser);
         setPhoneNumber(foundUser.phone);
-        setEmail(foundUser.email);
         setName(foundUser.name);
         setSerialNumber(foundUser.serialnumber);
         setAgeNumber(foundUser.agenumber);
@@ -56,8 +52,15 @@ const MYPAGE = () => {
       return;
     }
 
-    if (email && !emailRegex.test(email)) {
-      alert('유효한 이메일 주소를 입력해주세요.');
+    const age = Number(ageNumber);
+    if (isNaN(age) || age < 0 || age > 120) {
+      alert('연령은 0~120 사이의 값이어야 합니다.');
+      return;
+    }
+
+    const timeRange = timeNumber.split('~');
+    if (timeRange.length !== 2 || timeRange.some(time => isNaN(time) || time < 0 || time > 24)) {
+      alert('이용 시간대는 0~24 사이의 두 개의 숫자로 지정해야 합니다. 예: 9~18');
       return;
     }
 
@@ -69,7 +72,6 @@ const MYPAGE = () => {
         ...currentUser,
         password: newPassword || currentUser.password,
         phone: phoneNumber || currentUser.phone,
-        email: email || currentUser.email,
         name: name || currentUser.name,
         serialnumber: serialNumber || currentUser.serialnumber,
         agenumber: ageNumber || currentUser.agenumber,
@@ -79,7 +81,6 @@ const MYPAGE = () => {
       if (
         currentUser.password === updatedUser.password &&
         currentUser.phone === updatedUser.phone &&
-        currentUser.email === updatedUser.email &&
         currentUser.name === updatedUser.name &&
         currentUser.serialnumber === updatedUser.serialnumber &&
         currentUser.agenumber === updatedUser.agenumber &&
@@ -100,6 +101,7 @@ const MYPAGE = () => {
       alert('회원 정보를 찾을 수 없습니다.');
     }
   };
+
 
   const renderContent = () => {
     if (sessionId) {
