@@ -50,7 +50,9 @@ const SIGNUP = () => {
     checkpw: '',
     serialnumber: '',
     phone: '',
-    email: ''
+    email: '',
+    agenumber: '',
+    timenumber: ''
   });
   const [showpw, setShowPw] = useState('password');
 
@@ -81,7 +83,7 @@ const SIGNUP = () => {
       alert('이메일 형식이 올바르지 않습니다.');
       return;
     }
-    
+
     const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
     const isUserExist = existingUsers.some((user) => user.username === idInfo.id);
     if (isUserExist) {
@@ -92,8 +94,10 @@ const SIGNUP = () => {
     const isSerialExist = existingUsers.some((user) => user.serialnumber === idInfo.serialnumber);
     if (isSerialExist) {
       alert('이미 존재하는 시리얼넘버입니다.');
-    return;
+      return;
     }
+
+    const timeRange = idInfo.timenumber.split('~');
 
     const newUser = {
       username: idInfo.id,
@@ -101,7 +105,9 @@ const SIGNUP = () => {
       name: idInfo.name,
       serialnumber: idInfo.serialnumber,
       phone: idInfo.phone,
-      email: idInfo.email
+      email: idInfo.email,
+      agenumber: idInfo.agenumber,
+      timenumber: timeRange
     };
     existingUsers.push(newUser);
 
@@ -127,31 +133,39 @@ const SIGNUP = () => {
                 <div onClick={() => !isCheck && alert("이용 약관에 모두 동의해주세요.")}>
                   <input type="text" className="nameInput" required
                     minLength="2" maxLength="5"
-                    placeholder="이름" name="name" onChange={setinfo} disabled={!isCheck} />
+                    placeholder="이름(2글자 이상)" name="name" onChange={setinfo} disabled={!isCheck} />
 
                   <input type="text" className="idInput" required
                     minLength="4"
-                    placeholder="닉네임" name="id" onChange={setinfo} disabled={!isCheck} />
+                    placeholder="닉네임(4글자 이상)" name="id" onChange={setinfo} disabled={!isCheck} />
 
                   <input type={showpw} className="pwInput" required
                     minLength="6"
-                    placeholder="비밀번호" name="pw" onChange={setinfo} disabled={!isCheck} />
+                    placeholder="비밀번호(6글자 이상)" name="pw" onChange={setinfo} disabled={!isCheck} />
 
                   <input type={showpw} className="pwInput" required
                     minLength="6"
-                    placeholder="비밀번호 확인" name="checkpw" onChange={setinfo} disabled={!isCheck} />
+                    placeholder="비밀번호 확인(6글자 이상)" name="checkpw" onChange={setinfo} disabled={!isCheck} />
 
-                  <hr className="hr" />
+                  <hr className="hr" style={{ marginBottom: "-10px" }} />
 
                   <input type="text" className="serialnumberInput" required
                     placeholder="시리얼넘버" name="serialnumber" onChange={setinfo} disabled={!isCheck} />
 
                   <input type="text" className="phoneInput" required
                     pattern="\d{11}" maxLength="11"
-                    placeholder="전화번호" name="phone" onChange={setinfo} disabled={!isCheck} />
+                    placeholder="전화번호('-'없이 11자리)" name="phone" onChange={setinfo} disabled={!isCheck} />
 
                   <input type="email" className="emailInput" required
-                    placeholder="이메일" name="email" onChange={setinfo} disabled={!isCheck} />
+                    placeholder="이메일(example@gmail.com)" name="email" onChange={setinfo} disabled={!isCheck} />
+
+                  <hr className="hr" style={{ marginBottom: "-10px" }} />
+
+                  <input type="text" className="ageInput" required
+                    placeholder="연령(00살)" name="agenumber" onChange={setinfo} disabled={!isCheck} />
+
+                  <input type="text" className="timeInput" required
+                    placeholder="이용 시간대(00~24)" name="timenumber" onChange={setinfo} disabled={!isCheck} />
                 </div>
 
                 <label className="showPw">

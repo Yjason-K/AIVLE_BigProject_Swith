@@ -229,15 +229,15 @@
       margin-top: -10px;
     }
     
-    .idInput, .pwInput, .confirmPasswordInput, .emailInput, .newPasswordInput, .serialnumberInput, .phoneInput, .nameInput{
-      padding: 10px;
+    .idInput, .pwInput, .confirmPasswordInput, .emailInput, .newPasswordInput, .serialnumberInput, .phoneInput, .nameInput, .ageInput, .timeInput{
+      padding: 5px;
       width: 80%;
       margin-top: 15px;
       border: 1;
       border-radius: 10px;
       outline-style: none;
       display: inline-block;
-      height: 35px;
+      height: 30px;
       font-family: sans-serif;
     }
   
