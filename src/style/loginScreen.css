@@ -146,7 +146,7 @@
         justify-content: center;
         align-items: center;
         min-width: 400px;
-        top: 150px;
+        top: 70px;
         width: 400px;
         height: 800px;
         background-color: white;
@@ -161,7 +161,7 @@
         
       .terms_of_service{
         position: relative;
-        top: 140px;
+        top: 100px;
         margin-top:auto;
       }
   

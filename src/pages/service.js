@@ -1,6 +1,7 @@
 //서비스 페이지
 import { useEffect, useState } from "react";
 import Myheader from "../components/header";
+import '../style/service.css';
 
 const SERVICE = () => {
   const session = localStorage.getItem("sessionId");
@@ -15,11 +16,15 @@ const SERVICE = () => {
   return (
     <div className="service">
       <Myheader isLogin={sessionId} />
-      <div>
-        <center>
-          <br /><br /><br />
-          <img src="https://imgscf.slidemembers.com/docs/1/1/354/service_introduction_page_template_353420.jpg" alt = "사진" width="1000px" />
-        </center>
+      <div className="container">
+        <div className="box livecam">라이브캠</div>
+        <div className="verticalContainer">
+          <div className="box logContainer">
+            <div className="log_record">로그 기록</div>
+            <div className="log_number">2</div>
+          </div>
+          <div className="box service_function">서비스 기능</div>
+        </div>
       </div>
     </div>
   );
