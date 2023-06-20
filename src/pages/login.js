@@ -19,7 +19,7 @@ const LOGIN = () => {
     e.preventDefault();
 
     if (loginInfo.email === "" || loginInfo.pw === "") {
-      alert("이메일과 비밀번호를 입력해주세요.");
+      alert("아이디와 비밀번호를 입력해주세요.");
       return;
     }
 
@@ -38,7 +38,7 @@ const LOGIN = () => {
       alert("로그인 성공!");
       navigate("/service");
     } else {
-      alert("이메일 또는 비밀번호를 확인하세요.");
+      alert("아이디 또는 비밀번호를 확인하세요.");
     }
   };
 

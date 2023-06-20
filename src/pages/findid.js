@@ -6,7 +6,7 @@ import Myheader from "../components/header";
 const FindID = () => {
   const navigate = useNavigate();
   const [idInfo, setIdInfo] = useState({
-    username: '',
+    email: '',
     serialnumber: '',
     newPassword: '',
     confirmPassword: ''
@@ -23,13 +23,13 @@ const FindID = () => {
     e.preventDefault();
 
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const foundUser = storedUsers.find((user) => user.username === idInfo.username && user.serialnumber === idInfo.serialnumber);
+    const foundUser = storedUsers.find((user) => user.email === idInfo.email && user.serialnumber === idInfo.serialnumber);
 
     if (foundUser) {
       setIdInfo(prev => ({ ...prev, newPassword: '', confirmPassword: '' }));
       setVerified(true);
     } else {
-      alert("닉네임 또는 시리얼번호를 확인하세요.");
+      alert("이메일 또는 시리얼번호를 확인하세요.");
     }
   };
 
@@ -42,14 +42,14 @@ const FindID = () => {
     }
 
     const storedUsers = JSON.parse(localStorage.getItem("users"));
-    const foundUser = storedUsers.find((user) => user.username === idInfo.username && user.serialnumber === idInfo.serialnumber);
+    const foundUser = storedUsers.find((user) => user.email === idInfo.email && user.serialnumber === idInfo.serialnumber);
 
     if (foundUser) {
       foundUser.password = idInfo.newPassword;
       localStorage.setItem("users", JSON.stringify(storedUsers));
       alert("비밀번호가 성공적으로 재설정되었습니다!");
       setVerified(false);
-      setIdInfo({ username: '', serialnumber: '', newPassword: '', confirmPassword: '' });
+      setIdInfo({ email: '', serialnumber: '', newPassword: '', confirmPassword: '' });
       navigate('/login');
     } else {
       alert("오류 발생. 다시 시도해 주세요.");
@@ -67,11 +67,11 @@ const FindID = () => {
         <center><h1 className="title">비밀번호 초기화</h1>
           {!verified ?
             <>
-              <h5 className="subtitle">가입시 입력했던 닉네임과 시리얼번호를 입력하세요.</h5>
+              <h5 className="subtitle">가입시 입력했던 이메일과 시리얼번호를 입력하세요.</h5>
               <div className="verifyArea">
                 <form onSubmit={verifyUser}>
-                  <input type="text" className="nameInput" required
-                    placeholder="닉네임" name="username" onChange={setinfo} key="username" />
+                  <input type="email" className="emailInput" required
+                    placeholder="이메일(example@gmail.com)" name="email" onChange={setinfo} key="email" />
                   <input type="text" className="serialnumberInput" required
                     placeholder="시리얼번호" name="serialnumber" onChange={setinfo} key="serialnumber" />
                   <button type="submit" className="sbButton">확인</button>
@@ -80,7 +80,7 @@ const FindID = () => {
             </>
             :
             <>
-              <h3 className="subtitle">새로운 비밀번호를 입력하세요. (6자 이상)</h3>
+              <h3 className="subtitle">새로운 비밀번호를 입력하세요.<br />(6자 이상)</h3>
               <div className="resetPasswordArea">
                 <form onSubmit={resetPassword}>
                   <input type={showPassword ? "text" : "password"} className="newPasswordInput" required
