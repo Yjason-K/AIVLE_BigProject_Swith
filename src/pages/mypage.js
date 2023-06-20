@@ -47,12 +47,12 @@ const MYPAGE = () => {
   const updateUserInfo = (e) => {
     e.preventDefault();
 
-    if (newPassword !== newPasswordConfirmation) {
+    if (newPassword && newPassword !== newPasswordConfirmation) {
       alert('입력한 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
       return;
     }
 
-    if (!emailRegex.test(email)) {
+    if (email && !emailRegex.test(email)) {
       alert('유효한 이메일 주소를 입력해주세요.');
       return;
     }
@@ -61,15 +61,31 @@ const MYPAGE = () => {
     const currentUserIndex = storedUsers.findIndex((user) => user.username === session);
 
     if (currentUserIndex > -1) {
-      storedUsers[currentUserIndex] = {
-        ...storedUsers[currentUserIndex],
-        password: newPassword,
-        phone: phoneNumber,
-        email: email,
-        name: name,
-        serialnumber: serialNumber
+      const updatedUser = {
+        ...currentUser,
+        password: newPassword || currentUser.password,
+        phone: phoneNumber || currentUser.phone,
+        email: email || currentUser.email,
+        name: name || currentUser.name,
+        serialnumber: serialNumber || currentUser.serialnumber
       };
+
+      if (
+        currentUser.password === updatedUser.password &&
+        currentUser.phone === updatedUser.phone &&
+        currentUser.email === updatedUser.email &&
+        currentUser.name === updatedUser.name &&
+        currentUser.serialnumber === updatedUser.serialnumber
+      ) {
+        alert('수정된 부분이 없습니다.');
+        navigate('/service');
+        return;
+      }
+
+      storedUsers[currentUserIndex] = updatedUser;
       localStorage.setItem('users', JSON.stringify(storedUsers));
+      setCurrentUser(updatedUser);
+
       alert('회원 정보가 성공적으로 수정되었습니다.');
       navigate('/service');
     } else {
@@ -82,37 +98,37 @@ const MYPAGE = () => {
       if (verified) {
         return (
           <center>
-          <div className="mypageFrame">
-            <Link to="/service">
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-arrow-left Arrows" viewBox="0 0 16 16">
-                <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-              </svg>
-            </Link>
-            <div className="editArea">
-              <form onSubmit={updateUserInfo}>
-                <div>
-                  <input type="text" className="nameInput" value={name} onChange={(e) => setName(e.target.value)} />
+            <div className="mypageFrame">
+              <Link to="/service">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-arrow-left Arrows" viewBox="0 0 16 16">
+                  <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
+              </Link>
+              <div className="editArea">
+                <form onSubmit={updateUserInfo}>
+                  <div>
+                    <input type="text" className="nameInput" placeholder={`현재 이름: ${currentUser.name}`} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" className="idInput" value={`닉네임: ${currentUser.username}`} disabled />
 
-                  <input type="text" className="idInput" value={session} disabled />
+                    <input type="password" className="pwInput" placeholder="비밀번호 변경" onChange={(e) => setNewPassword(e.target.value)} minLength="6" />
+                    <input type="password" className="pwInput" placeholder="비밀번호 확인" onChange={(e) => setNewPasswordConfirmation(e.target.value)} minLength="6" />
 
-                  <input type={showPassword ? "text" : "password"} className="pwInput" placeholder="비밀번호 변경" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength="6" />
+                    <input type="text" className="serialnumberInput" placeholder={`현재 시리얼넘버: ${currentUser.serialnumber}`} onChange={(e) => setSerialNumber(e.target.value)} />
 
-                  <input type={showPassword ? "text" : "password"} className="pwInput" placeholder="비밀번호 확인" value={newPasswordConfirmation} onChange={(e) => setNewPasswordConfirmation(e.target.value)} required minLength="6" />
+                    <input type="text" className="phoneInput" placeholder={`현재 전화번호: ${currentUser.phone}`} onChange={(e) => setPhoneNumber(e.target.value)} pattern="\d{11}" maxLength="11" />
 
-                  <input type="text" className="serialnumberInput" value={serialNumber} onChange={(e) => setSerialNumber(e.target.value)} />
-
-                  <input type="text" className="phoneInput" placeholder="전화번호 변경" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required pattern="\d{11}" maxLength="11" />
-
-                  <input type="email" className="emailInput" placeholder="이메일 변경" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                <label className="showPw">
-                  <br />
-                  <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} /> 비밀번호 표시
-                </label>
-                <button type="submit" className="pwdchange">회원정보수정</button>
-              </form>
+                    <input type="email" className="emailInput" placeholder={`현재 이메일: ${currentUser.email}`} onChange={(e) => setEmail(e.target.value)} />
+                  </div>
+                  <label className="showPw">
+                    <input type="checkbox" className="" checked={showPassword} onChange={() => setShowPassword(!showPassword)} /> 비밀번호 표시
+                  </label>
+                  <div style={{ marginTop: "-10px" }}>
+                    <br />수정 할 부분을 입력하세요.
+                  </div>
+                  <button type="submit" className="pwdchange">회원정보수정</button>
+                </form>
+              </div>
             </div>
-          </div>
           </center>
         );
       }
