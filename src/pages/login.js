@@ -5,40 +5,40 @@ import Myheader from "../components/header";
 
 const LOGIN = () => {
   const navigate = useNavigate();
-  const [idInfo, setIdInfo] = useState({
-    id: "",
+  const [loginInfo, setLoginInfo] = useState({
+    email: "",
     pw: "",
   });
 
-  const changeIdPw = (e) => {
+  const changeLoginInfo = (e) => {
     const { name, value } = e.target;
-    setIdInfo({ ...idInfo, [name]: value });
+    setLoginInfo({ ...loginInfo, [name]: value });
   };
 
   const signIn = (e) => {
     e.preventDefault();
 
-    if (idInfo.id === "" || idInfo.pw === "") {
-      alert("닉네임과 비밀번호를 입력해주세요.");
+    if (loginInfo.email === "" || loginInfo.pw === "") {
+      alert("이메일과 비밀번호를 입력해주세요.");
       return;
     }
 
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
     const foundUser = storedUsers.find(
-      (user) => user.username === idInfo.id && user.password === idInfo.pw
+      (user) => user.email === loginInfo.email && user.password === loginInfo.pw
     );
 
     if (foundUser) {
       localStorage.setItem(
         "userId",
         JSON.stringify({
-          id: idInfo.id,
+          id: foundUser.username,
         })
       );
       alert("로그인 성공!");
       navigate("/service");
     } else {
-      alert("닉네임 또는 비밀번호를 확인하세요.");
+      alert("이메일 또는 비밀번호를 확인하세요.");
     }
   };
 
@@ -64,27 +64,27 @@ const LOGIN = () => {
               </svg>
             </Link>
             <Link to="/signup">
-              <span className="registers">Register</span>
+              <span className="registers">회원가입</span>
             </Link>
             <div className="loginArea_login">
               <form>
                 <input
-                  type="text"
-                  className="idInput"
-                  placeholder="닉네임"
-                  name="id"
-                  onChange={changeIdPw}
+                  type="email"
+                  className="emailInput"
+                  placeholder="아이디(example@gmail.com)"
+                  name="email"
+                  onChange={changeLoginInfo}
                 />
                 <input
                   type="password"
                   className="pwInput"
                   placeholder="비밀번호"
                   name="pw"
-                  onChange={changeIdPw}
+                  onChange={changeLoginInfo}
                 />
                 <br />
                 <Link to="/findid">
-                  <span className="findId">Forgot your Password?</span>
+                  <span className="findId">아이디 · 비밀번호 찾기</span>
                 </Link>
               </form>
               <div className="loginbuttonarea">

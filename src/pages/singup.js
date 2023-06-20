@@ -135,9 +135,8 @@ const SIGNUP = () => {
                     minLength="2" maxLength="5"
                     placeholder="이름(2글자 이상)" name="name" onChange={setinfo} disabled={!isCheck} />
 
-                  <input type="text" className="idInput" required
-                    minLength="4"
-                    placeholder="닉네임(4글자 이상)" name="id" onChange={setinfo} disabled={!isCheck} />
+                  <input type="email" className="emailInput" required
+                    placeholder="아이디(example@gmail.com)" name="email" onChange={setinfo} disabled={!isCheck} />
 
                   <input type={showpw} className="pwInput" required
                     minLength="6"
@@ -146,6 +145,10 @@ const SIGNUP = () => {
                   <input type={showpw} className="pwInput" required
                     minLength="6"
                     placeholder="비밀번호 확인(6글자 이상)" name="checkpw" onChange={setinfo} disabled={!isCheck} />
+
+                  <input type="text" className="idInput" required
+                    minLength="4"
+                    placeholder="닉네임(4글자 이상)" name="id" onChange={setinfo} disabled={!isCheck} />
 
                   <hr className="hr" style={{ marginBottom: "-10px" }} />
 
@@ -156,8 +159,6 @@ const SIGNUP = () => {
                     pattern="\d{11}" maxLength="11"
                     placeholder="전화번호('-'없이 11자리)" name="phone" onChange={setinfo} disabled={!isCheck} />
 
-                  <input type="email" className="emailInput" required
-                    placeholder="이메일(example@gmail.com)" name="email" onChange={setinfo} disabled={!isCheck} />
 
                   <hr className="hr" style={{ marginBottom: "-10px" }} />
 
@@ -171,7 +172,7 @@ const SIGNUP = () => {
                 <label className="showPw">
                   <input type="checkbox" className="showPw" onClick={showPwBt} /> 비밀번호 표시
                 </label><br />
-                <span className="pwChecking">닉네임은 4자 이상, 비밀번호는 6자 이상 입력해주세요.</span>
+                <span className="pwChecking"><b><u>닉네임, 아이디는 회원 가입 후 변경 불가</u></b></span>
                 <button type="submit" className="sbButton">회원가입</button>
               </form>
             </div>
