@@ -78,6 +78,18 @@ const SIGNUP = () => {
       return;
     }
 
+    const age = Number(idInfo.agenumber);
+    if (isNaN(age) || age < 0 || age > 120) {
+      alert('연령은 0~120 사이의 값이어야 합니다.');
+      return;
+    }
+
+    const timeRegex = /^(0[0-9]|1[0-9]|2[0-3])~(0[0-9]|1[0-9]|2[0-3])$/;
+    if (!timeRegex.test(idInfo.timenumber)) {
+      alert('이용 시간대는 00~24 형식이어야 합니다.');
+      return;
+    }
+
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     if (!emailRegex.test(idInfo.email)) {
       alert('이메일 형식이 올바르지 않습니다.');
@@ -88,6 +100,12 @@ const SIGNUP = () => {
     const isUserExist = existingUsers.some((user) => user.username === idInfo.id);
     if (isUserExist) {
       alert('이미 존재하는 닉네임입니다.');
+      return;
+    }
+
+    const isEmailExist = existingUsers.some((user) => user.email === idInfo.email);
+    if (isEmailExist) {
+      alert('이미 등록된 이메일입니다.');
       return;
     }
 
@@ -162,7 +180,7 @@ const SIGNUP = () => {
 
                   <hr className="hr" style={{ marginBottom: "-10px" }} />
 
-                  <input type="text" className="ageInput" required
+                  <input type="number" min="0" max="120" className="ageInput" required
                     placeholder="연령(00살)" name="agenumber" onChange={setinfo} disabled={!isCheck} />
 
                   <input type="text" className="timeInput" required
