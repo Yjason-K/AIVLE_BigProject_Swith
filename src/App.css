@@ -218,8 +218,18 @@
 .commentlist {
   border-bottom: 1px solid gray;
   background-color: #ececec;
+  display: flex;
+  flex-direction: column;
 }
 
+.commentlist .second_row {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-link {
+  padding: 0 0 0 0;
+}
 /* pagination */
 .pagination_btn {
   display: flex;

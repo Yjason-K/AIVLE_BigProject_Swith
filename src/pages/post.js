@@ -3,14 +3,8 @@
 import Myheader from "../components/header";
 import { commentContext, dataContext } from "../App";
 
-import React, { useContext, useEffect, useState, useReducer } from "react";
-import {
-  useParams,
-  useNavigate,
-  Route,
-  Redirect,
-  useLocation,
-} from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 import Commentcontent from "../components/Commentcontent";
 import { postContext } from "../App";
@@ -143,7 +137,11 @@ const POST = () => {
               </button>
             </div>
           </div>
-          <Commentcontent post_id={id} commentdata={commentdata} />
+          <Commentcontent
+            post_id={id}
+            commentdata={commentdata}
+            commentonRemove={commentonRemove}
+          />
         </div>
       </div>
     );
@@ -181,7 +179,11 @@ const POST = () => {
               </button>
             </div>
           </div>
-          <Commentcontent post_id={id} commentdata={commentdata} />
+          <Commentcontent
+            post_id={id}
+            commentdata={commentdata}
+            commentonRemove={commentonRemove}
+          />
         </div>
       </div>
     );

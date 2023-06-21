@@ -84,9 +84,10 @@ function commentReducer(state, action) {
     }
     case "REMOVE": {
       newState = state.filter(
-        (it) => it.postid !== action.id && it.create_date !== action.date
+        (it) =>
+          it.create_date !== action.data.date ||
+          it.comment_id !== action.data.id
       );
-
       break;
     }
     case "POSTREMOVE": {
