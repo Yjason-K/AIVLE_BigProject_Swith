@@ -10,36 +10,46 @@ import { postContext, dataContext } from "../App";
 import HtmlParser from "react-html-parser";
 
 const POSTEDIT = () => {
-  // const { id: postid } = useParams;
-  // const postdata = useContext(dataContext);
-  // const filterdata = postdata.find((it) => it.id);
-  // const [postTitle, setPostTitle] = useState();
-  // const [content, setContent] = useState();
-  // const [date, setDate] = useState();
-  // const [views, setViews] = useState();
-  // const [author, setAuthor] = useState();
-  // const [like, setLike] = useState();
+  const titleRef = useRef();
+  const { id: postid } = useParams;
+  const postdata = useContext(dataContext);
+  const filterdata = postdata.find((it) => it.id);
+  const [postTitle, setPostTitle] = useState("");
+  const [content, setContent] = useState();
+  const [date, setDate] = useState();
+  const [views, setViews] = useState();
+  const [author, setAuthor] = useState();
+  const [like, setLike] = useState();
 
-  // useEffect(() => {
-  //   setPostTitle(filterdata.title);
-  //   setContent(filterdata.content);
-  //   setDate(filterdata.postDate);
-  //   setViews(filterdata.views);
-  //   setAuthor(filterdata.writer);
-  //   setLike(filterdata.likes);
-  // });
+  useEffect(() => {
+    if (filterdata) {
+      setPostTitle(filterdata.title);
+      setContent(filterdata.content);
+      setDate(filterdata.postDate);
+      setViews(filterdata.views);
+      setAuthor(filterdata.writer);
+      setLike(filterdata.likes);
+    }
+  }, [filterdata]);
+
+  const onChangeContent = (e) => {
+    setPostTitle(e.target.value);
+  };
 
   // 비정상적인 접근 차단
   // if (author !== JSON.parse(localStorage.setItem('')))
   return (
     <div className="postedit">
       <Myheader />
-      {/* <section className="newPostArea">
+      <section className="newPostArea">
         <div className="postController">
           <div className="title_wrapper">
             <span className="publicSection">Title {postTitle.length} / 30</span>
             <input
               className="title-input"
+              config={{
+                placeholder: `${content}`,
+              }}
               type="text"
               maxLength={30}
               placeholder="제목을 입력해주세요"
@@ -70,7 +80,7 @@ const POSTEDIT = () => {
             }}
           />
         </div>
-      </section> */}
+      </section>
     </div>
   );
 };

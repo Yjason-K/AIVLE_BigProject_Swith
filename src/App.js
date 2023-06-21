@@ -86,6 +86,7 @@ function commentReducer(state, action) {
       newState = state.filter(
         (it) => it.postid !== action.id && it.create_date !== action.date
       );
+
       break;
     }
     case "POSTREMOVE": {
@@ -114,11 +115,12 @@ export const dataContext = createContext();
 function App() {
   // 게시글 Id numnber 지정
   // 서버에서 받아오는거 보고 id지정 어떻게 받아올지 결정
-  const [dataId, setDataId] = useState(
-    !localStorage.getItem("posts")
-      ? 0
-      : JSON.parse(localStorage.getItem("posts"))[0].id + 1
-  );
+
+  const [dataId, setDataId] = useState(() => {
+    return localStorage.getItem("posts")
+      ? JSON.parse(localStorage.getItem("posts"))[0]?.id + 1 || 0
+      : 0;
+  });
 
   const [isLogin, setIsLogin] = useState(false);
   const [data, dispatch] = useReducer(postReducer, []);
