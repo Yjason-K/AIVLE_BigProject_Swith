@@ -17,10 +17,12 @@ const FAQ = () => {
   return (
     <div>
       <Myheader isLogin={sessionId} />
-      <div style={{ width: '65%', marginTop: '60px', marginBottom: '10px', textAlign: 'center', margin: 'auto'}}>
+      <center>
+      <div style={{ width: '65%', marginTop: '50px'}}>
         <h1>Q & A</h1>
       </div>
-      <div className="faq" style={{ width: '65%', marginTop: '0', display: "flex", justifyContent: "center", alignItems: "center", margin: 'auto' }}>
+      </center>
+      <div className="faq" style={{ width: '65%', marginTop: '-20px', display: "flex", justifyContent: "center", alignItems: "center", margin: 'auto' }}>
         <div className="faq_accordion" style={{ width: "65%" }}>
           <Accordion defaultActiveKey="0" className="mt-5 p-3">
             <Accordion.Item eventKey="0" className="item">
