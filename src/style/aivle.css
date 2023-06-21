@@ -1,0 +1,23 @@
+.team-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: .5rem;
+  }
+  
+  .team-card {
+    flex: 0 0 auto;
+    width: 220px;  
+    height: 220px;
+    margin: 1.75rem;
+  }
+
+  .card-img-top {
+    width: 218px;
+    height: 220px;
+  }
+
+  .card{
+    border: 1px solid black;
+  }
