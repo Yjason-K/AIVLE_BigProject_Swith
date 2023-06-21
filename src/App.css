@@ -219,3 +219,11 @@
   border-bottom: 1px solid gray;
   background-color: #ececec;
 }
+
+/* pagination */
+.pagination_btn {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  justify-content: center;
+}

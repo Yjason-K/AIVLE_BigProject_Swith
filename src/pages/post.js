@@ -1,48 +1,25 @@
 // post 게시글 확인 페이지
+// post 게시글 확인 페이지
 import Myheader from "../components/header";
-import { dataContext } from "../App";
+import { commentContext, dataContext } from "../App";
 
 import React, { useContext, useEffect, useState, useReducer } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import {
+  useParams,
+  useNavigate,
+  Route,
+  Redirect,
+  useLocation,
+} from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 import Commentcontent from "../components/Commentcontent";
-
-function postReducer(state, action) {
-  let newState = [];
-  switch (action.type) {
-    case "INIT": {
-      return action.data;
-    }
-    case "CREATE": {
-      const newItem = {
-        ...action.data,
-      };
-      newState = [newItem, ...state];
-      break;
-    }
-    case "REMOVE": {
-      newState = state.filter(
-        (it) => it.postid !== action.id && it.create_date !== action.date
-      );
-      break;
-    }
-    // case "EDIT": {
-    //   newState = state.map((it) =>
-    //     parseInt(it.id) == parseInt(action.data.id) ? { ...action.data } : it
-    //   );
-    //   break;
-    // }
-    default:
-      return state;
-  }
-  localStorage.setItem("comments", JSON.stringify(newState));
-  return newState;
-}
+import { postContext } from "../App";
 
 const POST = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  const postList = useContext(dataContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [isLogin, setIsLogin] = useState(false);
   const [post, setPost] = useState();
   const [views, setViews] = useState();
   const [likes, setLikes] = useState();
@@ -50,22 +27,13 @@ const POST = () => {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [comment, setComment] = useState();
+  const [postdate, setPostdate] = useState();
 
+  const postList = useContext(dataContext);
+  const { onRemove, viewCountUpdate } = useContext(postContext);
+  const { commentdata, postonRemove, commentonCreate, commentonRemove } =
+    useContext(commentContext);
   const { id } = useParams();
-
-  const [commentdata, dispatch] = useReducer(postReducer, []);
-
-  // 댓글 데이터 불러오기
-  useEffect(() => {
-    const localCommentData = localStorage.getItem("comments");
-    if (localCommentData) {
-      const comentList = JSON.parse(localCommentData).sort(
-        (a, b) => parseInt(b.create_date) - parseInt(a.create_date)
-      );
-      // 시간순 정렬위해서
-      dispatch({ type: "INIT", data: comentList });
-    }
-  }, []);
 
   useEffect(() => {
     // 페이지가 로드될 때 실행되는 효과 함수
@@ -81,85 +49,143 @@ const POST = () => {
       //일기가 존재할 때
       setPost(targetPost);
       setLikes(targetPost.likes);
-      setViews(targetPost.views + 1);
+      setViews(targetPost.views + 1); // 여기서 views 값을 증가시킴
       setWriter(targetPost.writer);
       setTitle(targetPost.title);
       setContent(targetPost.content);
+      setPostdate(targetPost.postDate);
+      viewCountUpdate(
+        id,
+        title,
+        content,
+        writer,
+        postdate,
+        likes,
+        targetPost.views + 1
+      ); // 변경된 views 값을 전달
     } else {
       // 일기가 없을 때
-      alert("없는 게시글 입니다.");
+      alert("잘못된 접근 입니다.");
       navigate("/postlist", { replace: true });
     }
-  }, [id, postList]);
+  }, []);
 
-  const onCreate = () => {
-    dispatch({
-      type: "CREATE",
-      data: {
-        postid: id,
-        comment_id: JSON.parse(localStorage.getItem("userId")).id,
-        comment: comment,
-        create_date: new Date().getTime() + 32400000,
-      },
-    });
-    setComment("");
-  };
-
-  const onRemove = (targetId, targetDate) => {
-    dispatch({
-      type: "REMOVE",
-      data: {
-        id: targetId,
-        date: targetDate,
-      },
-    });
-  };
+  useEffect(() => {
+    viewCountUpdate(id, title, content, writer, postdate, likes, views);
+  }, [id, title, content, writer, postdate, likes, views]);
 
   const createclick = () => {
     if (isLogin) {
-      onCreate();
+      commentonCreate(id, comment);
+      setComment("");
     } else {
       alert("로그인 후 이용가능합니다!");
     }
   };
 
-  return (
-    <div className="show_post">
-      <Myheader isLogin={isLogin} />
-      <div className="post_wrapper">
-        <div className="title_wrapper">
-          <p>Witten by {writer}</p>
-          <p> 제목 : {title}</p>
-          <p>
-            조회수 : {views}, 추천수 : {likes}
-          </p>
-        </div>
-        <div className="content_wrapper">{ReactHtmlParser(content)}</div>
-        <div className="comment_section">
-          <textarea
-            placeholder={
-              isLogin
-                ? "인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."
-                : "로그인 후 사용할 수 있습니다."
-            }
-            maxlength="600"
-            value={comment}
-            onChange={(e) => {
-              setComment(e.target.value);
-            }}
-            style={{ height: 86 }}
-            disabled={!isLogin}
-          ></textarea>
-          <div className="comment_btn">
-            <button className="coomment_submit" onClick={createclick}>
-              등록
-            </button>
+  const postdeletehandler = () => {
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      onRemove(id);
+      postonRemove(id);
+      navigate("/postlist", { replace: true });
+    }
+  };
+
+  const editButtonClickHandler = () => {
+    if (window.confirm("게시글을 수정하시겠습니까?")) {
+      navigate(`/edit/${id}`);
+    }
+  };
+
+  if (writer === JSON.parse(localStorage.getItem("userId"))?.id) {
+    return (
+      <div className="show_post">
+        <Myheader login={isLogin} />
+        <div className="post_wrapper">
+          <div className="title_wrapper">
+            <p>Witten by {writer}</p>
+            <p> 제목 : {title}</p>
+            <p>
+              조회수 : {views}, 추천수 : {likes}
+            </p>
           </div>
+          <button
+            style={{ marginLeft: 710, marginTop: 5 }}
+            onClick={postdeletehandler}
+          >
+            삭제
+          </button>
+          <button
+            style={{ marginLeft: 10, marginTop: 5 }}
+            onClick={editButtonClickHandler}
+          >
+            수정
+          </button>
+          <div className="content_wrapper">{ReactHtmlParser(content)}</div>
+          <div className="comment_section">
+            <textarea
+              placeholder={
+                isLogin
+                  ? "인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."
+                  : "로그인 후 사용할 수 있습니다."
+              }
+              maxlength="600"
+              value={comment}
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              style={{ height: 86 }}
+              disabled={!isLogin}
+            ></textarea>
+            <div className="comment_btn">
+              <button className="coomment_submit" onClick={createclick}>
+                등록
+              </button>
+            </div>
+          </div>
+          <Commentcontent post_id={id} commentdata={commentdata} />
         </div>
-        <Commentcontent post_id={id} commentdata={commentdata} />
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="show_post">
+        <Myheader login={isLogin} />
+        <div className="post_wrapper">
+          <div className="title_wrapper">
+            <p>Witten by {writer}</p>
+            <p> 제목 : {title}</p>
+            <p>
+              조회수 : {views}, 추천수 : {likes}
+            </p>
+          </div>
+          <div className="content_wrapper">{ReactHtmlParser(content)}</div>
+          <div className="comment_section">
+            <textarea
+              placeholder={
+                isLogin
+                  ? "인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."
+                  : "로그인 후 사용할 수 있습니다."
+              }
+              maxlength="600"
+              value={comment}
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              style={{ height: 86 }}
+              disabled={!isLogin}
+            ></textarea>
+            <div className="comment_btn">
+              <button className="coomment_submit" onClick={createclick}>
+                등록
+              </button>
+            </div>
+          </div>
+          <Commentcontent post_id={id} commentdata={commentdata} />
+        </div>
+      </div>
+    );
+  }
 };
 
 export default POST;

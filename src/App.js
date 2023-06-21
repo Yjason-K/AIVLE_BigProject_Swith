@@ -5,7 +5,13 @@ import React, {
   useReducer,
   useRef,
 } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 
 import HOME from "./pages/home";
 import NEWPOST from "./pages/newPost";
@@ -19,6 +25,7 @@ import LOGIN from "./pages/login";
 import SIGNUP from "./pages/singup";
 import SERVICE from "./pages/service";
 import FindID from "./pages/findid";
+import Pagination from "./pages/pagination";
 
 import "./App.css";
 
@@ -40,10 +47,16 @@ function postReducer(state, action) {
       break;
     }
     case "REMOVE": {
-      newState = state.filter((it) => it.id !== action.targetId);
+      newState = state.filter((it) => parseInt(it.id) !== parseInt(action.id));
       break;
     }
     case "EDIT": {
+      newState = state.map((it) =>
+        parseInt(it.id) == parseInt(action.data.id) ? { ...action.data } : it
+      );
+      break;
+    }
+    case "VIEWCOUNT": {
       newState = state.map((it) =>
         parseInt(it.id) == parseInt(action.data.id) ? { ...action.data } : it
       );
@@ -56,6 +69,45 @@ function postReducer(state, action) {
   return newState;
 }
 
+function commentReducer(state, action) {
+  let newState = [];
+  switch (action.type) {
+    case "INIT": {
+      return action.data;
+    }
+    case "CREATE": {
+      const newItem = {
+        ...action.data,
+      };
+      newState = [newItem, ...state];
+      break;
+    }
+    case "REMOVE": {
+      newState = state.filter(
+        (it) => it.postid !== action.id && it.create_date !== action.date
+      );
+      break;
+    }
+    case "POSTREMOVE": {
+      newState = state.filter(
+        (it) => parseInt(it.postid) !== parseInt(action.postid)
+      );
+      break;
+    }
+    // case "EDIT": {
+    //   newState = state.map((it) =>
+    //     parseInt(it.id) == parseInt(action.data.id) ? { ...action.data } : it
+    //   );
+    //   break;
+    // }
+    default:
+      return state;
+  }
+  localStorage.setItem("comments", JSON.stringify(newState));
+  return newState;
+}
+
+export const commentContext = createContext();
 export const postContext = createContext();
 export const dataContext = createContext();
 
@@ -68,9 +120,6 @@ function App() {
       : JSON.parse(localStorage.getItem("posts"))[0].id + 1
   );
 
-  // const [session, setSession] = useState(
-  //   JSON.parse(localStorage.getItem("userId"))
-  // );
   const [isLogin, setIsLogin] = useState(false);
   const [data, dispatch] = useReducer(postReducer, []);
 
@@ -104,7 +153,7 @@ function App() {
   };
   // REMOVE
   const onRemove = (targetId) => {
-    dispatch({ type: "REMOVE", targetId });
+    dispatch({ type: "REMOVE", id: targetId });
   };
   // EDIT
   const onEdit = (targetId, date, content) => {
@@ -118,29 +167,105 @@ function App() {
     });
   };
 
+  const viewCountUpdate = (
+    dataid,
+    posttitle,
+    postcontent,
+    postwriter,
+    aapostdate,
+    postlikes,
+    postcount
+  ) => {
+    dispatch({
+      type: "VIEWCOUNT",
+      data: {
+        id: dataid,
+        title: posttitle,
+        content: postcontent,
+        writer: postwriter,
+        postDate: aapostdate,
+        likes: postlikes,
+        views: postcount,
+      },
+    });
+  };
+
+  const [commentdata, comment_dispatch] = useReducer(commentReducer, []);
+
+  // 댓글 데이터 불러오기
+  useEffect(() => {
+    const localCommentData = localStorage.getItem("comments");
+    if (localCommentData) {
+      const comentList = JSON.parse(localCommentData).sort(
+        (a, b) => parseInt(b.create_date) - parseInt(a.create_date)
+      );
+      // 시간순 정렬위해서
+      comment_dispatch({ type: "INIT", data: comentList });
+    }
+  }, []);
+
+  const commentonCreate = (id, comment) => {
+    comment_dispatch({
+      type: "CREATE",
+      data: {
+        postid: id,
+        comment_id: JSON.parse(localStorage.getItem("userId")).id,
+        comment: comment,
+        create_date: new Date().getTime() + 32400000,
+      },
+    });
+  };
+
+  const commentonRemove = (targetId, targetDate) => {
+    comment_dispatch({
+      type: "REMOVE",
+      data: {
+        id: targetId,
+        date: targetDate,
+      },
+    });
+  };
+
+  const postonRemove = (targetId) => {
+    comment_dispatch({
+      type: "POSTREMOVE",
+      postid: targetId,
+    });
+  };
+
   return (
-    <postContext.Provider value={onCreate}>
-      <dataContext.Provider value={data}>
-        <BrowserRouter>
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<Navigate to="/main" replace />} />
-              <Route path="/main" element={<HOME />} />
-              <Route path="/newpost" element={<NEWPOST />} />
-              <Route path="/edit/:id" element={<POSTEDIT />} />
-              <Route path="/post/:id" element={<POST />} />
-              <Route path="/postlist" element={<POSTLIST />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/team21" element={<AIVLE />} />
-              <Route path="/mypage" element={<MYPAGE />} />
-              <Route path="/login" element={<LOGIN />} />
-              <Route path="/signup" element={<SIGNUP />} />
-              <Route path="/findid" element={<FindID />} />
-              <Route path="/service" element={<SERVICE />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </dataContext.Provider>
+    <postContext.Provider value={{ onCreate, onRemove, viewCountUpdate }}>
+      <commentContext.Provider
+        value={{
+          commentdata,
+          postonRemove,
+          commentonRemove,
+          commentonCreate,
+        }}
+      >
+        <dataContext.Provider value={data}>
+          <BrowserRouter>
+            <div className="App">
+              <Routes>
+                <Route path="/" element={<Navigate to="/main" replace />} />
+                <Route path="/main" element={<HOME />} />
+                <Route path="/newpost" element={<NEWPOST />} />
+                <Route path="/edit/:id" element={<POSTEDIT />} />
+                <Route path="/post/:id" element={<POST />} />
+                <Route path="/postlist" element={<POSTLIST />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/team21" element={<AIVLE />} />
+                <Route path="/mypage" element={<MYPAGE />} />
+                <Route path="/login" element={<LOGIN />} />
+                <Route path="/signup" element={<SIGNUP />} />
+                <Route path="/findid" element={<FindID />} />
+                <Route path="/service" element={<SERVICE />} />
+                <Route path="/pagination" element={<Pagination />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </dataContext.Provider>
+      </commentContext.Provider>
     </postContext.Provider>
   );
 }
