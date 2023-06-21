@@ -158,13 +158,25 @@ function App() {
     dispatch({ type: "REMOVE", id: targetId });
   };
   // EDIT
-  const onEdit = (targetId, date, content) => {
+  const onEdit = (
+    data_id,
+    posttitle,
+    postcontent,
+    postwriter,
+    aapostdate,
+    postlikes,
+    postcount
+  ) => {
     dispatch({
       type: "EDIT",
       data: {
-        id: targetId,
-        date: new Date(date).getTime() + 32400000,
-        content,
+        id: data_id,
+        title: posttitle,
+        content: postcontent,
+        writer: postwriter,
+        postDate: aapostdate,
+        likes: postlikes,
+        views: postcount,
       },
     });
   };
@@ -236,7 +248,9 @@ function App() {
   };
 
   return (
-    <postContext.Provider value={{ onCreate, onRemove, viewCountUpdate }}>
+    <postContext.Provider
+      value={{ onCreate, onRemove, viewCountUpdate, onEdit }}
+    >
       <commentContext.Provider
         value={{
           commentdata,
