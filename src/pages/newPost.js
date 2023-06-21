@@ -35,7 +35,7 @@ const NMEWPOST = () => {
   const originData = localStorage.getItem("posts");
   const data = useContext(dataContext);
 
-  const onCreate = useContext(postContext);
+  const { onCreate } = useContext(postContext);
 
   const handleSubmit = () => {
     if (postTitle.length < 4) {
@@ -55,6 +55,8 @@ const NMEWPOST = () => {
       navigate("/postlist", { replace: true });
     }
   };
+
+  console.log(onCreate);
 
   return (
     <div className="newpost">

@@ -7,28 +7,27 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ReactHtmlParser from "react-html-parser";
 import Myheader from "../components/header";
 import { postContext, dataContext } from "../App";
+import HtmlParser from "react-html-parser";
 
 const POSTEDIT = () => {
-  const { id: postid } = useParams;
-  const postdata = useContext(dataContext);
-  const filterdata = postdata.find((it) => it.id);
+  // const { id: postid } = useParams;
+  // const postdata = useContext(dataContext);
+  // const filterdata = postdata.find((it) => it.id);
   // const [postTitle, setPostTitle] = useState();
   // const [content, setContent] = useState();
-  // const date = filterdata.postDate;
-  // const views = filterdata.views;
-  // const author = filterdata.writer;
-  // const like = filterdata.likes;
+  // const [date, setDate] = useState();
+  // const [views, setViews] = useState();
+  // const [author, setAuthor] = useState();
+  // const [like, setLike] = useState();
 
-  // setPostTitle(filterdata.title);
-  // setContent(ReactHtmlParser(filterdata.contnet));
-
-  // const titleRef = useRef();
-
-  // const onChangeContent = (e) => {
-  //   setPostTitle(e.target.value);
-  // };
-
-  // console.log(postTitle);
+  // useEffect(() => {
+  //   setPostTitle(filterdata.title);
+  //   setContent(filterdata.content);
+  //   setDate(filterdata.postDate);
+  //   setViews(filterdata.views);
+  //   setAuthor(filterdata.writer);
+  //   setLike(filterdata.likes);
+  // });
 
   // 비정상적인 접근 차단
   // if (author !== JSON.parse(localStorage.setItem('')))
