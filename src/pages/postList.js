@@ -1,15 +1,28 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import Myheader from "../components/header";
 import PostComponent from "../components/Postcontent";
+import NumPagination from "./numberpagination";
 import { useNavigate } from "react-router-dom";
 import { dataContext } from "../App";
 
 const POSTLIST = () => {
-  const dataId = useRef();
   const data = useContext(dataContext);
+  const [posts, setPosts] = useState(useContext(dataContext));
   const [isLogin, setIsLogin] = useState(false);
   const [searchBy, setSearchBy] = useState("title");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+
+  // pagination 번호 처리
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentPosts = (posts) => {
+    let currentPosts = 0;
+    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  };
 
   useEffect(() => {
     const sessionId = localStorage.getItem("userId");
@@ -36,14 +49,29 @@ const POSTLIST = () => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = data.filter((post) => {
-    if (searchBy === "title") {
-      return post.title.toLowerCase().includes(searchTerm.toLowerCase());
-    } else if (searchBy === "writer") {
-      return post.writer.toLowerCase().includes(searchTerm.toLowerCase());
+  const handleSearch = () => {
+    if (searchTerm.trim() === "") {
+      // 검색어가 비어있을 경우 Data를 설정합니다.
+      setPosts(data);
+    } else {
+      const encodedSearchTerm = encodeURIComponent(searchTerm); // 검색어 인코딩
+      if (searchBy === "title") {
+        const filteredPosts = data.filter((it) => {
+          const encodedTitle = encodeURIComponent(it.title); // 제목 인코딩
+          return encodedTitle.includes(encodedSearchTerm);
+        });
+        setPosts(filteredPosts);
+      } else if (searchBy === "writer") {
+        const filteredPosts = data.filter((it) => {
+          const encodedAuthor = encodeURIComponent(it.writer); // 작성자 인코딩
+          return encodedAuthor.includes(encodedSearchTerm);
+        });
+        setPosts(filteredPosts);
+      }
     }
-    return false;
-  });
+  };
+
+  console.log(posts);
 
   return (
     <div className="postlist">
@@ -62,7 +90,12 @@ const POSTLIST = () => {
               <span id="DescHead">추천</span>
               <span id="DescHead">조회수</span>
             </div>
-            <PostComponent data={filteredData} />
+            <PostComponent data={currentPosts(posts)} />
+            <NumPagination
+              postsPerPage={postsPerPage}
+              totalPosts={posts.length}
+              paginate={setCurrentPage}
+            />
           </div>
           <div className="btn_area">
             <div className="search_container">
@@ -81,6 +114,7 @@ const POSTLIST = () => {
                 onChange={handleSearchTermChange}
                 className="search_title"
               />
+              <button onClick={handleSearch}>검색</button>
             </div>
             <button className="new_post" onClick={handleNewPost}>
               새글 작성하기
