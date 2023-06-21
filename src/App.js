@@ -131,7 +131,7 @@ function App() {
     const localData = localStorage.getItem("posts");
     if (localData) {
       const postsList = JSON.parse(localData).sort(
-        (a, b) => parseInt(b.id) - parseInt(a.id)
+        (a, b) => parseInt(b.postDate) - parseInt(a.postDate)
       );
       // 시간순 정렬위해서
       dispatch({ type: "INIT", data: postsList });

@@ -85,7 +85,9 @@ const POSTEDIT = () => {
               <button
                 className="postviewbutton_cancel"
                 onClick={() => {
-                  navigate("/postlist", { replace: true });
+                  if (window.confirm("게시글 수정을 취소하시겠습니까?")) {
+                    navigate("/postlist", { replace: true });
+                  }
                 }}
               >
                 Cancel
