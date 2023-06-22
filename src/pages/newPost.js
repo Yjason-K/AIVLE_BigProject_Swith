@@ -3,6 +3,8 @@ import { useEffect, useState, useContext, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Button } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
 
 import Myheader from "../components/header";
 import { postContext, dataContext } from "../App";
@@ -56,10 +58,101 @@ const NMEWPOST = () => {
     }
   };
 
+  const handlCancel = () => {
+    if (
+      window.confirm(
+        "게시글 작성을 취소하시겠습니까? 작성된 내용은 내용은 저장되지 않습니다."
+      )
+    ) {
+      navigate("/postlist", { replace: true });
+    }
+  };
+
+  // 파일 갯수
+  const [att_num, setAttNum] = useState(1);
+
+  const att_plus = () => {
+    setAttNum(att_num + 1);
+  };
+  const att_minus = () => {
+    setAttNum(att_num - 1);
+  };
+
+  if (att_num > 3) {
+    window.alert("이미지는 최대 3개까지 업로드 가능합니다.");
+    setAttNum(3);
+  }
+  if (att_num < 0) {
+    setAttNum(0);
+  }
+
+  const renderFileInputs = () => {
+    const fileInputs = [];
+    for (let i = 1; i <= att_num; i++) {
+      fileInputs.push(
+        <div key={i}>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleFileChange(e, i)}
+          />
+          <button className="preview-button" onClick={() => handlePreview(i)}>
+            미리보기
+          </button>
+        </div>
+      );
+    }
+    return fileInputs;
+  };
+
+  // const renderPreview = () => {
+  //   const fileInputs = [];
+  //   for (let i = 1; i <= att_num; i++) {
+  //     fileInputs
+  //       .push(
+  //       <Button
+  //         key={i}
+  //         variant="outline-dark"
+  //         className="preview-button"
+  //         onClick={() => handlePreview(i)}
+  //       >
+  //         미리보기
+  //       </Button>
+  //       );
+  //   }
+  //   return fileInputs;
+  // };
+
+  // 이미지 미리보기를 위한 모달 처리
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handlePreview = (index) => {
+    setShowModal(true);
+    setSelectedImage(selectedImages[index]);
+  };
+
+  const handleFileChange = (e, index) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImages((prevSelectedImages) => {
+          const newSelectedImages = [...prevSelectedImages];
+          newSelectedImages[index] = reader.result;
+          return newSelectedImages;
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="newpost">
       <Myheader />
-      <section className="newPostArea">
+      <div className="newPostArea">
         <div className="postController">
           <div className="title_wrapper">
             <span className="publicSection">Title {postTitle.length} / 30</span>
@@ -76,9 +169,9 @@ const NMEWPOST = () => {
             />
           </div>
           <div className="newpost_btn_wrapper">
-            <Link to={"/postlist"} className="linkButtondesign">
-              <button className="postviewbutton_cancel">Cancel</button>
-            </Link>
+            <button className="postviewbutton_cancel" onClick={handlCancel}>
+              Cancel
+            </button>
             <button className="postviewbutton" onClick={handleSubmit}>
               Save
             </button>
@@ -96,7 +189,50 @@ const NMEWPOST = () => {
             }}
           />
         </div>
-      </section>
+        <div className="attach_area">
+          <div className="attach_num">
+            <h5 style={{ marginRight: 20 }}>이미지 업로드하기</h5>
+            <Button variant="outline-dark" className="a_btn" onClick={att_plus}>
+              +
+            </Button>
+            <Button
+              variant="outline-dark"
+              className="a_btn"
+              onClick={att_minus}
+            >
+              -
+            </Button>
+          </div>
+          <div className="file_list">{renderFileInputs()}</div>
+        </div>
+        {/* <div className="preivew">{renderPreview()}</div> */}
+        {/* // newPost 컴포넌트 내에 추가될 코드 */}
+        <Modal
+          show={showModal}
+          onHide={() => {
+            setShowModal(false);
+            setSelectedImage(null);
+          }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>이미지 미리보기</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {selectedImage && (
+              <img
+                src={selectedImage}
+                alt="Preview"
+                style={{ width: "100%" }}
+              />
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowModal(false)}>
+              닫기
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     </div>
   );
 };

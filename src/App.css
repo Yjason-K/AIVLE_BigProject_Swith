@@ -122,7 +122,7 @@
 
 .newPostArea {
   border: solid 1px gray;
-  height: 600px;
+  height: 740px;
   width: 800px;
   margin: auto;
   margin-top: 50px;
@@ -137,7 +137,7 @@
 
 .postController .title_wrapper {
   flex-grow: 1;
-  padding-top: 5px;
+  margin: 3px 3px;
   margin-left: 5px;
   margin-right: 3px;
 }
@@ -147,6 +147,35 @@
 
 .postController .title_wrapper .title-input {
   width: 100px;
+}
+
+.newpost_btn_wrapper {
+  margin: 3px 3px;
+  margin-right: 5px;
+}
+
+.postviewbutton_cancel {
+  margin-right: 8px;
+}
+
+/* attach */
+.attach_area {
+  border: 1px solid black;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.attach_num {
+  display: flex;
+  flex-direction: row;
+  height: 54px;
+  align-items: center;
+}
+
+.a_btn {
+  padding: 0rem 0.5rem;
+  font-size: 0.2rem;
+  margin-right: 7px;
 }
 
 /* ckeditor */
@@ -180,12 +209,12 @@
   border: 1px solid gray;
 }
 
-.edit-delete{
+.edit-delete {
   display: flex;
   flex-direction: row;
 }
 
-.btn_delete{
+.btn_delete {
   margin-left: 85.5%;
 }
 
