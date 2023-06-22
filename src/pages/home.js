@@ -9,7 +9,7 @@ const UncontrolledExample = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://i.ytimg.com/vi/c0BiOZ8ZXfg/mqdefault.jpg"
+          src="https://imgscf.slidemembers.com/docs/1/1/354/service_introduction_page_template_353421.jpg"
           width="800px" height="500px"
           alt="First slide"
         />
@@ -17,17 +17,9 @@ const UncontrolledExample = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWaNVdTOMlq5fSIHQkhWcG2Ejxv2o5EQo-JhWp-soNqJaWtiC8ZS9e9gwag_boQ0FeAOQ&usqp=CAU"
+          src="https://imgscf.slidemembers.com/docs/1/1/354/service_introduction_page_template_353423.jpg"
           width="800px" height="500px"
           alt="Second slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://i.ytimg.com/vi/Xjx6oABT6sY/hqdefault.jpg"
-          width="800px" height="500px"
-          alt="Third slide"
         />
       </Carousel.Item>
     </Carousel>
@@ -50,20 +42,20 @@ const HOME = () => {
       <br /><br />
       <UncontrolledExample />
       <div className="feature_list" style={{ marginTop: "40px" }}>
-          <div className="feature_name" style={{ display: 'flex', justifyContent: 'space-between', margin: 'auto', width: '75%' }}>
-            <span style={{width: "350px"}}><center>특징1</center></span>
-            <span style={{width: "350px"}}><center>특징2</center></span>
-            <span style={{width: "350px"}}><center>특징3</center></span>
-          </div>
+        <div className="feature_name" style={{ display: 'flex', justifyContent: 'space-between', margin: 'auto', width: '75%' }}>
+          <span style={{ width: "350px" }}><center>특징1</center></span>
+          <span style={{ width: "350px" }}><center>특징2</center></span>
+          <span style={{ width: "350px" }}><center>특징3</center></span>
+        </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: 'auto', width: "75%", marginTop: "10px" }}>
           <div>
-            <img src="https://i.ytimg.com/vi/c0BiOZ8ZXfg/mqdefault.jpg" width={"350px"} height={"200px"} alt="Image 1" />
+            <img src="https://cdn.icon-icons.com/icons2/1104/PNG/512/wifi_78927.png" width={"350px"} height={"200px"} alt="Image 1" />
           </div>
           <div>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWaNVdTOMlq5fSIHQkhWcG2Ejxv2o5EQo-JhWp-soNqJaWtiC8ZS9e9gwag_boQ0FeAOQ&usqp=CAU" width={"350px"} height={"200px"} alt="Image 2" />
+            <img src="https://gongu.copyright.or.kr/gongu/wrt/cmmn/wrtFileImageView.do?wrtSn=13156879&filePath=L2Rpc2sxL25ld2RhdGEvMjAxOC8yMS9DTFMxLzEzMTU2ODc5X0NPTENUXzIwMTgxMTI2XzE=&thumbAt=Y&thumbSe=b_tbumb&wrtTy=10004" width={"350px"} height={"200px"} alt="Image 3" />
           </div>
           <div>
-            <img src="https://i.ytimg.com/vi/Xjx6oABT6sY/hqdefault.jpg" width={"350px"} height={"200px"} alt="Image 3" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNVxHHVicJIFxqQLE1neN1YxY7MzqrbcTX2w&usqp=CAU" width={"350px"} height={"200px"} alt="Image 2" />
           </div>
         </div>
       </div>
