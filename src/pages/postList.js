@@ -114,7 +114,9 @@ const POSTLIST = () => {
                 onChange={handleSearchTermChange}
                 className="search_title"
               />
-              <button onClick={handleSearch}>검색</button>
+              <button onClick={handleSearch} className="search_btn">
+                검색
+              </button>
             </div>
             <button className="new_post" onClick={handleNewPost}>
               새글 작성하기
