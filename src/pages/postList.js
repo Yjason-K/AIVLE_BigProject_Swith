@@ -51,7 +51,7 @@ const POSTLIST = () => {
 
   const handleSearch = () => {
     if (searchTerm.trim() === "") {
-      // 검색어가 비어있을 경우 Data를 설정합니다.
+      // 검색어가 비어있을 경우 전체 데이터를 설정합니다.
       setPosts(data);
     } else {
       const encodedSearchTerm = encodeURIComponent(searchTerm); // 검색어 인코딩
@@ -68,6 +68,7 @@ const POSTLIST = () => {
         });
         setPosts(filteredPosts);
       }
+      setCurrentPage(1); // 검색 시 첫 번째 페이지로 설정
     }
   };
 
