@@ -36,6 +36,9 @@ const POSTLIST = () => {
       navigate("/newpost");
     } else {
       alert("로그인 후 사용할 수 있습니다.");
+      if (window.confirm("로그인 하시겠습니까?")) {
+        navigate("/login");
+      }
     }
   };
 
@@ -91,7 +94,10 @@ const POSTLIST = () => {
               <span id="DescHead">추천</span>
               <span id="DescHead">조회수</span>
             </div>
-            <PostComponent data={currentPosts(posts)} />
+            <PostComponent
+              data={currentPosts(posts)}
+              currentPage={currentPage}
+            />
             <NumPagination
               postsPerPage={postsPerPage}
               totalPosts={posts.length}

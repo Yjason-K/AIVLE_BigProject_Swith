@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Postcontent = ({ data }) => {
+const Postcontent = ({ data, currentPage }) => {
   const getStringDate = (date) => {
     return new Date(date).toISOString().slice(0, 10);
   };
@@ -18,10 +18,15 @@ const Postcontent = ({ data }) => {
     return matchingComments.length;
   }
 
+  let a = [];
+  for (let i = 1; i <= 10; i++) {
+    a.push((currentPage - 1) * 10 + i);
+  }
+
   return data.map((post, idx) => (
     <Link to={`/post/${post.id}`} className="linktopost" key={post.numbers}>
       <div className="noticedescription userPost">
-        <span>{idx + 1}</span>
+        <span>{a[idx]}</span>
         <span>
           {/* 댓글 개수 보여주는 거 같은디... */}
           {post.title}{" "}
