@@ -101,8 +101,9 @@ const POST = () => {
               조회수 : {views}, 추천수 : {likes}
             </p>
           </div>
-          <button
-            style={{ marginLeft: 710, marginTop: 5 }}
+          <div className="edit_delete">
+          <button className="btn_delete"
+            style={{marginTop: 5 }}
             onClick={postdeletehandler}
           >
             삭제
@@ -113,6 +114,7 @@ const POST = () => {
           >
             수정
           </button>
+          </div>
           <div className="content_wrapper">{ReactHtmlParser(content)}</div>
           <div className="comment_section">
             <textarea
