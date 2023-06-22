@@ -29,6 +29,8 @@ import Pagination from "./pages/pagination";
 
 import "./App.css";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const getStringDate = (date) => {
   return date.toISOString().slice(0, 10);
 };

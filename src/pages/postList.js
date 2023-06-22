@@ -75,8 +75,6 @@ const POSTLIST = () => {
     }
   };
 
-  console.log(posts);
-
   return (
     <div className="postlist">
       <Myheader isLogin={isLogin} />
