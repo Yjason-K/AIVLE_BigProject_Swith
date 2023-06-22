@@ -1,23 +1,15 @@
 // post 게시글 확인 페이지
-// post 게시글 확인 페이지
 import Myheader from "../components/header";
 import { commentContext, dataContext } from "../App";
 
-import React, { useContext, useEffect, useState, useReducer } from "react";
-import {
-  useParams,
-  useNavigate,
-  Route,
-  Redirect,
-  useLocation,
-} from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 import Commentcontent from "../components/Commentcontent";
 import { postContext } from "../App";
 
 const POST = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [isLogin, setIsLogin] = useState(false);
   const [post, setPost] = useState();
@@ -138,12 +130,24 @@ const POST = () => {
               disabled={!isLogin}
             ></textarea>
             <div className="comment_btn">
+              <button
+                className="to_postlist"
+                onClick={() => {
+                  navigate("/postlist");
+                }}
+              >
+                목록으로
+              </button>
               <button className="coomment_submit" onClick={createclick}>
                 등록
               </button>
             </div>
           </div>
-          <Commentcontent post_id={id} commentdata={commentdata} />
+          <Commentcontent
+            post_id={id}
+            commentdata={commentdata}
+            commentonRemove={commentonRemove}
+          />
         </div>
       </div>
     );
@@ -176,12 +180,24 @@ const POST = () => {
               disabled={!isLogin}
             ></textarea>
             <div className="comment_btn">
+              <button
+                className="to_postlist"
+                onClick={() => {
+                  navigate("/postlist");
+                }}
+              >
+                목록으로
+              </button>
               <button className="coomment_submit" onClick={createclick}>
                 등록
               </button>
             </div>
           </div>
-          <Commentcontent post_id={id} commentdata={commentdata} />
+          <Commentcontent
+            post_id={id}
+            commentdata={commentdata}
+            commentonRemove={commentonRemove}
+          />
         </div>
       </div>
     );

@@ -56,8 +56,6 @@ const NMEWPOST = () => {
     }
   };
 
-  console.log(onCreate);
-
   return (
     <div className="newpost">
       <Myheader />
@@ -94,7 +92,6 @@ const NMEWPOST = () => {
             }}
             onChange={(event, editor) => {
               const data = editor.getData();
-              console.log({ editor, data });
               setContent(data);
             }}
           />

@@ -200,11 +200,12 @@
 
 .post_wrapper .comment_btn {
   display: flex;
-  justify-content: end;
+  flex-direction: row;
   margin-right: 10px;
   margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
+  justify-content: space-between;
 }
 
 .coomment_submit {
@@ -213,13 +214,28 @@
   border: none;
   cursor: pointer;
   padding-bottom: 5px;
+  align-self: end;
+}
+
+.to_postlist {
+  margin-left: 10px;
 }
 
 .commentlist {
   border-bottom: 1px solid gray;
   background-color: #ececec;
+  display: flex;
+  flex-direction: column;
 }
 
+.commentlist .second_row {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-link {
+  padding: 0 0 0 0;
+}
 /* pagination */
 .pagination_btn {
   display: flex;

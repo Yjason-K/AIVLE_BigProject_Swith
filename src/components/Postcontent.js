@@ -21,7 +21,7 @@ const Postcontent = ({ data }) => {
   return data.map((post, idx) => (
     <Link to={`/post/${post.id}`} className="linktopost" key={post.numbers}>
       <div className="noticedescription userPost">
-        <span>{idx}</span>
+        <span>{idx + 1}</span>
         <span>
           {/* 댓글 개수 보여주는 거 같은디... */}
           {post.title}{" "}
@@ -39,7 +39,6 @@ const Postcontent = ({ data }) => {
 };
 
 export default React.memo(Postcontent);
-
 
 // import React from "react";
 // import { Link } from "react-router-dom";

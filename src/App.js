@@ -84,7 +84,9 @@ function commentReducer(state, action) {
     }
     case "REMOVE": {
       newState = state.filter(
-        (it) => it.postid !== action.id && it.create_date !== action.date
+        (it) =>
+          it.create_date !== action.data.date ||
+          it.comment_id !== action.data.id
       );
       break;
     }
@@ -114,11 +116,12 @@ export const dataContext = createContext();
 function App() {
   // 게시글 Id numnber 지정
   // 서버에서 받아오는거 보고 id지정 어떻게 받아올지 결정
-  const [dataId, setDataId] = useState(
-    !localStorage.getItem("posts")
-      ? 0
-      : JSON.parse(localStorage.getItem("posts"))[0].id + 1
-  );
+
+  const [dataId, setDataId] = useState(() => {
+    return localStorage.getItem("posts")
+      ? JSON.parse(localStorage.getItem("posts"))[0]?.id + 1 || 0
+      : 0;
+  });
 
   const [isLogin, setIsLogin] = useState(false);
   const [data, dispatch] = useReducer(postReducer, []);
@@ -128,7 +131,7 @@ function App() {
     const localData = localStorage.getItem("posts");
     if (localData) {
       const postsList = JSON.parse(localData).sort(
-        (a, b) => parseInt(b.id) - parseInt(a.id)
+        (a, b) => parseInt(b.postDate) - parseInt(a.postDate)
       );
       // 시간순 정렬위해서
       dispatch({ type: "INIT", data: postsList });
@@ -156,13 +159,25 @@ function App() {
     dispatch({ type: "REMOVE", id: targetId });
   };
   // EDIT
-  const onEdit = (targetId, date, content) => {
+  const onEdit = (
+    data_id,
+    posttitle,
+    postcontent,
+    postwriter,
+    aapostdate,
+    postlikes,
+    postcount
+  ) => {
     dispatch({
       type: "EDIT",
       data: {
-        id: targetId,
-        date: new Date(date).getTime() + 32400000,
-        content,
+        id: data_id,
+        title: posttitle,
+        content: postcontent,
+        writer: postwriter,
+        postDate: aapostdate,
+        likes: postlikes,
+        views: postcount,
       },
     });
   };
@@ -234,7 +249,9 @@ function App() {
   };
 
   return (
-    <postContext.Provider value={{ onCreate, onRemove, viewCountUpdate }}>
+    <postContext.Provider
+      value={{ onCreate, onRemove, viewCountUpdate, onEdit }}
+    >
       <commentContext.Provider
         value={{
           commentdata,
