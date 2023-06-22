@@ -101,6 +101,7 @@
 
 .search_container {
   margin: auto;
+  margin-left: 275px;
 }
 
 .search_title {
@@ -111,6 +112,10 @@
   margin-left: 3px;
   margin-right: 3px;
   font-weight: 200;
+}
+
+.search_btn {
+  padding: auto;
 }
 
 /* NewPost */
