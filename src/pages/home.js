@@ -41,7 +41,8 @@ const HOME = () => {
       <Myheader isLogin={sessionId} />
       <br /><br /><br />
       <UncontrolledExample />
-      <div className="feature_list" style={{ marginTop: "40px", display: 'flex', justifyContent: 'space-between', margin: 'auto', width: '75%', gap: '1rem' }}>
+      <br /><br /><br />
+      <div style={{ display: 'flex', justifyContent: 'space-between', margin: 'auto', width: '75%', gap: '1rem' }}>
         <div style={{ flex: 1 }}>
           <div className="feature_name" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <center>특징1</center>
@@ -68,8 +69,6 @@ const HOME = () => {
         </div>
       </div>
     </div>
-
   );
 };
-
 export default HOME;
