@@ -1,9 +1,9 @@
-  .footer-container {
+.footer-container {
     margin-top: 100px;
     display: flex;
     justify-content: space-between;
-    padding-top: 20px;
-    padding-bottom: 5px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     background-color: #B1AB9A;
     border-top: 1px solid #dee2e6;
     white-space: nowrap;
@@ -14,6 +14,7 @@
     margin-left: 150px;
     flex-direction: column;
     align-items: center;
+    height: 10px;
   }
   
   .footer-logo {
@@ -22,27 +23,44 @@
   }
   
   .footer-right {
+    font-size: 12px;
     margin-right: 150px;
     display: flex;
-    justify-content: space-between;
-    width: 35%;
+    flex-direction: column;
+    width: 37%;
   }
   
-  .footer-right-left {
-    font-size: 13px;
+  .footer-right-top{
+    line-height: 18px;
+  }
+
+  .footer-right-bottom{
+    margin-top: 8px;
+    line-height: 14px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .footer-right-bottom-left{
     display: flex;
     flex-direction: column;
-    line-height: 17px;
   }
-  
-  .github-logo {
-    width: 100px;
-  }
-  
-  a:link {
-    color: black;
-}
 
-  a:visited {
+  .footer-right-bottom-middle{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-right-bottom-right {
+    display: flex;
+    flex-direction: column;
+  }    
+  .github-logo {
+    width: 50px;
+  }
+  
+  a:link, a:visited {
     color: black;
-}
+  }
+  
