@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Myheader from "../components/header";
+import Footer from "../components/footer";
 import "../style/aivle.css";
 import younghwan from "../img/yonghwan.png";
 import gyujin from "../img/gyujin.png";
@@ -63,6 +64,7 @@ const AIVLE = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
