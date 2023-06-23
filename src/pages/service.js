@@ -1,17 +1,24 @@
 //서비스 페이지
 import { useEffect, useState } from "react";
 import Myheader from "../components/header";
-import '../style/service.css';
+import "../style/service.css";
+import { useNavigate } from "react-router-dom";
 
 const SERVICE = () => {
   const session = localStorage.getItem("sessionId");
   const [sessionId, setSessionId] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (session && session !== "null") {
       setSessionId(true);
     }
   }, []);
+
+  if (!sessionId) {
+    window.alert("잘못된 접근입니다.");
+    navigate("/main", { replace: true });
+  }
 
   return (
     <div className="service">
