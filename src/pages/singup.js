@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 
 import "../style/loginScreen.css";
-import jaerong from "../img/logo.png";
+import jaerong from "../img/jaerong.png";
 
 const SIGNUP = () => {
   const navigate = useNavigate();
@@ -146,7 +146,7 @@ const SIGNUP = () => {
 
   // 시리얼 번호 찾기 안내 Modal
   const [showModal, setShowModal] = useState(false);
-  const previewImgage = null;
+  const previewImgage = jaerong;
 
   return (
     <div className="signup">
