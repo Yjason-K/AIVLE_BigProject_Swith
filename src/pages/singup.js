@@ -45,7 +45,6 @@ const SIGNUP = () => {
   2. 개인정보의 수집 및 이용목적
   
   3. 개인정보의 보유 및 이용기간`;
-
   const [idInfo, setIdInfo] = useState({
     name: "",
     id: "",

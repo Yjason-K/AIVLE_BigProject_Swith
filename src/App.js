@@ -30,6 +30,7 @@ import Pagination from "./pages/pagination";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./components/footer";
 
 const getStringDate = (date) => {
   return date.toISOString().slice(0, 10);
@@ -281,6 +282,7 @@ function App() {
                 <Route path="/service" element={<SERVICE />} />
                 <Route path="/pagination" element={<Pagination />} />
               </Routes>
+              <Footer />
             </div>
           </BrowserRouter>
         </dataContext.Provider>

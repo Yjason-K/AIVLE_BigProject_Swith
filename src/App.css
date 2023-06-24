@@ -1,10 +1,10 @@
 /* postList */
 
 .postlist .postlist_wrapper {
-  margin: 50px auto;
+  margin: 80px auto;
   align-items: center;
   border: solid 1px gray;
-  width: 800px;
+  width: 1000px;
   height: 630px;
 }
 
@@ -101,7 +101,7 @@
 
 .search_container {
   margin: auto;
-  margin-left: 275px;
+  margin-left: 38%;
 }
 
 .search_title {

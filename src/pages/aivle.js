@@ -16,7 +16,7 @@ const teamMembers = [
   { name: "김영재", description: "Frontend", image: youngjae },
   { name: "오승재", description: "Frontend", image: seungjae },
   { name: "남환준", description: "Backend", image: hwanjun },
-  { name: "이한준", description: "Backend", image: hanjoon }
+  { name: "이한준", description: "Backend", image: hanjoon },
 ];
 
 const AIVLE = () => {
@@ -32,15 +32,21 @@ const AIVLE = () => {
   return (
     <div className="aivle">
       <Myheader isLogin={sessionId} />
-      <div style={{marginTop: "30px"}}>
+      <div style={{ marginTop: "50px" }}>
         <div>
-          <h1><center>팀원 소개</center></h1>
+          <h1>
+            <center>팀원 소개</center>
+          </h1>
         </div>
         <div className="team-row">
           {teamMembers.slice(0, 3).map((member, index) => (
             <div key={index} className="team-card">
               <div className="card">
-                <img src={member.image} className="card-img-top" alt="team member" />
+                <img
+                  src={member.image}
+                  className="card-img-top"
+                  alt="team member"
+                />
                 <div className="card-body">
                   <h5 className="card-title">{member.name}</h5>
                   <p className="card-text">{member.description}</p>
@@ -49,11 +55,15 @@ const AIVLE = () => {
             </div>
           ))}
         </div>
-        <div className="team-row" style={{marginTop: "50px"}}>
+        <div className="team-row" style={{ marginTop: "50px" }}>
           {teamMembers.slice(3).map((member, index) => (
             <div key={index} className="team-card">
               <div className="card">
-                <img src={member.image} className="card-img-top" alt="team member" />
+                <img
+                  src={member.image}
+                  className="card-img-top"
+                  alt="team member"
+                />
                 <div className="card-body">
                   <h5 className="card-title">{member.name}</h5>
                   <p className="card-text">{member.description}</p>
