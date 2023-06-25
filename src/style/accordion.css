@@ -87,3 +87,8 @@ label {
   margin-bottom: 8px;
   font-weight: 800;
 }
+
+.submitEmail:hover {
+  background-color: #353535;
+  color: white;
+}

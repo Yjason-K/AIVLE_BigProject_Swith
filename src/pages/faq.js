@@ -22,25 +22,27 @@ const FAQ = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "cs.s.with@gmail.com",
-        "template_2md8tjf",
-        form.current,
-        "DvatRb3CY3WIvoXSp"
-      )
-      .then(
-        (result) => {
-          alert(
-            "성공적으로 접수되었습니다. \n(주말/ 공휴일/ 평일 19시 이후는 답변이 늦어질 수 있습니다.)"
-          );
-          form.current.reset();
-        },
-        (error) => {
-          console.log(error.text);
-          alert("전송이 실패되었습니다.");
-        }
-      );
+    if (window.confirm("1:1 문의를 접수하시겠습니까?")) {
+      emailjs
+        .sendForm(
+          "cs.s.with@gmail.com",
+          "template_2md8tjf",
+          form.current,
+          "DvatRb3CY3WIvoXSp"
+        )
+        .then(
+          (result) => {
+            alert(
+              "성공적으로 접수되었습니다. \n(주말/ 공휴일/ 평일 19시 이후는 답변이 늦어질 수 있습니다.)"
+            );
+            form.current.reset();
+          },
+          (error) => {
+            console.log(error.text);
+            alert("전송이 실패되었습니다.");
+          }
+        );
+    }
   };
 
   return (
@@ -146,7 +148,7 @@ const FAQ = () => {
           </div>
         </div>
         <div className="email_contact">
-          <h2 className="em_title">Email Contact</h2>
+          <h2 className="em_title">1:1 문의</h2>
           <form ref={form} onSubmit={sendEmail}>
             <label>연락 받을 Email</label>
             <br />
@@ -171,10 +173,16 @@ const FAQ = () => {
             <textarea
               name="mail_content"
               required
-              placeholder="문의 내용을 입력해주세요."
+              maxLength={3000}
+              placeholder="문의 내용을 입력해주세요 (3000자 이내)"
             />
             <br />
-            <input type="submit" value="Send" />
+            <input
+              type="submit"
+              value="Send"
+              style={{ marginTop: "10px" }}
+              className="submitEmail"
+            />
           </form>
         </div>
       </div>
