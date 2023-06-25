@@ -10,13 +10,48 @@ import hwanjun from "../img/hwanjun.png";
 import hanjoon from "../img/hanjoon.png";
 
 const teamMembers = [
-  { name: "김용환", description: "AI 모델링", image: younghwan },
-  { name: "장규진", description: "AI 모델링", image: gyujin },
-  { name: "조예령", description: "AI 모델링", image: yeryeong },
-  { name: "김영재", description: "Frontend", image: youngjae },
-  { name: "오승재", description: "Frontend", image: seungjae },
-  { name: "남환준", description: "Backend", image: hwanjun },
-  { name: "이한준", description: "Backend", image: hanjoon },
+  {
+    name: "김용환",
+    description: "AI 모델링",
+    image: younghwan,
+    git: "https://github.com/brightface",
+  },
+  {
+    name: "장규진",
+    description: "AI 모델링",
+    image: gyujin,
+    git: "https://github.com/kj021",
+  },
+  {
+    name: "조예령",
+    description: "AI 모델링",
+    image: yeryeong,
+    git: "https://github.com/CYeryeong",
+  },
+  {
+    name: "김영재",
+    description: "Frontend",
+    image: youngjae,
+    git: "https://github.com/Yjason-K",
+  },
+  {
+    name: "오승재",
+    description: "Frontend",
+    image: seungjae,
+    git: "https://github.com/18-12847",
+  },
+  {
+    name: "남환준",
+    description: "Backend",
+    image: hwanjun,
+    git: "https://github.com/only-juun",
+  },
+  {
+    name: "이한준",
+    description: "Backend",
+    image: hanjoon,
+    git: "https://github.com/leehanjun506",
+  },
 ];
 
 const AIVLE = () => {
@@ -42,14 +77,30 @@ const AIVLE = () => {
           {teamMembers.slice(0, 3).map((member, index) => (
             <div key={index} className="team-card">
               <div className="card">
-                <img
-                  src={member.image}
-                  className="card-img-top"
-                  alt="team member"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{member.name}</h5>
-                  <p className="card-text">{member.description}</p>
+                <div className="card-inner">
+                  <div className="card-front">
+                    <img
+                      src={member.image}
+                      className="card-img-top"
+                      alt="team member"
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{member.name}</h5>
+                      <p className="card-text">{member.description}</p>
+                    </div>
+                  </div>
+                  <div className="card-back">
+                    <div className="card-back-content">
+                      <a
+                        href={member.git}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="github-link"
+                      >
+                        GitHub
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -59,14 +110,30 @@ const AIVLE = () => {
           {teamMembers.slice(3).map((member, index) => (
             <div key={index} className="team-card">
               <div className="card">
-                <img
-                  src={member.image}
-                  className="card-img-top"
-                  alt="team member"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{member.name}</h5>
-                  <p className="card-text">{member.description}</p>
+                <div className="card-inner">
+                  <div className="card-front">
+                    <img
+                      src={member.image}
+                      className="card-img-top"
+                      alt="team member"
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{member.name}</h5>
+                      <p className="card-text">{member.description}</p>
+                    </div>
+                  </div>
+                  <div className="card-back">
+                    <div className="card-back-content">
+                      <a
+                        href={member.git}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="github-link"
+                      >
+                        GitHub
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
