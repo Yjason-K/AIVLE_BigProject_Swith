@@ -42,6 +42,7 @@ const LOGIN = () => {
     }
   };
 
+
   return (
     <div className="login">
       <Myheader />
@@ -49,6 +50,7 @@ const LOGIN = () => {
         <div className="login_container">
           <div className="login_frame">
             <div className="loginFrame_left">
+              <div className="left_btn_area">
               <Link to="/main">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -64,9 +66,10 @@ const LOGIN = () => {
                   />
                 </svg>
               </Link>
-              <Link to="/signup">
-                <span className="registers">회원가입</span>
-              </Link>
+                <span className="loginregisters" onClick={() => {
+                  navigate("/signup")
+                }}>회원가입</span>
+                </div>
               <div className="login_loginArea">
                 <form>
                   <input
@@ -89,11 +92,11 @@ const LOGIN = () => {
                   </Link>
                 </form>
                 <div className="loginbuttonarea">
-                  <button type="submit" className="sbButton" onClick={signIn}>
+                  <button type="submit" className="loginButton" onClick={signIn}>
                     로그인
                   </button>
                   <Link to="/main">
-                    <button type="submit" className="sbButton sbButton2">
+                    <button type="submit" className="loginButton loginButton2">
                       로그인 없이 보기
                     </button>
                   </Link>

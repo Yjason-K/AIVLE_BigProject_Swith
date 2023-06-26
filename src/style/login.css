@@ -26,9 +26,9 @@
 
 .login_loginArea{
     position: relative;
-    padding-top: 155px;
+    padding-top: 100px;
     width: 80%;
-    height: 100%;
+    height: 75%;
     border-radius: 10px;
     text-align: center;
   }
@@ -83,7 +83,11 @@
     transition: all ease-in-out 0.15s;
 }
 
-.registers {
+.Arrows:hover{
+    background-color: rgb(180, 185, 199);
+  }
+
+.loginregisters {
     position: absolute;
     cursor: pointer;
     color:rgb(105, 105, 105);
@@ -125,7 +129,7 @@
     margin-top: -10px;
 }
 
-.sbButton{
+.loginButton{
     position: relative;
     bottom: -30px;
     margin-top: 15px;
@@ -141,6 +145,11 @@
     transition: all ease-in-out 0.2s;
 }
 
-.sbButton2 {
+.loginButton2 {
     margin-top: 10px;
 }
+
+.loginButton:hover {
+    background-color : #B1AB9A; 
+    color: rgb(255, 255, 255);
+  }
