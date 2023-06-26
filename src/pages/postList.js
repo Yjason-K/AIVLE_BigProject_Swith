@@ -120,7 +120,7 @@ const POSTLIST = () => {
                 className="search_title"
               />
               <button onClick={handleSearch} className="search_btn">
-                검색
+                <span>검색</span>
               </button>
             </div>
             <button className="new_post" onClick={handleNewPost}>
