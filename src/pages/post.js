@@ -19,7 +19,7 @@ const POST = () => {
   const [writer, setWriter] = useState();
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState("");
   const [postdate, setPostdate] = useState(null);
 
   const postList = useContext(dataContext);
