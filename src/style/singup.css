@@ -108,3 +108,14 @@
 .register_terms_of_service{
     position: relative;
   }
+
+  .btn-custom {
+    background-color: #c2baa6;
+    border-color: transparent;
+    margin-top: 15px;
+  }
+  
+  .btn-custom:hover {
+    background-color: #B1AB9A;
+    border-color: transparent;
+  }

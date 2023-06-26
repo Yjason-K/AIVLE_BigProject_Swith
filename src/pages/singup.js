@@ -242,7 +242,7 @@ const SIGNUP = () => {
                     disabled={!isCheck}
                   />
                   {/* 시리얼번호 안내 버튼 */}
-                  <Button onClick={() => setShowModal(true)}>
+                  <Button className="btn-custom" onClick={() => setShowModal(true)}>
                     시리얼 번호 안내
                   </Button>
 
