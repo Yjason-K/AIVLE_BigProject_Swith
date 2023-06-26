@@ -50,7 +50,7 @@
   height: 530px;
 }
 
-input {
+.faq_input {
   margin-left: 3%;
   margin-bottom: 5px;
   width: 94%;
@@ -73,6 +73,7 @@ textarea {
   outline: none;
   padding-left: 10px;
   background-color: rgb(233, 233, 233);
+  resize: none;
 }
 
 .em_title {
