@@ -157,3 +157,8 @@
     background-color : #B1AB9A; 
     color: rgb(255, 255, 255);
   }
+
+.loginArea_right{
+    background-image: url('../img/hf.jpeg');
+    background-size: 100%;
+}
