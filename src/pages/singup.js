@@ -4,7 +4,7 @@ import Myheader from "../components/header";
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 
-import "../style/loginScreen.css";
+import "../style/singup.css";
 import jaerong from "../img/jaerong.png";
 
 const SIGNUP = () => {
@@ -151,8 +151,8 @@ const SIGNUP = () => {
     <div className="signup">
       <Myheader />
       <Fragment>
-        <div className="container">
-          <div className="loginFrame">
+        <div className="signup_container">
+          <div className="register_frame">
             <Link to="/login">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +168,7 @@ const SIGNUP = () => {
                 />
               </svg>
             </Link>
-            <div className="registerArea">
+            <div className="register_Area">
               <form onSubmit={newRegis}>
                 <div
                   onClick={() =>
@@ -297,13 +297,13 @@ const SIGNUP = () => {
                     <u>닉네임, 아이디는 회원 가입 후 변경 불가</u>
                   </b>
                 </span>
-                <button type="submit" className="sbButton">
+                <button type="submit" className="register_sbButton">
                   회원가입
                 </button>
               </form>
             </div>
           </div>
-          <div className="terms_of_service">
+          <div className="register_terms_of_service">
             <h1 className="h3 mb-3 fw-normal">이용 약관</h1>
             <textarea
               style={{ resize: "none", width: "650px", height: "250px" }}

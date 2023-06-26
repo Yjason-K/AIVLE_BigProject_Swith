@@ -5,7 +5,7 @@ import Myheader from "../components/header";
 
 const FindID = () => {
   const navigate = useNavigate();
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [serialNumber, setSerialNumber] = useState('');
   const [idInfo, setIdInfo] = useState({
     email: '',
     serialnumber: '',
@@ -24,12 +24,13 @@ const FindID = () => {
     e.preventDefault();
 
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const foundUser = storedUsers.find((user) => user.phone === phoneNumber);
+    const foundUser = storedUsers.find((user) => user.serialnumber === serialNumber);
 
     if (foundUser) {
       setIdInfo(prev => ({ ...prev, email: foundUser.email }));
+      alert(`찾은 아이디: ${foundUser.email}`);
     } else {
-      alert("전화번호를 확인하세요.");
+      alert("시리얼 번호를 확인하세요.");
     }
   };
 
@@ -76,28 +77,27 @@ const FindID = () => {
   return (
     <div className="findpassword">
       <Myheader />
-      <div className="findpwd" style={{ marginTop: "60px" }}>
-        <center><h1 className="title">아이디 찾기 / 비밀번호 초기화</h1>
+      <div className="findpwd" style={{ marginTop: "100px" }}>
+        <center>
           {!verified ?
             <>
-              <br />
-              <h5 className="subtitle">전화번호를 입력하세요.</h5>
+              <h1 className="title">아이디 찾기</h1>
               <div className="findEmailArea">
                 <form onSubmit={findEmail}>
-                  <input type="text" className="phoneInput" required
-                    placeholder="전화번호" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} key="phoneNumber" />
+                  <input type="text" className="emailInput" required
+                    placeholder="시리얼번호 입력" value={serialNumber} onChange={(e) => setSerialNumber(e.target.value)} key="serialNumber" />
                   <button type="submit" className="sbButton" style={{ marginTop: "1px" }}>아이디 찾기</button>
                 </form>
               </div>
-              <br /><br /><br />
-              <h5 className="subtitle">가입시 입력했던<br />이메일과 시리얼번호를 입력하세요.</h5>
+              <br /><br /><br /><br />
+              <h1 className="title">비밀번호 찾기</h1>
               <div className="verifyArea">
                 <form onSubmit={verifyUser}>
                   <input type="email" className="emailInput" required
-                    placeholder="이메일(example@gmail.com)" name="email" onChange={setinfo} value={idInfo.email} key="email" readOnly />
+                    placeholder="아이디(example@gmail.com)" name="email" onChange={setinfo} value={idInfo.email} key="email" readOnly />
                   <input type="text" className="serialnumberInput" required
                     placeholder="시리얼번호" name="serialnumber" onChange={setinfo} key="serialnumber" />
-                  <button type="submit" className="sbButton" style={{ marginTop: "1px" }}>확인</button>
+                  <button type="submit" className="sbButton" style={{ marginTop: "1px" }}>비밀번호 초기화</button>
                 </form>
               </div>
             </>
