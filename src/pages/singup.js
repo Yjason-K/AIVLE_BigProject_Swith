@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Myheader from "../components/header";
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 
 import "../style/singup.css";
 import jaerong from "../img/jaerong.png";
@@ -139,8 +140,28 @@ const SIGNUP = () => {
 
     localStorage.setItem("users", JSON.stringify(existingUsers));
 
-    alert("회원가입 성공!");
-    navigate("/login");
+    window.alert("회원가입 성공!");
+    navigate("/login", { replace: true });
+
+    // axios({
+    //   method: "post",
+    //   url: "http://15.165.98.14:8080/users/signup",
+    //   data: {
+    //     name: idInfo.name,
+    //     nickname: idInfo.id,
+    //     password: idInfo.pw,
+    //     serialNumber: idInfo.serialnumber,
+    //     phoneNumber: idInfo.phone,
+    //     email: idInfo.email,
+    //   },
+    // })
+    //   .then((res) => {
+    //     alert("회원가입 성공!");
+    //     navigate("/login");
+    //   })
+    //   .catch((err) => {
+    //     window.alert(err.data);
+    //   });
   };
 
   // 시리얼 번호 찾기 안내 Modal

@@ -2,6 +2,8 @@ import { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../style/login.css";
 import Myheader from "../components/header";
+import { ButtonToolbar } from "react-bootstrap";
+import axios from "axios";
 
 const LOGIN = () => {
   const navigate = useNavigate();
@@ -42,6 +44,22 @@ const LOGIN = () => {
     }
   };
 
+  // const handleLogin = () => {
+  //   axios({
+  //     method: "post",
+  //     url: "http://15.165.98.14:8080/users/login",
+  //     data: {
+  //       email: loginInfo.email,
+  //       password: loginInfo.pw,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.data);
+  //     });
+  // };
 
   return (
     <div className="login" style={{height: "814px"}}>
@@ -51,25 +69,30 @@ const LOGIN = () => {
           <div className="login_frame">
             <div className="loginFrame_left">
               <div className="left_btn_area">
-              <Link to="/main">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="26"
-                  height="26"
-                  fill="currentColor"
-                  className="bi bi-arrow-left Arrows"
-                  viewBox="0 0 16 16"
+                <Link to="/main">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                    className="bi bi-arrow-left Arrows"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                    />
+                  </svg>
+                </Link>
+                <span
+                  className="loginregisters"
+                  onClick={() => {
+                    navigate("/signup");
+                  }}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-                  />
-                </svg>
-              </Link>
-                <span className="loginregisters" onClick={() => {
-                  navigate("/signup")
-                }}>회원가입</span>
-                </div>
+                  회원가입
+                </span>
+              </div>
               <div className="login_loginArea">
                 <form>
                   <input
@@ -92,7 +115,11 @@ const LOGIN = () => {
                   </Link>
                 </form>
                 <div className="loginbuttonarea">
-                  <button type="submit" className="loginButton" onClick={signIn}>
+                  <button
+                    type="submit"
+                    className="loginButton"
+                    onClick={signIn}
+                  >
                     로그인
                   </button>
                   <Link to="/main">
