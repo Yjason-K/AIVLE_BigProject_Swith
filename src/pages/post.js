@@ -7,6 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 import Commentcontent from "../components/Commentcontent";
 import { postContext } from "../App";
+import { Button } from "react-bootstrap";
 
 const POST = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const POST = () => {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [comment, setComment] = useState();
-  const [postdate, setPostdate] = useState();
+  const [postdate, setPostdate] = useState(null);
 
   const postList = useContext(dataContext);
   const { onRemove, viewCountUpdate } = useContext(postContext);
@@ -93,34 +94,56 @@ const POST = () => {
     }
   };
 
+  const title_date = (date) => {
+    const title_d =
+      new Date(date).toISOString().slice(0, 10) +
+      " " +
+      new Date(date).toISOString().slice(11, 19);
+    return title_d;
+  };
+
+  console.log(postdate);
+
   if (writer === JSON.parse(localStorage.getItem("userId"))?.id) {
     return (
       <div className="show_post">
         <Myheader login={isLogin} />
         <div className="post_wrapper">
           <div className="title_wrapper">
-            <p>Witten by {writer}</p>
-            <p> 제목 : {title}</p>
-            <p>
-              조회수 : {views}, 추천수 : {likes}
-            </p>
+            <div className="post_title">
+              <p> {title}</p>
+            </div>
+            <div className="post_info">
+              <p className="writer">{writer}</p>
+              <p className="viewcount">
+                조회수 : {views}, 추천수 : {likes}
+              </p>
+              <p className="postdate">
+                {postdate !== null && title_date(postdate)}
+              </p>
+            </div>
           </div>
           <div className="edit_delete">
-            <button
+            <Button
+              variant="dark"
               className="btn_delete"
               style={{ marginTop: 5 }}
               onClick={postdeletehandler}
             >
               삭제
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="dark"
               style={{ marginLeft: 10, marginTop: 5 }}
               onClick={editButtonClickHandler}
+              className="btn_edit"
             >
               수정
-            </button>
+            </Button>
           </div>
-          <div className="content_wrapper">{ReactHtmlParser(content)}</div>
+          <div className="content_wrapper">
+            <div className="post_content">{ReactHtmlParser(content)}</div>
+          </div>
           <div className="comment_section">
             <textarea
               placeholder={
@@ -137,24 +160,31 @@ const POST = () => {
               disabled={!isLogin}
             ></textarea>
             <div className="comment_btn">
-              <button
+              <Button
+                variant="outline-dark"
                 className="to_postlist"
                 onClick={() => {
                   navigate("/postlist");
                 }}
               >
                 목록으로
-              </button>
-              <button className="coomment_submit" onClick={createclick}>
+              </Button>
+              <Button
+                variant="dark"
+                className="coomment_submit"
+                onClick={createclick}
+              >
                 등록
-              </button>
+              </Button>
             </div>
           </div>
-          <Commentcontent
-            post_id={id}
-            commentdata={commentdata}
-            commentonRemove={commentonRemove}
-          />
+          <div className="comment_all">
+            <Commentcontent
+              post_id={id}
+              commentdata={commentdata}
+              commentonRemove={commentonRemove}
+            />
+          </div>
         </div>
       </div>
     );
@@ -164,13 +194,22 @@ const POST = () => {
         <Myheader login={isLogin} />
         <div className="post_wrapper">
           <div className="title_wrapper">
-            <p>Witten by {writer}</p>
-            <p> 제목 : {title}</p>
-            <p>
-              조회수 : {views}, 추천수 : {likes}
-            </p>
+            <div className="post_title">
+              <p> {title}</p>
+            </div>
+            <div className="post_info">
+              <p className="writer">{writer}</p>
+              <p className="viewcount">
+                조회수 : {views}, 추천수 : {likes}
+              </p>
+              <p className="postdate">
+                {postdate !== null && title_date(postdate)}
+              </p>
+            </div>
           </div>
-          <div className="content_wrapper">{ReactHtmlParser(content)}</div>
+          <div className="content_wrapper">
+            <div className="post_content">{ReactHtmlParser(content)}</div>
+          </div>
           <div className="comment_section">
             <textarea
               placeholder={
@@ -183,29 +222,36 @@ const POST = () => {
               onChange={(e) => {
                 setComment(e.target.value);
               }}
-              style={{ height: 86 }}
+              style={{ height: 86, backgroundColor: "#F8F8F8" }}
               disabled={!isLogin}
             ></textarea>
             <div className="comment_btn">
-              <button
+              <Button
+                variant="outline-dark"
                 className="to_postlist"
                 onClick={() => {
                   navigate("/postlist");
                 }}
               >
                 목록으로
-              </button>
+              </Button>
               {/* <button>추천</button> */}
-              <button className="coomment_submit" onClick={createclick}>
+              <Button
+                variant="dark"
+                className="coomment_submit"
+                onClick={createclick}
+              >
                 등록
-              </button>
+              </Button>
             </div>
           </div>
-          <Commentcontent
-            post_id={id}
-            commentdata={commentdata}
-            commentonRemove={commentonRemove}
-          />
+          <div className="comment_all">
+            <Commentcontent
+              post_id={id}
+              commentdata={commentdata}
+              commentonRemove={commentonRemove}
+            />
+          </div>
         </div>
       </div>
     );

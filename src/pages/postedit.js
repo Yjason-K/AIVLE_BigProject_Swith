@@ -6,6 +6,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Myheader from "../components/header";
 import { postContext, dataContext } from "../App";
+import { Button } from "react-bootstrap";
 
 const POSTEDIT = () => {
   const titleRef = useRef();
@@ -82,8 +83,9 @@ const POSTEDIT = () => {
           </div>
           <div className="newpost_btn_wrapper">
             <Link to={"/postlist"} className="linkButtondesign">
-              <button
-                className="postviewbutton_cancel"
+              <Button
+                variant="dark"
+                className="postviewbutton_save"
                 onClick={() => {
                   if (window.confirm("게시글 수정을 취소하시겠습니까?")) {
                     navigate("/postlist", { replace: true });
@@ -91,11 +93,15 @@ const POSTEDIT = () => {
                 }}
               >
                 Cancel
-              </button>
+              </Button>
             </Link>
-            <button className="postviewbutton" onClick={saveHandler}>
+            <Button
+              variant="dark"
+              className="postviewbutton_save"
+              onClick={saveHandler}
+            >
               Save
-            </button>
+            </Button>
           </div>
         </div>
         <div className="newpostcontent">
