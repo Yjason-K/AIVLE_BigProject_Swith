@@ -37,7 +37,7 @@
 .question {
   display: flex;
   flex-direction: row;
-  margin-bottom: 170px;
+  margin-bottom: 100px;
 }
 
 .email_contact {
