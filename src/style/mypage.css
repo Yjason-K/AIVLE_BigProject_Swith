@@ -1,0 +1,48 @@
+.mypage_pwcheck {
+    position: relative;
+    top: 200px;
+    width: 30%;
+    height: 100%;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .mypage_edit {
+    position: relative;
+    top: -50px;
+    width: 30%;
+  }
+
+  .mypageFrame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 400px;
+    top: 50px;
+    width: 400px;
+    height: 800px;
+    background-color: white;
+    border-radius: 10px 0px 0px 10px;
+    box-shadow: -5px 5px 15px -5px black;
+    opacity: 0.9;
+    margin-right: 50px;
+  }
+
+  .idInput, .pwInput, .emailInput, .serialnumberInput, .phoneInput, .nameInput, .ageInput, .timeInput{
+    padding: 5px;
+    width: 80%;
+    margin-top: 15px;
+    border: 1;
+    border-radius: 10px;
+    outline-style: none;
+    display: inline-block;
+    height: 30px;
+    font-family: sans-serif;
+  }
+  
+  .idInput:focus, .pwInput:focus, .emailInput:focus, .serialnumberInput:focus, .phoneInput:focus, .nameInput:focus{
+    border-color: #B1AB9A;
+    box-shadow: 0 0 10px #B1AB9A; 
+    outline: none;
+  }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Myheader from "../components/header";
-import "../style/loginScreen.css";
+import "../style/mypage.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const MYPAGE = () => {
