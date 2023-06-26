@@ -95,10 +95,15 @@ const NMEWPOST = () => {
             type="file"
             accept="image/*"
             onChange={(e) => handleFileChange(e, i)}
+            className="attach_btn"
           />
-          <button className="preview-button" onClick={() => handlePreview(i)}>
+          <Button
+            variant="secondary"
+            className="preview_button"
+            onClick={() => handlePreview(i)}
+          >
             미리보기
-          </button>
+          </Button>
         </div>
       );
     }
@@ -169,12 +174,20 @@ const NMEWPOST = () => {
             />
           </div>
           <div className="newpost_btn_wrapper">
-            <button className="postviewbutton_cancel" onClick={handlCancel}>
+            <Button
+              variant="dark"
+              className="postviewbutton_cancel"
+              onClick={handlCancel}
+            >
               Cancel
-            </button>
-            <button className="postviewbutton" onClick={handleSubmit}>
+            </Button>
+            <Button
+              variant="dark"
+              className="postviewbutton_save"
+              onClick={handleSubmit}
+            >
               Save
-            </button>
+            </Button>
           </div>
         </div>
         <div className="newpostcontent">
@@ -191,7 +204,9 @@ const NMEWPOST = () => {
         </div>
         <div className="attach_area">
           <div className="attach_num">
-            <h5 style={{ marginRight: 20 }}>이미지 업로드하기</h5>
+            <h5 style={{ marginRight: 20, marginLeft: 10 }}>
+              이미지 업로드하기
+            </h5>
             <Button variant="outline-dark" className="a_btn" onClick={att_plus}>
               +
             </Button>

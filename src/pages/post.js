@@ -68,8 +68,12 @@ const POST = () => {
 
   const createclick = () => {
     if (isLogin) {
-      commentonCreate(id, comment);
-      setComment("");
+      if (comment.length !== 0) {
+        commentonCreate(id, comment);
+        setComment("");
+      } else {
+        window.alert("댓글을 입력해주세요.");
+      }
     } else {
       alert("로그인 후 이용가능합니다!");
     }
