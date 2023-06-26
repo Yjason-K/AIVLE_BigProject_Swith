@@ -239,7 +239,8 @@
 
 .post_wrapper {
   border: 1px solid gray;
-  height: 800px;
+  min-height: 600px;
+  height: auto;
   width: 800px;
   margin: auto;
   margin-top: 50px;
@@ -247,11 +248,50 @@
 
 .post_wrapper .title_wrapper {
   width: 780px;
-  height: 100px;
+  height: 70px;
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
   border: 1px solid gray;
+}
+
+.post_title {
+  margin-left: 10px;
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.post_info {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  height: 15px;
+  text-align: start;
+}
+
+.writer {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.viewcount {
+  margin-left: 10px;
+  font-size: 10px;
+  color: #717171;
+}
+
+.postdate {
+  margin-left: 10px;
+  font-size: 10px;
+  color: #717171;
+}
+
+.post_content {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .edit-delete {
@@ -260,7 +300,7 @@
 }
 
 .btn_delete {
-  margin-left: 85.5%;
+  margin-left: 87.5%;
 }
 
 .post_wrapper .content_wrapper {
@@ -289,36 +329,69 @@
 .post_wrapper .comment_btn {
   display: flex;
   flex-direction: row;
-  margin-right: 10px;
   margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
   justify-content: space-between;
 }
 
+.btn_delete {
+  font-size: 10px;
+}
+.btn_edit {
+  font-size: 10px;
+}
+
 .coomment_submit {
-  background-color: #0a0a23;
-  color: #fff;
   border: none;
   cursor: pointer;
   padding-bottom: 5px;
   align-self: end;
+  margin-right: 10px;
+  font-size: 10px;
 }
 
 .to_postlist {
   margin-left: 10px;
+  font-size: 10px;
+}
+
+.comment_all {
+  height: auto;
+  margin-bottom: 3px;
 }
 
 .commentlist {
   border-bottom: 1px solid gray;
-  background-color: #ececec;
+  background-color: #f8f8f8;
   display: flex;
   flex-direction: column;
+  min-height: 45px;
+}
+
+.first_row {
+  margin-left: 10px;
+}
+
+.comment_id {
+  font-weight: 620;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.comment_date {
+  font-size: 10px;
+  color: #717171;
 }
 
 .commentlist .second_row {
+  margin-left: 10px;
   display: flex;
   flex-direction: row;
+}
+
+.commment_delete_button {
+  margin-right: 5px;
 }
 
 .btn-link {
