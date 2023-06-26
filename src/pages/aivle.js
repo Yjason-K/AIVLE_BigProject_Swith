@@ -67,7 +67,7 @@ const AIVLE = () => {
   return (
     <div className="aivle">
       <Myheader isLogin={sessionId} />
-      <div style={{ marginTop: "50px" }}>
+      <div style={{ marginTop: "100px" }}>
         <div>
           <h1>
             <center>팀원 소개</center>
