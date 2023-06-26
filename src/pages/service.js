@@ -16,7 +16,6 @@ const SERVICE = () => {
   }, []);
 
   if (!sessionId) {
-    window.alert("잘못된 접근입니다.");
     navigate("/main", { replace: true });
   }
 

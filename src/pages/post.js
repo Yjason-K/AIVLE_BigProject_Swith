@@ -102,18 +102,19 @@ const POST = () => {
             </p>
           </div>
           <div className="edit_delete">
-          <button className="btn_delete"
-            style={{marginTop: 5 }}
-            onClick={postdeletehandler}
-          >
-            삭제
-          </button>
-          <button
-            style={{ marginLeft: 10, marginTop: 5 }}
-            onClick={editButtonClickHandler}
-          >
-            수정
-          </button>
+            <button
+              className="btn_delete"
+              style={{ marginTop: 5 }}
+              onClick={postdeletehandler}
+            >
+              삭제
+            </button>
+            <button
+              style={{ marginLeft: 10, marginTop: 5 }}
+              onClick={editButtonClickHandler}
+            >
+              수정
+            </button>
           </div>
           <div className="content_wrapper">{ReactHtmlParser(content)}</div>
           <div className="comment_section">
@@ -190,6 +191,7 @@ const POST = () => {
               >
                 목록으로
               </button>
+              {/* <button>추천</button> */}
               <button className="coomment_submit" onClick={createclick}>
                 등록
               </button>
