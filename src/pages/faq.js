@@ -139,6 +139,7 @@ const FAQ = () => {
               name="from_email"
               placeholder="ex)abcd@gmail.com"
               required
+              className="faq_input"
             />
             <br />
             <label>문의 제목</label>
@@ -148,6 +149,7 @@ const FAQ = () => {
               name="mail_title"
               maxLength={25}
               placeholder="제목을 입력해주세요. (25자 이내)"
+              className="faq_input"
             />
             <br />
             <label>문의 내용</label>
@@ -162,7 +164,7 @@ const FAQ = () => {
             <input
               type="submit"
               value="Send"
-              style={{ marginTop: "10px" }}
+              style={{ marginTop: "10px", marginLeft: "20px" }}
               className="submitEmail"
             />
           </form>

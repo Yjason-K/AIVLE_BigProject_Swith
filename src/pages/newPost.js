@@ -69,7 +69,7 @@ const NMEWPOST = () => {
   };
 
   // 파일 갯수
-  const [att_num, setAttNum] = useState(1);
+  const [att_num, setAttNum] = useState(0);
 
   const att_plus = () => {
     setAttNum(att_num + 1);
