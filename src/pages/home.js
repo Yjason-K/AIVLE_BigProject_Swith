@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Myheader from "../components/header";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Footer from "../components/footer";
 
 const UncontrolledExample = () => {
   return (
@@ -41,14 +40,12 @@ const HOME = () => {
 
   return (
     <div className="main_page" style={{ width: "100%", height: "1000px" }}>
-      <Myheader isLogin={sessionId} />
-      <br />
-      <br />
-      <br />
-      <UncontrolledExample />
-      <br />
-      <br />
-      <br />
+      <div style={{marginBottom: "100px"}}>
+        <Myheader isLogin={sessionId} />
+      </div>
+      <div style={{marginBottom: "100px"}}>
+        <UncontrolledExample />
+      </div>
       <div
         style={{
           display: "flex",
