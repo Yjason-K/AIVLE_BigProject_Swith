@@ -98,6 +98,10 @@
     transition: all ease-in-out 0.2s;
 }
 
+.loginregisters:hover {
+    color:rgb(149, 50, 149);
+  }
+
 .pwInput, .emailInput{
     padding: 5px;
     width: 80%;
