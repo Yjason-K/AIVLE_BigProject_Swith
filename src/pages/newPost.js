@@ -1,29 +1,29 @@
 // newPost
-import { useEffect, useState, useContext, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Button } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
+import { useEffect, useState, useContext, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Button } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 
-import Myheader from "../components/header";
-import { postContext, dataContext } from "../App";
+import Myheader from '../components/header';
+import { postContext, dataContext } from '../App';
 
 const NMEWPOST = () => {
   // 로그인 검증
   useEffect(() => {
-    if (session && session !== "null") {
+    if (session && session !== 'null') {
       setSessionId(true);
     }
   }, []);
 
   // 로그인 세션정보
-  const session = localStorage.getItem("sessionId");
+  const session = localStorage.getItem('sessionId');
   const [sessionId, setSessionId] = useState(false);
 
   // 제목, 본문 내용
-  const [postTitle, setPostTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [postTitle, setPostTitle] = useState('');
+  const [content, setContent] = useState('');
 
   // Ref
   const titleRef = useRef();
@@ -34,37 +34,37 @@ const NMEWPOST = () => {
 
   const navigate = useNavigate();
 
-  const originData = localStorage.getItem("posts");
+  const originData = localStorage.getItem('posts');
   const data = useContext(dataContext);
 
   const { onCreate } = useContext(postContext);
 
   const handleSubmit = () => {
     if (postTitle.length < 4) {
-      alert("제목을 입력해주세요");
+      alert('제목을 입력해주세요');
       titleRef.current.focus();
       return;
     }
 
     if (content.length < 10) {
-      alert("일기를 입력해주세요");
+      alert('일기를 입력해주세요');
       titleRef.current.focus();
       return;
     }
 
-    if (window.confirm("게시글을 저장하시겠습니까?")) {
+    if (window.confirm('게시글을 저장하시겠습니까?')) {
       onCreate(postTitle, content);
-      navigate("/postlist", { replace: true });
+      navigate('/postlist', { replace: true });
     }
   };
 
   const handlCancel = () => {
     if (
       window.confirm(
-        "게시글 작성을 취소하시겠습니까? 작성된 내용은 내용은 저장되지 않습니다."
+        '게시글 작성을 취소하시겠습니까? 작성된 내용은 내용은 저장되지 않습니다.'
       )
     ) {
-      navigate("/postlist", { replace: true });
+      navigate('/postlist', { replace: true });
     }
   };
 
@@ -79,7 +79,7 @@ const NMEWPOST = () => {
   };
 
   if (att_num > 3) {
-    window.alert("이미지는 최대 3개까지 업로드 가능합니다.");
+    window.alert('이미지는 최대 3개까지 업로드 가능합니다.');
     setAttNum(3);
   }
   if (att_num < 0) {
@@ -90,7 +90,7 @@ const NMEWPOST = () => {
     const fileInputs = [];
     for (let i = 1; i <= att_num; i++) {
       fileInputs.push(
-        <div key={i}>
+        <div key={i} className="att_wrapper">
           <input
             type="file"
             accept="image/*"
@@ -194,7 +194,7 @@ const NMEWPOST = () => {
           <CKEditor
             editor={ClassicEditor}
             config={{
-              placeholder: "내용을 입력하세요.",
+              placeholder: '내용을 입력하세요.',
             }}
             onChange={(event, editor) => {
               const data = editor.getData();
@@ -204,7 +204,15 @@ const NMEWPOST = () => {
         </div>
         <div className="attach_area">
           <div className="attach_num">
-            <h5 style={{ marginRight: 20, marginLeft: 10 }}>
+            <h5
+              style={{
+                marginRight: 20,
+                marginLeft: 10,
+                fontWeight: 'bold',
+                fontSize: 14,
+                color: 'rgb(41, 41, 41)',
+              }}
+            >
               이미지 업로드하기
             </h5>
             <Button variant="outline-dark" className="a_btn" onClick={att_plus}>
@@ -230,19 +238,25 @@ const NMEWPOST = () => {
           }}
         >
           <Modal.Header closeButton>
-            <Modal.Title>이미지 미리보기</Modal.Title>
+            <Modal.Title style={{ fontSize: '17px', fontWeight: 'bold' }}>
+              이미지 미리보기
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {selectedImage && (
               <img
                 src={selectedImage}
                 alt="Preview"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
               />
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
+            <Button
+              className="close_btn"
+              variant="secondary"
+              onClick={() => setShowModal(false)}
+            >
               닫기
             </Button>
           </Modal.Footer>

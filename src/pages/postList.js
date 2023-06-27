@@ -1,16 +1,17 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import Myheader from "../components/header";
-import PostComponent from "../components/Postcontent";
-import NumPagination from "./numberpagination";
-import { useNavigate } from "react-router-dom";
-import { dataContext } from "../App";
+import React, { useContext, useEffect, useState, useRef } from 'react';
+import Myheader from '../components/header';
+import PostComponent from '../components/Postcontent';
+import NumPagination from './numberpagination';
+import { useNavigate } from 'react-router-dom';
+import { dataContext } from '../App';
+import Button from 'react-bootstrap/Button';
 
 const POSTLIST = () => {
   const data = useContext(dataContext);
   const [posts, setPosts] = useState(useContext(dataContext));
   const [isLogin, setIsLogin] = useState(false);
-  const [searchBy, setSearchBy] = useState("title");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchBy, setSearchBy] = useState('title');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
@@ -25,7 +26,7 @@ const POSTLIST = () => {
   };
 
   useEffect(() => {
-    const sessionId = localStorage.getItem("userId");
+    const sessionId = localStorage.getItem('userId');
     if (sessionId) {
       setIsLogin(true);
     }
@@ -33,11 +34,11 @@ const POSTLIST = () => {
 
   const handleNewPost = () => {
     if (isLogin) {
-      navigate("/newpost");
+      navigate('/newpost');
     } else {
-      alert("로그인 후 사용할 수 있습니다.");
-      if (window.confirm("로그인 하시겠습니까?")) {
-        navigate("/login");
+      alert('로그인 후 사용할 수 있습니다.');
+      if (window.confirm('로그인 하시겠습니까?')) {
+        navigate('/login');
       }
     }
   };
@@ -53,18 +54,18 @@ const POSTLIST = () => {
   };
 
   const handleSearch = () => {
-    if (searchTerm.trim() === "") {
+    if (searchTerm.trim() === '') {
       // 검색어가 비어있을 경우 전체 데이터를 설정합니다.
       setPosts(data);
     } else {
       const encodedSearchTerm = encodeURIComponent(searchTerm); // 검색어 인코딩
-      if (searchBy === "title") {
+      if (searchBy === 'title') {
         const filteredPosts = data.filter((it) => {
           const encodedTitle = encodeURIComponent(it.title); // 제목 인코딩
           return encodedTitle.includes(encodedSearchTerm);
         });
         setPosts(filteredPosts);
-      } else if (searchBy === "writer") {
+      } else if (searchBy === 'writer') {
         const filteredPosts = data.filter((it) => {
           const encodedAuthor = encodeURIComponent(it.writer); // 작성자 인코딩
           return encodedAuthor.includes(encodedSearchTerm);
@@ -107,7 +108,7 @@ const POSTLIST = () => {
               <select
                 value={searchBy}
                 onChange={handleSearchByChange}
-                style={{ height: 20 }}
+                style={{ height: 22.5, fontSize: '11px', borderRadius: '5px' }}
               >
                 <option value="title">제목</option>
                 <option value="writer">작성자</option>
@@ -119,9 +120,13 @@ const POSTLIST = () => {
                 onChange={handleSearchTermChange}
                 className="search_title"
               />
-              <button onClick={handleSearch} className="search_btn">
-                <span>검색</span>
-              </button>
+              <Button
+                variant="outline-dark"
+                onClick={handleSearch}
+                className="search_btn"
+              >
+                검색
+              </Button>
             </div>
             <button className="new_post" onClick={handleNewPost}>
               새글 작성하기

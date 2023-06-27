@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 /* Navigation Variables */
 :root {
@@ -8,7 +8,7 @@
   --nav-background: #ebe2cd;
   --nav-font-color: #353535;
   --link-hover-color: #c2baa6;
-  --noto-font: "Noto Sans KR", sans-serif;
+  --noto-font: 'Noto Sans KR', sans-serif;
 }
 
 /* Outer navigation wrapper */
@@ -59,15 +59,18 @@ nav ul li span:visited {
   background: var(--nav-background);
   color: var(--nav-font-color);
   text-decoration: none;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
 }
+
 nav ul li span:hover {
   background: var(--link-hover-color);
   color: var(--nav-font-color);
 }
 nav ul li span:not(:only-child):after {
   padding-left: 4px;
-  content: " ▾";
+  content: ' ▾';
 }
 nav ul li ul li {
   min-width: 190px;

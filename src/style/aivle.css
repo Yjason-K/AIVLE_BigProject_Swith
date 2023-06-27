@@ -76,3 +76,12 @@
 .github-link:hover {
   background-color: C2BAA6;
 }
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 13px;
+  font-weight: 500;
+}

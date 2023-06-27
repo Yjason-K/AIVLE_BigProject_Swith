@@ -1,65 +1,65 @@
-import { useEffect, useState } from "react";
-import Myheader from "../components/header";
-import "../style/aivle.css";
-import younghwan from "../img/yonghwan.png";
-import gyujin from "../img/gyujin.png";
-import yeryeong from "../img/yeryeong.png";
-import youngjae from "../img/youngjae.png";
-import seungjae from "../img/seungjae.png";
-import hwanjun from "../img/hwanjun.png";
-import hanjoon from "../img/hanjoon.png";
+import { useEffect, useState } from 'react';
+import Myheader from '../components/header';
+import '../style/aivle.css';
+import younghwan from '../img/yonghwan.png';
+import gyujin from '../img/gyujin.png';
+import yeryeong from '../img/yeryeong.png';
+import youngjae from '../img/youngjae.png';
+import seungjae from '../img/seungjae.png';
+import hwanjun from '../img/hwanjun.png';
+import hanjoon from '../img/hanjoon.png';
 
 const teamMembers = [
   {
-    name: "김용환",
-    description: "AI 모델링",
+    name: '김용환',
+    description: 'AI 모델링',
     image: younghwan,
-    git: "https://github.com/brightface",
+    git: 'https://github.com/brightface',
   },
   {
-    name: "장규진",
-    description: "AI 모델링",
+    name: '장규진',
+    description: 'AI 모델링',
     image: gyujin,
-    git: "https://github.com/kj021",
+    git: 'https://github.com/kj021',
   },
   {
-    name: "조예령",
-    description: "AI 모델링",
+    name: '조예령',
+    description: 'AI 모델링',
     image: yeryeong,
-    git: "https://github.com/CYeryeong",
+    git: 'https://github.com/CYeryeong',
   },
   {
-    name: "김영재",
-    description: "Frontend",
+    name: '김영재',
+    description: 'Frontend',
     image: youngjae,
-    git: "https://github.com/Yjason-K",
+    git: 'https://github.com/Yjason-K',
   },
   {
-    name: "오승재",
-    description: "Frontend",
+    name: '오승재',
+    description: 'Frontend',
     image: seungjae,
-    git: "https://github.com/18-12847",
+    git: 'https://github.com/18-12847',
   },
   {
-    name: "남환준",
-    description: "Backend",
+    name: '남환준',
+    description: 'Backend',
     image: hwanjun,
-    git: "https://github.com/only-juun",
+    git: 'https://github.com/only-juun',
   },
   {
-    name: "이한준",
-    description: "Backend",
+    name: '이한준',
+    description: 'Backend',
     image: hanjoon,
-    git: "https://github.com/leehanjun506",
+    git: 'https://github.com/leehanjun506',
   },
 ];
 
 const AIVLE = () => {
-  const session = localStorage.getItem("sessionId");
+  const session = localStorage.getItem('sessionId');
   const [sessionId, setSessionId] = useState(false);
 
   useEffect(() => {
-    if (session && session !== "null") {
+    if (session && session !== 'null') {
       setSessionId(true);
     }
   }, []);
@@ -67,7 +67,7 @@ const AIVLE = () => {
   return (
     <div className="aivle">
       <Myheader isLogin={sessionId} />
-      <div style={{ marginTop: "50px" }}>
+      <div style={{ marginTop: '50px' }}>
         <div>
           <h1>
             <center>팀원 소개</center>
@@ -106,7 +106,7 @@ const AIVLE = () => {
             </div>
           ))}
         </div>
-        <div className="team-row" style={{ marginTop: "50px" }}>
+        <div className="team-row" style={{ marginTop: '50px' }}>
           {teamMembers.slice(3).map((member, index) => (
             <div key={index} className="team-card">
               <div className="card">

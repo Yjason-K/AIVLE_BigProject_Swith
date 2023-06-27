@@ -1,13 +1,13 @@
 // post 게시글 확인 페이지
-import Myheader from "../components/header";
-import { commentContext, dataContext } from "../App";
+import Myheader from '../components/header';
+import { commentContext, dataContext } from '../App';
 
-import React, { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import ReactHtmlParser from "react-html-parser";
-import Commentcontent from "../components/Commentcontent";
-import { postContext } from "../App";
-import { Button } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
+import Commentcontent from '../components/Commentcontent';
+import { postContext } from '../App';
+import { Button } from 'react-bootstrap';
 
 const POST = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const POST = () => {
   const [writer, setWriter] = useState();
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const [postdate, setPostdate] = useState(null);
 
   const postList = useContext(dataContext);
@@ -30,7 +30,7 @@ const POST = () => {
 
   useEffect(() => {
     // 페이지가 로드될 때 실행되는 효과 함수
-    const sessionId = localStorage.getItem("userId");
+    const sessionId = localStorage.getItem('userId');
     if (sessionId) {
       setIsLogin(true);
     }
@@ -58,8 +58,8 @@ const POST = () => {
       ); // 변경된 views 값을 전달
     } else {
       // 일기가 없을 때
-      alert("잘못된 접근 입니다.");
-      navigate("/postlist", { replace: true });
+      alert('잘못된 접근 입니다.');
+      navigate('/postlist', { replace: true });
     }
   }, []);
 
@@ -71,25 +71,25 @@ const POST = () => {
     if (isLogin) {
       if (comment.length !== 0) {
         commentonCreate(id, comment);
-        setComment("");
+        setComment('');
       } else {
-        window.alert("댓글을 입력해주세요.");
+        window.alert('댓글을 입력해주세요.');
       }
     } else {
-      alert("로그인 후 이용가능합니다!");
+      alert('로그인 후 이용가능합니다!');
     }
   };
 
   const postdeletehandler = () => {
-    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+    if (window.confirm('게시글을 삭제하시겠습니까?')) {
       onRemove(id);
       postonRemove(id);
-      navigate("/postlist", { replace: true });
+      navigate('/postlist', { replace: true });
     }
   };
 
   const editButtonClickHandler = () => {
-    if (window.confirm("게시글을 수정하시겠습니까?")) {
+    if (window.confirm('게시글을 수정하시겠습니까?')) {
       navigate(`/edit/${id}`);
     }
   };
@@ -97,14 +97,12 @@ const POST = () => {
   const title_date = (date) => {
     const title_d =
       new Date(date).toISOString().slice(0, 10) +
-      " " +
+      ' ' +
       new Date(date).toISOString().slice(11, 19);
     return title_d;
   };
 
-  console.log(postdate);
-
-  if (writer === JSON.parse(localStorage.getItem("userId"))?.id) {
+  if (writer === JSON.parse(localStorage.getItem('userId'))?.id) {
     return (
       <div className="show_post">
         <Myheader login={isLogin} />
@@ -148,8 +146,8 @@ const POST = () => {
             <textarea
               placeholder={
                 isLogin
-                  ? "인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."
-                  : "로그인 후 사용할 수 있습니다."
+                  ? '인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.'
+                  : '로그인 후 사용할 수 있습니다.'
               }
               maxlength="600"
               value={comment}
@@ -164,7 +162,7 @@ const POST = () => {
                 variant="outline-dark"
                 className="to_postlist"
                 onClick={() => {
-                  navigate("/postlist");
+                  navigate('/postlist');
                 }}
               >
                 목록으로
@@ -214,15 +212,15 @@ const POST = () => {
             <textarea
               placeholder={
                 isLogin
-                  ? "인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."
-                  : "로그인 후 사용할 수 있습니다."
+                  ? '인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.'
+                  : '로그인 후 사용할 수 있습니다.'
               }
               maxlength="600"
               value={comment}
               onChange={(e) => {
                 setComment(e.target.value);
               }}
-              style={{ height: 86, backgroundColor: "#F8F8F8" }}
+              style={{ height: 86, backgroundColor: '#F8F8F8' }}
               disabled={!isLogin}
             ></textarea>
             <div className="comment_btn">
@@ -230,7 +228,7 @@ const POST = () => {
                 variant="outline-dark"
                 className="to_postlist"
                 onClick={() => {
-                  navigate("/postlist");
+                  navigate('/postlist');
                 }}
               >
                 목록으로
