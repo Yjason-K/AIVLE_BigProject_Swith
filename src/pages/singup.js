@@ -268,7 +268,7 @@ const SIGNUP = () => {
                     disabled={!isCheck}
                   />
 
-                  <hr className="hr" style={{ marginBottom: "-10px" }} />
+                  <hr className="hr" style={{ marginBottom: "0px" }} />
 
                   <input
                     ref={serialnumberRef}
@@ -297,7 +297,7 @@ const SIGNUP = () => {
                     disabled={!isCheck}
                   />
 
-                  <hr className="hr" style={{ marginBottom: "-10px" }} />
+                  <hr className="hr" style={{ marginBottom: "0px" }} />
 
                   <input
                     ref={ageRef}
