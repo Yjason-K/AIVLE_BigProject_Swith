@@ -1,11 +1,11 @@
 /* postList */
 
 .postlist .postlist_wrapper {
-  margin: 80px auto;
+  margin: 100px auto;
   align-items: center;
   border: solid 1px gray;
   width: 1000px;
-  height: 630px;
+  height: 644px;
 }
 
 .freeNotice {

@@ -49,8 +49,8 @@ const FAQ = () => {
     <div>
       <Myheader isLogin={sessionId} />
       <center>
-        <div style={{ width: "65%", marginTop: "50px", marginBottom: "50px" }}>
-          <h1>Q & A</h1>
+        <div style={{ width: "65%", marginTop: "100px", marginBottom: "50px" }}>
+          <h1>F A Q</h1>
         </div>
       </center>
       <div className="question">
@@ -62,8 +62,8 @@ const FAQ = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            margin: "auto",
-            marginTop: 30,
+            // margin: "auto",
+            // marginTop: 30,
           }}
         >
           <h2 style={{ fontWeight: "bold" }}>자주묻는질문</h2>

@@ -37,7 +37,7 @@
 .question {
   display: flex;
   flex-direction: row;
-  margin-bottom: 170px;
+  margin-bottom: 100px;
 }
 
 .email_contact {
@@ -47,7 +47,9 @@
   width: 35%;
   margin-top: 36px;
   margin: auto;
-  height: 530px;
+  height: 560px;
+  max-height: 100%;
+  overflow: auto;
 }
 
 .faq_input {
@@ -87,6 +89,21 @@ label {
   margin-left: 3%;
   margin-bottom: 8px;
   font-weight: 800;
+}
+
+.submitEmail{
+  position: relative;
+  width: 50%;
+  height: 35px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 700;
+  background-color : #B1AB9A; 
+  color: rgb(255, 255, 255);
+  transition: all ease-in-out 0.2s;
+  margin-bottom: 5px;
 }
 
 .submitEmail:hover {

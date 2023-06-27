@@ -62,7 +62,7 @@ const LOGIN = () => {
   // };
 
   return (
-    <div className="login">
+    <div className="login" style={{height: "814px"}}>
       <Myheader />
       <Fragment>
         <div className="login_container">

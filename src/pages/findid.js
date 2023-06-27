@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../style/loginScreen.css";
+import "../style/findid.css";
 import Myheader from "../components/header";
 import axios from "axios";
 
@@ -105,115 +105,120 @@ const FindID = () => {
   return (
     <div className="findpassword">
       <Myheader />
-      <div className="findpwd" style={{ marginTop: "100px" }}>
-        <center>
-          {!verified ? (
-            <>
-              <h1 className="title">아이디 찾기</h1>
-              <div className="findEmailArea">
-                <form onSubmit={findEmail}>
-                  <input
-                    type="text"
-                    className="emailInput"
-                    required
-                    placeholder="시리얼번호 입력"
-                    value={serialNumber}
-                    onChange={(e) => setSerialNumber(e.target.value)}
-                    key="serialNumber"
-                  />
-                  <button
-                    type="submit"
-                    className="sbButton"
-                    style={{ marginTop: "1px" }}
-                  >
-                    아이디 찾기
-                  </button>
-                </form>
-              </div>
-              <br />
-              <br />
-              <br />
-              <br />
-              <h1 className="title">비밀번호 찾기</h1>
-              <div className="verifyArea">
-                <form onSubmit={verifyUser}>
-                  <input
-                    type="email"
-                    className="emailInput"
-                    required
-                    placeholder="아이디(example@gmail.com)"
-                    name="email"
-                    onChange={setinfo}
-                    value={idInfo.email}
-                    key="email"
-                    readOnly
-                  />
-                  <input
-                    type="text"
-                    className="serialnumberInput"
-                    required
-                    placeholder="시리얼번호"
-                    name="serialnumber"
-                    onChange={setinfo}
-                    key="serialnumber"
-                  />
-                  <button
-                    type="submit"
-                    className="sbButton"
-                    style={{ marginTop: "1px" }}
-                  >
-                    비밀번호 초기화
-                  </button>
-                </form>
-              </div>
-            </>
-          ) : (
-            <>
-              <br />
-              <h3 className="subtitle">
-                새로운 비밀번호를 입력하세요.
-                <br />
-                (6자 이상)
-              </h3>
-              <div className="resetPasswordArea">
-                <form onSubmit={resetPassword}>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    className="newPasswordInput"
-                    required
-                    placeholder="새 비밀번호"
-                    name="newPassword"
-                    onChange={setinfo}
-                    key="newPassword"
-                    minLength="6"
-                  />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    className="confirmPasswordInput"
-                    required
-                    placeholder="비밀번호 확인"
-                    name="confirmPassword"
-                    onChange={setinfo}
-                    key="confirmPassword"
-                    minLength="6"
-                  />
+      <div className="find_pwd">
+        {!verified ? (
+          <>
+            <div style={{ height: "auto" }}>
+              <center>
+                <div className="find_id">
+                  <h1>아이디 찾기</h1>
+                  <div className="findEmailArea">
+                    <form onSubmit={findEmail}>
+                      <input
+                        type="text"
+                        className="emailInput"
+                        required
+                        placeholder="시리얼번호 입력"
+                        value={serialNumber}
+                        onChange={(e) => setSerialNumber(e.target.value)}
+                        key="serialNumber"
+                      />
+                      <button
+                        type="submit"
+                        className="findid_button"
+                        style={{ marginTop: "1px" }}
+                      >
+                        아이디 찾기
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                <div style={{ marginTop: "100px" }}>
+                  <h1>비밀번호 찾기</h1>
+                  <div className="verifyArea">
+                    <form onSubmit={verifyUser}>
+                      <input
+                        type="email"
+                        className="emailInput"
+                        required
+                        placeholder="아이디(example@gmail.com)"
+                        name="email"
+                        onChange={setinfo}
+                        value={idInfo.email}
+                        key="email"
+                      />
+                      <input
+                        type="text"
+                        className="serialnumberInput"
+                        required
+                        placeholder="시리얼번호"
+                        name="serialnumber"
+                        onChange={setinfo}
+                        key="serialnumber"
+                      />
+                      <button
+                        type="submit"
+                        className="findid_button"
+                        style={{ marginTop: "1px" }}
+                      >
+                        비밀번호 초기화
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </center>
+            </div>
+
+          </>
+        ) : (
+          <>
+            <div className="resetpwd">
+              <center>
+                <h3 className="subtitle">
+                  새로운 비밀번호를 입력하세요.
                   <br />
-                  <br />
-                  <label>
+                  (6자 이상)
+                </h3>
+                <div className="resetPasswordArea">
+                  <form onSubmit={resetPassword}>
                     <input
-                      type="checkbox"
-                      onChange={togglePasswordVisibility}
+                      type={showPassword ? "text" : "password"}
+                      className="newPasswordInput"
+                      required
+                      placeholder="새 비밀번호"
+                      name="newPassword"
+                      onChange={setinfo}
+                      key="newPassword"
+                      minLength="6"
                     />
-                    비밀번호 표시
-                  </label>
-                  <button type="submit" className="pwdchange">
-                    비밀번호 변경
-                  </button>
-                </form>
-              </div>
-            </>
-          )}
-        </center>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="confirmPasswordInput"
+                      required
+                      placeholder="비밀번호 확인"
+                      name="confirmPassword"
+                      onChange={setinfo}
+                      key="confirmPassword"
+                      minLength="6"
+                    />
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        type="checkbox"
+                        onChange={togglePasswordVisibility}
+                      />
+                      비밀번호 표시
+                    </label>
+                    <button type="submit" className="resetpwd_button">
+                      비밀번호 변경
+                    </button>
+                  </form>
+                </div>
+              </center>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
