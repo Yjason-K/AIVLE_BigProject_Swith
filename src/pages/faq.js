@@ -62,8 +62,8 @@ const FAQ = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            margin: "auto",
-            marginTop: 30,
+            // margin: "auto",
+            // marginTop: 30,
           }}
         >
           <h2 style={{ fontWeight: "bold" }}>자주묻는질문</h2>
