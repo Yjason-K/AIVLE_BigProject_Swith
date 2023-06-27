@@ -1,32 +1,38 @@
 .mypage_pwcheck {
     position: relative;
-    top: 200px;
-    width: 30%;
-    height: 100%;
+    display: flex;
     border-radius: 10px;
     text-align: center;
+    height: 420px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10em auto;
+  }
+
+.mypage_main{
+    height: 814px;
+    margin-top: 100px;
+}
+
+.mypageFrame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 400px;
+    width: 400px;
+    height: 814px;
+    background-color: white;
+    border-radius: 10px 0px 0px 10px;
+    box-shadow: -5px 5px 15px -5px black;
+    opacity: 0.9;
   }
   
   .mypage_edit {
     position: relative;
     top: -50px;
     width: 30%;
-  }
-
-  .mypageFrame {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 400px;
-    top: 50px;
-    width: 400px;
-    height: 800px;
-    background-color: white;
-    border-radius: 10px 0px 0px 10px;
-    box-shadow: -5px 5px 15px -5px black;
-    opacity: 0.9;
-    margin-right: 50px;
   }
 
   .idInput, .pwInput, .emailInput, .serialnumberInput, .phoneInput, .nameInput, .ageInput, .timeInput{
@@ -46,3 +52,23 @@
     box-shadow: 0 0 10px #B1AB9A; 
     outline: none;
   }
+
+  .mypage_button {
+    position: relative;
+    bottom: -30px;
+    width: 80%;
+    height: 35px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: #c2baa6;
+    color: rgb(255, 255, 255);
+    transition: all ease-in-out 0.2s;
+  }
+
+.mypage_button:hover{
+    background-color : #B1AB9A; 
+    color: rgb(255, 255, 255);
+}
