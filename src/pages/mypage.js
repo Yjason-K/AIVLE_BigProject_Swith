@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Myheader from "../components/header";
 import "../style/mypage.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -44,23 +44,30 @@ const MYPAGE = () => {
     }
   };
 
+  const confirmPwRef = useRef();
+  const ageRef = useRef();
+  const timeRef = useRef();
+
   const updateUserInfo = (e) => {
     e.preventDefault();
 
     if (newPassword && newPassword !== newPasswordConfirmation) {
       alert('입력한 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+      confirmPwRef.current.focus();
       return;
     }
 
     const age = Number(ageNumber);
     if (isNaN(age) || age < 0 || age > 120) {
       alert('연령은 0~120 사이의 값이어야 합니다.');
+      ageRef.current.focus();
       return;
     }
 
     const timeRange = timeNumber.split('~');
     if (timeRange.length !== 2 || timeRange.some(time => isNaN(time) || time < 0 || time > 24)) {
       alert('이용 시간대는 0~24 사이의 두 개의 숫자로 지정해야 합니다. 예: 9~18');
+      timeRef.current.focus();
       return;
     }
 
@@ -121,14 +128,14 @@ const MYPAGE = () => {
                       <input type="text" className="idInput" value={`닉네임: ${currentUser.username}`} disabled />
                       <input type="email" className="emailInput" placeholder={`이메일: ${currentUser.email}`} disabled />
                       <input type="password" className="pwInput" placeholder="비밀번호 변경(6글자 이상)" onChange={(e) => setNewPassword(e.target.value)} minLength="6" />
-                      <input type="password" className="pwInput" placeholder="비밀번호 확인(6글자 이상)" onChange={(e) => setNewPasswordConfirmation(e.target.value)} minLength="6" />
+                      <input ref={confirmPwRef} type="password" className="pwInput" placeholder="비밀번호 확인(6글자 이상)" onChange={(e) => setNewPasswordConfirmation(e.target.value)} minLength="6" />
                       <hr className="hr" style={{ marginBottom: "0px" }} />
                       <input type="text" className="nameInput" placeholder={`이름: ${currentUser.name}`} onChange={(e) => setName(e.target.value)} />
                       <input type="text" className="serialnumberInput" placeholder={`시리얼넘버: ${currentUser.serialnumber}`} onChange={(e) => setSerialNumber(e.target.value)} />
                       <input type="text" className="phoneInput" placeholder={`전화번호: ${currentUser.phone}`} onChange={(e) => setPhoneNumber(e.target.value)} pattern="\d{11}" maxLength="11" />
                       <hr className="hr" style={{ marginBottom: "0px" }} />
-                      <input type="text" className="ageInput" placeholder={`연령: ${currentUser.agenumber}`} onChange={(e) => setAgeNumber(e.target.value)} />
-                      <input type="text" className="timeInput" placeholder={`이용 시간대: ${currentUser.timenumber.join('~')}`} onChange={(e) => setTimeNumber(e.target.value)} />
+                      <input ref={ageRef} type="text" className="ageInput" placeholder={`연령: ${currentUser.agenumber}`} onChange={(e) => setAgeNumber(e.target.value)} />
+                      <input ref={timeRef} type="text" className="timeInput" placeholder={`이용 시간대: ${currentUser.timenumber.join('~')}`} onChange={(e) => setTimeNumber(e.target.value)} />
                       <hr />
                     </div>
                     <label className="showPw">
