@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Myheader from "../components/header";
 import { Button } from "react-bootstrap";
@@ -46,6 +46,13 @@ const SIGNUP = () => {
   2. 개인정보의 수집 및 이용목적
   
   3. 개인정보의 보유 및 이용기간`;
+  const nicknameRef = useRef();
+  const emailRef = useRef();
+  const confirmPwRef = useRef();
+  const ageRef = useRef();
+  const timeRef = useRef();
+  const serialnumberRef = useRef();
+
   const [idInfo, setIdInfo] = useState({
     name: "",
     id: "",
@@ -78,24 +85,28 @@ const SIGNUP = () => {
 
     if (idInfo.pw !== idInfo.checkpw) {
       alert("비밀번호가 일치하지 않습니다.");
+      confirmPwRef.current.focus();
       return;
     }
 
     const age = Number(idInfo.agenumber);
     if (isNaN(age) || age < 0 || age > 120) {
       alert("연령은 0~120 사이의 값이어야 합니다.");
+      ageRef.current.focus();
       return;
     }
 
     const timeRegex = /^(0[0-9]|1[0-9]|2[0-3])~(0[0-9]|1[0-9]|2[0-3])$/;
     if (!timeRegex.test(idInfo.timenumber)) {
       alert("이용 시간대는 00~24 형식이어야 합니다.");
+      timeRef.current.focus();
       return;
     }
 
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     if (!emailRegex.test(idInfo.email)) {
       alert("이메일 형식이 올바르지 않습니다.");
+      emailRef.current.focus();
       return;
     }
 
@@ -105,6 +116,7 @@ const SIGNUP = () => {
     );
     if (isUserExist) {
       alert("이미 존재하는 닉네임입니다.");
+      nicknameRef.current.focus();
       return;
     }
 
@@ -113,6 +125,7 @@ const SIGNUP = () => {
     );
     if (isEmailExist) {
       alert("이미 등록된 이메일입니다.");
+      emailRef.current.focus();
       return;
     }
 
@@ -121,6 +134,7 @@ const SIGNUP = () => {
     );
     if (isSerialExist) {
       alert("이미 존재하는 시리얼넘버입니다.");
+      serialnumberRef.current.focus();
       return;
     }
 
@@ -209,6 +223,7 @@ const SIGNUP = () => {
                   />
 
                   <input
+                    ref={emailRef}
                     type="email"
                     className="emailInput"
                     required
@@ -230,6 +245,7 @@ const SIGNUP = () => {
                   />
 
                   <input
+                    ref={confirmPwRef}
                     type={showpw}
                     className="pwInput"
                     required
@@ -241,6 +257,7 @@ const SIGNUP = () => {
                   />
 
                   <input
+                    ref={nicknameRef}
                     type="text"
                     className="idInput"
                     required
@@ -254,6 +271,7 @@ const SIGNUP = () => {
                   <hr className="hr" style={{ marginBottom: "-10px" }} />
 
                   <input
+                    ref={serialnumberRef}
                     type="text"
                     className="serialnumberInput"
                     required
@@ -282,6 +300,7 @@ const SIGNUP = () => {
                   <hr className="hr" style={{ marginBottom: "-10px" }} />
 
                   <input
+                    ref={ageRef}
                     type="number"
                     min="0"
                     max="120"
@@ -294,6 +313,7 @@ const SIGNUP = () => {
                   />
 
                   <input
+                    ref={timeRef}
                     type="text"
                     className="timeInput"
                     required
