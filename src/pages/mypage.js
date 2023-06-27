@@ -149,7 +149,7 @@ const MYPAGE = () => {
         <div className="mypage_pwcheck">
                 <h1>회원정보수정</h1>
                 <form onSubmit={verifyPassword}>
-                    <input type="password" className="pwInput" placeholder="비밀번호 확인" onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" style = {{textAlign: "center"}} className="mypagepwInput" placeholder="비밀번호 확인" onChange={(e) => setPassword(e.target.value)} />
                     <input type="submit" className="mypage_button" value="확인" />
                 </form>
         </div>
