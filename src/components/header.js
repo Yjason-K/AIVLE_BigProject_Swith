@@ -33,13 +33,13 @@ const Myheader = () => {
           <nav>
             <ul className="nav-list">
               <li>
-                <Link to="/service">
-                  <span>Service</span>
+                <Link to="/main">
+                  <span>Home</span>
                 </Link>
               </li>
               <li>
-                <Link to="/main">
-                  <span>Home</span>
+                <Link to="/service">
+                  <span>Service</span>
                 </Link>
               </li>
               <li>

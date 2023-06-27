@@ -1,6 +1,6 @@
-import "./footer.scss";
-import logo from "../img/logo-1.png";
-import git_log from "../img/github-mark.png";
+import './footer.scss';
+import logo from '../img/logo-1.png';
+import git_log from '../img/github-mark.png';
 
 const Footer = () => {
   return (
@@ -30,21 +30,21 @@ const Footer = () => {
             <b>TEAM 21(Contact Us)</b>
           </div>
           <div className="team">
-            AI :{" "}
+            AI :{' '}
             <a
               href="https://github.com/brightface"
               target="_blank"
               rel="noopener noreferrer"
             >
               김용환
-            </a>{" "}
+            </a>{' '}
             <a
               href="https://github.com/kj021"
               target="_blank"
               rel="noopener noreferrer"
             >
               장규진
-            </a>{" "}
+            </a>{' '}
             <a
               href="https://github.com/CYeryeong"
               target="_blank"
@@ -54,14 +54,14 @@ const Footer = () => {
             </a>
           </div>
           <div className="team">
-            FE :{" "}
+            FE :{' '}
             <a
               href="https://github.com/Yjason-K"
               target="_blank"
               rel="noopener noreferrer"
             >
               김영재
-            </a>{" "}
+            </a>{' '}
             <a
               href="https://github.com/18-12847"
               target="_blank"
@@ -71,14 +71,14 @@ const Footer = () => {
             </a>
           </div>
           <div className="team">
-            BE :{" "}
+            BE :{' '}
             <a
               href="https://github.com/only-juun"
               target="_blank"
               rel="noopener noreferrer"
             >
               남환준
-            </a>{" "}
+            </a>{' '}
             <a
               href="https://github.com/leehanjun506"
               target="_blank"
