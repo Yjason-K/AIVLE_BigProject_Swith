@@ -96,7 +96,7 @@
   border-radius: 10px;
   font-weight: 700;
   background-color : #B1AB9A; 
-  color: rgb(196, 233, 255);
+  color: rgb(255, 255, 255);
   transition: all ease-in-out 0.2s;
 }
 
@@ -110,12 +110,12 @@
   }
 
   .btn-custom {
-    background-color: #c2baa6;
+    background-color: #B1AB9A;
     border-color: transparent;
     margin-top: 15px;
   }
   
   .btn-custom:hover {
-    background-color: #B1AB9A;
+    background-color: #717171;
     border-color: transparent;
   }

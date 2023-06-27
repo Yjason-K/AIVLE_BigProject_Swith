@@ -50,7 +50,7 @@ const FAQ = () => {
       <Myheader isLogin={sessionId} />
       <center>
         <div style={{ width: "65%", marginTop: "100px", marginBottom: "50px" }}>
-          <h1>Q & A</h1>
+          <h1>F A Q</h1>
         </div>
       </center>
       <div className="question">

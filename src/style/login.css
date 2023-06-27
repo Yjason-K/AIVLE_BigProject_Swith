@@ -144,8 +144,8 @@
     cursor: pointer;
     border-radius: 10px;
     font-weight: 700;
-    background-color : #c2baa6;
-    color: rgb(196, 233, 255);
+    background-color : #B1AB9A;
+    color: rgb(255, 255, 255);
     transition: all ease-in-out 0.2s;
 }
 
@@ -154,7 +154,7 @@
 }
 
 .loginButton:hover {
-    background-color : #B1AB9A; 
+    background-color : #717171; 
     color: rgb(255, 255, 255);
   }
 
