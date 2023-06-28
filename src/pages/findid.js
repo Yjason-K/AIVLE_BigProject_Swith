@@ -108,8 +108,8 @@ const FindID = () => {
       <div className="find_pwd">
         {!verified ? (
           <>
-            <div style={{ height: "auto" }}>
-              <center>
+            <div>
+              <center style={{marginTop: "34px"}}>
                 <div className="find_id">
                   <h1>아이디 찾기</h1>
                   <div className="findEmailArea">
