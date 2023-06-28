@@ -2,29 +2,41 @@ import { useEffect, useState } from "react";
 import Myheader from "../components/header";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
+import service1 from "../img/home_service1.png";
+import service2 from "../img/home_service2.png";
 
 const UncontrolledExample = () => {
   return (
-    <Carousel>
+    <center>
+      <Carousel style={{ width: "80%" }}>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://imgscf.slidemembers.com/docs/1/1/354/service_introduction_page_template_353421.jpg"
-          width="100%"
-          height="500px"
-          alt="First slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://imgscf.slidemembers.com/docs/1/1/354/service_introduction_page_template_353423.jpg"
-          width="100%"
-          height="500px"
-          alt="Second slide"
-        />
-      </Carousel.Item>
-    </Carousel>
+          <img
+            className="d-block w-100"
+            src={service1}
+            width="100%"
+            height="500px"
+            alt="Second slide"
+          />
+          <Carousel.Caption style={{color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
+            <h3>집에서 한시라도 눈을 뗄 수가 없나요?</h3>
+            사랑하는 이들의 안전을 지키기 위해 많은 고민을 하고 있다면<br /> S.with 서비스를 이용하는 것은 어떠신가요?
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={service2}
+            width="100%"
+            height="500px"
+            alt="First slide"
+          />
+          <Carousel.Caption style={{color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
+            <h3>S.with 서비스는 WIFI와 IP카메라를 활용한<br /> 위험 상황 감지가 가능합니다!</h3>
+            실시간 포즈 추정으로 위험 상황 감지가 가능한 AI 서비스를 이용해서 집에서도 안심하고 지내세요! 
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+    </center>
   );
 };
 
@@ -40,10 +52,10 @@ const HOME = () => {
 
   return (
     <div className="main_page" style={{ width: "100%", height: "1000px" }}>
-      <div style={{marginBottom: "100px"}}>
+      <div style={{ marginBottom: "100px" }}>
         <Myheader isLogin={sessionId} />
       </div>
-      <div style={{marginBottom: "100px"}}>
+      <div style={{ marginBottom: "100px" }}>
         <UncontrolledExample />
       </div>
       <div
