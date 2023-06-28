@@ -4,6 +4,7 @@ import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import service1 from "../img/home_service1.png";
 import service2 from "../img/home_service2.png";
+import service3 from "../img/home_service3.png";
 
 const UncontrolledExample = () => {
   return (
@@ -32,7 +33,21 @@ const UncontrolledExample = () => {
           />
           <Carousel.Caption style={{color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
             <h3>S.with 서비스는 WIFI와 IP카메라를 활용한<br /> 위험 상황 감지가 가능합니다!</h3>
-            실시간 포즈 추정으로 위험 상황 감지가 가능한 AI 서비스를 이용해서 집에서도 안심하고 지내세요! 
+            실시간 행동 추정으로 위험 상황 감지가 가능한 AI 서비스를 이용해서 집에서도 안심하고 지내세요! 
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={service3}
+            width="100%"
+            height="500px"
+            alt="First slide"
+          />
+          <Carousel.Caption style={{color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
+            <h3>안전사고가 일어나도 걱정마세요!</h3>
+            S.with 서비스는 위험 상황 발생 시 즉각적으로 알림을 보내 골든 타임을 확보하고,<br />
+            빠른 대처를 통해 2차 사고 예방이 가능합니다.<br />이제 고민을 덜고, 사랑하는 이들을 위해 S.with 서비스를 선택하세요.
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
