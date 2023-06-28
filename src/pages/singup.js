@@ -107,7 +107,32 @@ const SIGNUP = () => {
     `;
 
   const termsOfService2 = `
-   
+   [S.with] 개인 정보 보호 약관
+
+     [S.with] 계정을 생성하기 전에 [S.with]의 약관을 주의 깊게 읽어보시기 바랍니다. [S.with]
+    계정을 생성하기 위해서는 IoT 홈카메라 서비스 이용약관, 개인 정보 이용 동의 약관에 동
+    의 해야 합니다.
+
+     [S.with]의 서비스 약관에는 사용자와 [S.with]의 관계, [S.with] 서비스에서 제공하는 콘텐
+    츠와 소프트웨어의 사용, 분쟁 해결을 포함하지만 이에 국한되지 않는 중요한 내용이 설명
+    되어 있습니다.
+
+     또한 계정을 만들 때 [S.with]에서는 다음과 같은 주요 사항을 포함하여 [S.with] 개인정보
+    처리방침에 설명된 바와 같이 사용자의 정보를 처리합니다.
+
+    ㆍ사용자가 [S.with]을 사용할 때 [S.with]에서 처리하는 데이터
+        - [S.with] 계정을 설정할 때 제공하신 이름, 이메일 주소, 전화번호, 시리얼번호와 같은
+          정보가 저장됩니다.
+        - 사용자가 게시판에서 게시글을 작성하거나 게시글에 댓글을 다는 등의 활동을 하기
+        위해 [S.with] 서비스를 사용하면 [S.with]은 사용자가 만든 정보를 저장합니다.
+
+    ㆍ정보의 보유기간
+        - 사용자가 원할 경우 언제든지 삭제할 수 있는 데이터가 있는 반면 자동으로 삭제되는
+          데이터도 있으며, 필요한 경우 [S.with]이 오랜 기간 동안 보관하는 데이터도 있습니
+          다. 사용자가 데이터를 삭제하면 [S.with]은 삭제 정책에 따라 데이터를 [S.with] 서버
+          에서 안전하고 확실하게 삭제하거나 익명 상태로만 보관합니다.
+
+
   `;
   const nicknameRef = useRef();
   const emailRef = useRef();
@@ -422,7 +447,7 @@ const SIGNUP = () => {
               readOnly
             ></textarea>
             <div className="checkbox-container">
-              개인 정보 수집 및 이용 약관에 동의합니다.&nbsp;
+              &nbsp;&nbsp;&nbsp;개인 정보 수집 및 이용 약관에 동의합니다.&nbsp;
               <input
                 type="checkbox"
                 onChange={() => setIsCheckOne(!isCheckOne)}
@@ -437,7 +462,7 @@ const SIGNUP = () => {
               readOnly
             ></textarea>
             <div className="checkbox-container">
-              개인 정보 보호 약관에 동의합니다.&nbsp;
+            &nbsp;&nbsp;&nbsp;개인 정보 보호 약관에 동의합니다.&nbsp;
               <input
                 type="checkbox"
                 onChange={() => setIsCheckTwo(!isCheckTwo)}
