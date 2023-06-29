@@ -1,0 +1,63 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.view_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.view_detail {
+  position: relative;
+  margin-top: 15px;
+  width: 50%;
+  height: 40px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 700;
+  background-color: #B1AB9A;
+  color: rgb(255, 255, 255);
+  transition: all ease-in-out 0.2s;
+}
+
+.view_detail:hover {
+  background-color: #717171;
+  color: rgb(255, 255, 255);
+}
+
+.feature_detail {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  height: 100%;
+}
+
+.feature_detail1 {
+    width: 55%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+
+.feature_detail1_picture {
+    width: 45%;
+    height: 100%;
+    text-align: right;
+}
+
+.feature_detail1_picture img {
+  width: 100%;
+  height: auto;
+}
+hr {
+    margin-top: 35px;
+    margin-bottom: 35px;
+  }
