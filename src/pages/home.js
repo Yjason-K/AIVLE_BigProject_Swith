@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Myheader from "../components/header";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -59,16 +59,21 @@ const UncontrolledExample = () => {
 const HOME = () => {
   const session = localStorage.getItem("sessionId");
   const [sessionId, setSessionId] = useState(false);
+  const featureDetail1Ref = useRef(null);
+  const featureDetail2Ref = useRef(null);
 
-  const handleScrollToFeatureDetail = () => {
-    const featureDetailSection = document.getElementById("feature_detail1");
-    if (featureDetailSection) {
-      window.scrollTo({
-        top: featureDetailSection.offsetTop,
-        behavior: "smooth",
-      });
+  const handleScrollToFeatureDetail1 = () => {
+    if (featureDetail1Ref.current) {
+      featureDetail1Ref.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const handleScrollToFeatureDetail2 = () => {
+    if (featureDetail2Ref.current) {
+      featureDetail2Ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     if (session && session !== "null") {
       setSessionId(true);
@@ -114,47 +119,17 @@ const HOME = () => {
           >
             <img
               src="https://cdn.icon-icons.com/icons2/1104/PNG/512/wifi_78927.png"
-              width={"100%"}
+              width={"50%"}
               height={"100%"}
               alt="Image 1"
             />
           </div>
           <div className="view_button">
-            <button className="view_detail" onClick={handleScrollToFeatureDetail}>자세히 알아보기</button>
+            <button className="view_detail" onClick={handleScrollToFeatureDetail1}>자세히 알아보기</button>
           </div>
         </div>
+
         <div style={{ flex: 1 }}>
-          <div
-            className="feature_name"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <center>AI</center>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "200px",
-            }}
-          >
-            <img
-              src="https://gongu.copyright.or.kr/gongu/wrt/cmmn/wrtFileImageView.do?wrtSn=13156879&filePath=L2Rpc2sxL25ld2RhdGEvMjAxOC8yMS9DTFMxLzEzMTU2ODc5X0NPTENUXzIwMTgxMTI2XzE=&thumbAt=Y&thumbSe=b_tbumb&wrtTy=10004"
-              width={"100%"}
-              height={"100%"}
-              alt="Image 3"
-            />
-          </div>
-          <div className="view_button">
-            <button className="view_detail">자세히 알아보기</button>
-          </div>
-        </div>
-        <div className="feature_row" style={{ flex: 1 }}>
           <div
             className="feature_name"
             style={{
@@ -176,13 +151,13 @@ const HOME = () => {
           >
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNVxHHVicJIFxqQLE1neN1YxY7MzqrbcTX2w&usqp=CAU"
-              width={"100%"}
+              width={"50%"}
               height={"100%"}
-              alt="Image 2"
+              alt="Image 3"
             />
           </div>
           <div className="view_button">
-            <button className="view_detail">자세히 알아보기</button>
+            <button className="view_detail" onClick={handleScrollToFeatureDetail2}>자세히 알아보기</button>
           </div>
         </div>
       </div>
@@ -193,7 +168,7 @@ const HOME = () => {
         </center>
       </div>
       <div>
-        <div className="feature_detail" id="feature_detail1">
+        <div className="feature_detail" id="feature_detail1" ref={featureDetail1Ref}>
           <div className="feature_detail1">
             <h2>WIFI Pose estimation</h2>
             WIFI Pose Estimation(와이파이 포즈 추정)은 Wi-Fi 신호를 이용하여 사용자의 위치와 동작을 추정하는 기술입니다.
@@ -215,6 +190,34 @@ const HOME = () => {
           <hr style={{ width: "80%" }} />
         </center>
       </div>
+      <div>
+        <div className="feature_detail" id="feature_detail2" ref={featureDetail2Ref}>
+          <div className="feature_detail2">
+            <h2>IP Camera</h2>
+            IP 카메라 포즈 추정(IP camera pose estimation)은 컴퓨터 비전과 컴퓨터 그래픽스 분야에서 사용되는 기술입니다. 이 기술은 IP 카메라에서 캡처된 영상을 기반으로 카메라의 위치와 방향(포즈)을 추정하는 것을 의미합니다.<br /><br />
+
+            IP 카메라 포즈 추정은 주로 다음과 같은 과정을 거칩니다.<br /><br />
+
+            1. 영상 처리 : IP 카메라로부터 수신된 영상을 처리합니다. 이 단계에서는 영상 내의 주요 특징점을 탐지하거나 추출하는 등의 작업이 수행됩니다.<br />
+
+            2. 특징점 매칭 : 영상 내의 특징점들을 다른 프레임이나 3D 모델의 특징점과 매칭시킵니다. 이를 통해 영상의 특징점들과 3D 공간 상의 대응점을 찾을 수 있습니다.<br />
+
+            3. 카메라 포즈 추정 : 매칭된 특징점들을 사용하여 카메라의 위치와 방향을 추정합니다.<br />
+
+            4. 결과 제공 : 추정된 카메라 포즈 정보를 활용하여 다양한 응용분야에서 활용할 수 있습니다. 예를 들어 가상 현실(VR), 확장 현실(AR), 실시간 모션 추적 등에 활용될 수 있습니다.
+          </div>
+          <div className="feature_detail2_picture">
+            <img src="https://i.ytimg.com/vi/W1ZNFfftx2E/maxresdefault.jpg" style={{ height: "400px" }} alt="asdf" />
+          </div>
+        </div>
+      </div>
+
+      <div className="hr_line">
+        <center>
+          <hr style={{ width: "80%" }} />
+        </center>
+      </div>
+
     </div>
   );
 };

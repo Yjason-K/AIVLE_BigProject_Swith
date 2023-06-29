@@ -29,6 +29,11 @@
   color: rgb(255, 255, 255);
 }
 
+hr {
+    margin-top: 35px;
+    margin-bottom: 35px;
+  }
+
 .feature_detail {
   display: flex;
   justify-content: space-between;
@@ -57,7 +62,24 @@
   width: 100%;
   height: auto;
 }
-hr {
-    margin-top: 35px;
-    margin-bottom: 35px;
+
+.feature_detail2 {
+    width: 55%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
   }
+  
+
+.feature_detail2_picture {
+    width: 45%;
+    height: 100%;
+    text-align: right;
+}
+
+.feature_detail2_picture img {
+  width: 100%;
+  height: auto;
+}
