@@ -14,6 +14,7 @@ const generateDummyData = () => {
     dummyData.push(data);
   }
 
+  localStorage.setItem("posts", JSON.stringify(dummyData));
   return dummyData;
 };
 

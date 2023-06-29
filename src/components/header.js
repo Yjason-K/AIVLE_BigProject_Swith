@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './myheader.scss';
-import logo from '../img/logo.png';
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./myheader.scss";
+import logo from "../img/logo.png";
 
 const Myheader = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem("userId");
     if (userId) {
       setIsLogin(true);
     }
@@ -16,9 +16,10 @@ const Myheader = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('userId');
+    // localStorage.removeItem("userId");
+    localStorage.removeItem("token");
     setIsLogin(false);
-    navigate('/main', { repalce: true });
+    navigate("/main", { repalce: true });
   };
 
   if (isLogin) {
@@ -27,7 +28,7 @@ const Myheader = () => {
         <div className="nav-container">
           <div className="brand">
             <Link to="/main">
-              <img src={logo} style={{ width: '130px' }} alt="service_logo" />
+              <img src={logo} style={{ width: "130px" }} alt="service_logo" />
             </Link>
           </div>
           <nav>
@@ -78,7 +79,7 @@ const Myheader = () => {
         <div className="nav-container">
           <div className="brand">
             <Link to="/main">
-              <img src={logo} style={{ width: '100px' }} alt="serive_logo" />
+              <img src={logo} style={{ width: "100px" }} alt="serive_logo" />
             </Link>
           </div>
           <nav>
