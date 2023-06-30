@@ -34,7 +34,7 @@
   }
 
 .register_Area::before {
-    content: 'REGISTER';
+    content: '회원가입';
     position: absolute;
     top: -40px;
     color:#5f5f5f;
@@ -59,6 +59,11 @@
   border-color: #B1AB9A;
   box-shadow: 0 0 10px #B1AB9A; 
   outline: none;
+}
+
+.timeInput{
+  width: 35%;
+  padding: 0px;
 }
 
 .pwChecking{
@@ -119,3 +124,59 @@
     background-color: #717171;
     border-color: transparent;
   }
+
+.ageInputContainer {
+  position: relative;
+}
+
+.ageInputContainer .tooltiptext {
+  visibility: hidden;
+  width: 250px;
+  background-color: #B1AB9A;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -125px;
+
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.ageInputContainer:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.timeInputContainer {
+  position: relative;
+}
+
+.timeInputContainer .tooltiptext{
+  visibility: hidden;
+  width: 250px;
+  background-color: #B1AB9A;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+  top: 120%;
+  left: 50%;
+  margin-left: -125px;
+
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.timeInputContainer:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

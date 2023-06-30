@@ -1,4 +1,4 @@
-import { Fragment, useState, useRef } from 'react';
+import { Fragment, useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Myheader from '../components/header';
 import { Button } from 'react-bootstrap';
@@ -136,7 +136,8 @@ const SIGNUP = () => {
   const emailRef = useRef();
   const confirmPwRef = useRef();
   const ageRef = useRef();
-  const timeRef = useRef();
+  const timeRef1 = useRef();
+  const timeRef2 = useRef();
   const serialnumberRef = useRef();
 
   const [idInfo, setIdInfo] = useState({
@@ -154,7 +155,13 @@ const SIGNUP = () => {
 
   const setinfo = (e) => {
     const { name, value } = e.target;
-    setIdInfo({ ...idInfo, [name]: value });
+    if (name === 'timenumber1' || name === 'timenumber2') {
+      const [hour] = value.split(':');
+      const numericValue = parseInt(hour, 10);
+      setIdInfo({ ...idInfo, [name]: numericValue });
+    } else {
+      setIdInfo({ ...idInfo, [name]: value });
+    }
   };
 
   const showPwBt = () => {
@@ -163,7 +170,6 @@ const SIGNUP = () => {
 
   const newRegis = (e) => {
     e.preventDefault();
-
     if (!isCheckOne || !isCheckTwo) {
       alert('이용 약관에 모두 동의해주세요.');
       return;
@@ -179,13 +185,6 @@ const SIGNUP = () => {
     if (isNaN(age) || age < 0 || age > 120) {
       alert('연령은 0~120 사이의 값이어야 합니다.');
       ageRef.current.focus();
-      return;
-    }
-
-    const timeRegex = /^(0[0-9]|1[0-9]|2[0-3])~(0[0-9]|1[0-9]|2[0-3])$/;
-    if (!timeRegex.test(idInfo.timenumber)) {
-      alert('이용 시간대는 00~24 형식이어야 합니다.');
-      timeRef.current.focus();
       return;
     }
 
@@ -224,8 +223,6 @@ const SIGNUP = () => {
       return;
     }
 
-    const timeRange = idInfo.timenumber.split('~');
-
     const newUser = {
       username: idInfo.id,
       password: idInfo.pw,
@@ -234,12 +231,11 @@ const SIGNUP = () => {
       phone: idInfo.phone,
       email: idInfo.email,
       agenumber: idInfo.agenumber,
-      timenumber: timeRange,
+      timenumber: [idInfo.timenumber1, idInfo.timenumber2],
     };
     existingUsers.push(newUser);
 
     localStorage.setItem('users', JSON.stringify(existingUsers));
-
     window.alert('회원가입 성공!');
     navigate('/login', { replace: true });
 
@@ -263,6 +259,17 @@ const SIGNUP = () => {
     //     window.alert(err.data);
     //   });
   };
+  useEffect(() => {
+    // localStorage에서 timenumber 가져오기
+    const timeRangeArray = JSON.parse(localStorage.getItem('timenumber'));
+    if (timeRangeArray) {
+      setIdInfo({
+        ...idInfo,
+        timenumber1: timeRangeArray[0],
+        timenumber2: timeRangeArray[1],
+      });
+    }
+  }, []);
 
   // 시리얼 번호 찾기 안내 Modal
   const [showModal, setShowModal] = useState(false);
@@ -391,29 +398,45 @@ const SIGNUP = () => {
 
                   <hr className="hr" style={{ marginBottom: '0px', marginTop: "15px" }} />
 
-                  <input
-                    ref={ageRef}
-                    type="number"
-                    min="0"
-                    max="120"
-                    className="ageInput"
-                    required
-                    placeholder="연령(00살)"
-                    name="agenumber"
-                    onChange={setinfo}
-                    disabled={!isCheck}
-                  />
-
-                  <input
-                    ref={timeRef}
-                    type="text"
-                    className="timeInput"
-                    required
-                    placeholder="이용 시간대(00~24)"
-                    name="timenumber"
-                    onChange={setinfo}
-                    disabled={!isCheck}
-                  />
+                  <div className="tooltipContainer ageInputContainer">
+                    <input
+                      ref={ageRef}
+                      type="number"
+                      min="0"
+                      max="120"
+                      className="ageInput"
+                      required
+                      placeholder="연령(00)"
+                      name="agenumber"
+                      onChange={setinfo}
+                      disabled={!isCheck}
+                    />
+                    <span className="tooltiptext">영유아와 고령자한테 제공되는<br />알림 종류가 각각 다릅니다!</span>
+                  </div>
+                  <div className='timeinput_area'>
+                    <div className="tooltipContainer timeInputContainer">
+                      <input
+                        ref={timeRef1}
+                        type="time"
+                        className="timeInput"
+                        required
+                        name="timenumber1"
+                        onChange={setinfo}
+                        disabled={!isCheck}
+                      />
+                    &nbsp; ~ &nbsp;
+                      <input
+                        ref={timeRef2}
+                        type="time"
+                        className="timeInput"
+                        required
+                        name="timenumber2"
+                        onChange={setinfo}
+                        disabled={!isCheck}
+                      />
+                      <span className="tooltiptext">이용 시간대를 설정해주세요.</span>
+                    </div>
+                  </div>
                 </div>
 
                 <label className="showPw">
@@ -459,7 +482,7 @@ const SIGNUP = () => {
               readOnly
             ></textarea>
             <div className="checkbox-container">
-            &nbsp;&nbsp;&nbsp;개인 정보 보호 약관에 동의합니다.&nbsp;
+              &nbsp;&nbsp;&nbsp;개인 정보 보호 약관에 동의합니다.&nbsp;
               <input
                 type="checkbox"
                 onChange={() => setIsCheckTwo(!isCheckTwo)}
@@ -498,5 +521,4 @@ const SIGNUP = () => {
     </div>
   );
 };
-
 export default SIGNUP;
