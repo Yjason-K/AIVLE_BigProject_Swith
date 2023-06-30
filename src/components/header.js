@@ -5,6 +5,9 @@ import logo from "../img/logo.png";
 
 const Myheader = () => {
   const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
 
   useEffect(() => {
     const userId = localStorage.getItem('token');
@@ -34,7 +37,7 @@ const Myheader = () => {
                 <span>Home</span>
               </Link>
             </li>
-            {userId && (
+            {isLogin && (
               <li>
                 {location.pathname === '/service' ? (
                   <span style={{cursor: "pointer"}}>Service</span>
@@ -60,7 +63,7 @@ const Myheader = () => {
                 <span>FAQ</span>
               </Link>
             </li>
-            {userId ? (
+            {isLogin ? (
               <>
                 <li>
                   <Link to="/mypage">
