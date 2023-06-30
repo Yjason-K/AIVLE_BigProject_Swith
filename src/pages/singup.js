@@ -356,7 +356,18 @@ const SIGNUP = () => {
                     disabled={!isCheck}
                   />
 
-                  <hr className="hr" style={{ marginBottom: '0px' }} />
+                  <input
+                    type="text"
+                    className="phoneInput"
+                    required
+                    pattern="\d{11}"
+                    maxLength="11"
+                    placeholder="전화번호('-'없이 11자리)"
+                    name="phone"
+                    onChange={setinfo}
+                    disabled={!isCheck}
+                  />
+                  <hr className="hr" style={{ marginBottom: '0px', marginTop: "15px" }} />
 
                   <input
                     ref={serialnumberRef}
@@ -380,19 +391,7 @@ const SIGNUP = () => {
                     시리얼 번호 안내
                   </Button>
 
-                  <input
-                    type="text"
-                    className="phoneInput"
-                    required
-                    pattern="\d{11}"
-                    maxLength="11"
-                    placeholder="전화번호('-'없이 11자리)"
-                    name="phone"
-                    onChange={setinfo}
-                    disabled={!isCheck}
-                  />
-
-                  <hr className="hr" style={{ marginBottom: '0px' }} />
+                  <hr className="hr" style={{ marginBottom: '0px', marginTop: "15px" }} />
 
                   <input
                     ref={ageRef}

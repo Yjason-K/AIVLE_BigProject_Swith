@@ -1,5 +1,4 @@
-//서비스 페이지
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Myheader from "../components/header";
 import "../style/service.css";
 import { useNavigate } from "react-router-dom";
@@ -7,24 +6,19 @@ import LOG from "../components/logComponent";
 
 const SERVICE = () => {
   const session = localStorage.getItem("sessionId");
-  const [sessionId, setSessionId] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (session && session !== "null") {
-      setSessionId(true);
-    }
-  }, []);
-
-  if (!sessionId) {
+  // 세션 체크
+  if (!session || session === "null") {
     navigate("/main", { replace: true });
   }
+
   const [logData, setLogData] = useState();
   const [detection, setDetection] = useState();
 
   return (
     <div className="service">
-      <Myheader isLogin={sessionId} />
+      <Myheader isLogin={session} />
       <div className="container">
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span className="log_detection">이상탐지</span>
