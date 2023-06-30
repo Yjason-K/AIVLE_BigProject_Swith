@@ -19,7 +19,7 @@ const NMEWPOST = () => {
   }, []);
 
   // 로그인 세션정보
-  const session = localStorage.getItem("sessionId");
+  const session = localStorage.getItem("token");
   const [sessionId, setSessionId] = useState(false);
 
   // 제목, 본문 내용

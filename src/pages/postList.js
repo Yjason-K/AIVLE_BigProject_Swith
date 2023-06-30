@@ -35,7 +35,7 @@ const POSTLIST = () => {
       .then((res) => {
         setTotalPosts(res.data.totalElements);
         setTotalPages(res.data.totalPages);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err.data);
@@ -66,7 +66,7 @@ const POSTLIST = () => {
 
   // 로그인 했는지 확인
   useEffect(() => {
-    const sessionId = localStorage.getItem("userId");
+    const sessionId = localStorage.getItem("token");
     if (sessionId) {
       setIsLogin(true);
     }
@@ -119,7 +119,7 @@ const POSTLIST = () => {
 
   return (
     <div className="postlist">
-      <Myheader isLogin={isLogin} />
+      <Myheader />
       <div className="postlist_wrapper">
         <div className="post_post">
           <div className="freeNotice">

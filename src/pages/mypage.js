@@ -4,7 +4,7 @@ import "../style/mypage.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const MYPAGE = () => {
-  const session = JSON.parse(localStorage.getItem("userId"));
+  const session = JSON.parse(localStorage.getItem("token"));
   const [sessionId, setSessionId] = useState(false);
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");

@@ -63,7 +63,6 @@ const LOGIN = () => {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", JSON.stringify(res.data));
-        localStorage.setItem("userId", "abc");
         navigate("/service", { replace: true });
       })
       .catch((err) => {

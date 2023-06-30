@@ -23,15 +23,19 @@ const POSTEDIT = () => {
   const [like, setLike] = useState();
 
   useEffect(() => {
-    if (filterdata) {
-      setPostTitle(filterdata.title);
-      setContent(filterdata.content);
-      setDate(filterdata.postDate);
-      setViews(filterdata.views);
-      setAuthor(filterdata.writer);
-      setLike(filterdata.likes);
-    }
-  }, [filterdata]);
+    axios({
+      method: "get",
+      url: `http://15.165.98.14:8080/posts/post/${postid}`,
+    })
+      .then((res) => {
+        setPostTitle(res.data.title);
+        setContent(res.data.content);
+      })
+      .catch((err) => {
+        alert("게시글을 불러오지 못했습니다..");
+        navigate("/postlist", { replace: true });
+      });
+  }, []);
 
   const onChangeContent = (e) => {
     setPostTitle(e.target.value);
@@ -74,7 +78,7 @@ const POSTEDIT = () => {
         navigate("/postlist", { replace: true });
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log("게시글을 수정하지 못했습니다.", err.data);
       });
   };
 

@@ -29,7 +29,7 @@ const UncontrolledExample = () => {
 };
 
 const HOME = () => {
-  const session = localStorage.getItem("sessionId");
+  const session = localStorage.getItem("toekn");
   const [sessionId, setSessionId] = useState(false);
 
   useEffect(() => {
@@ -40,10 +40,10 @@ const HOME = () => {
 
   return (
     <div className="main_page" style={{ width: "100%", height: "1000px" }}>
-      <div style={{marginBottom: "100px"}}>
+      <div style={{ marginBottom: "100px" }}>
         <Myheader isLogin={sessionId} />
       </div>
-      <div style={{marginBottom: "100px"}}>
+      <div style={{ marginBottom: "100px" }}>
         <UncontrolledExample />
       </div>
       <div

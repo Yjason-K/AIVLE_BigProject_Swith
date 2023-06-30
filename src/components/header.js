@@ -7,7 +7,7 @@ const Myheader = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("token");
     if (userId) {
       setIsLogin(true);
     }

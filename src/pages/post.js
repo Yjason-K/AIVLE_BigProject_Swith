@@ -18,6 +18,7 @@ const POST = () => {
   const [views, setViews] = useState();
   const [likes, setLikes] = useState();
   const [writer, setWriter] = useState();
+  const [loginId, setLoginId] = useState("");
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [comment, setComment] = useState("");
@@ -30,6 +31,8 @@ const POST = () => {
   const { commentdata, postonRemove, commentonCreate, commentonRemove } =
     useContext(commentContext);
   const { id } = useParams();
+
+  const [nickname, setNickname] = useState("");
 
   // axios({
   //   method: "get",
@@ -44,7 +47,7 @@ const POST = () => {
 
   useEffect(() => {
     // 페이지가 로드될 때 실행되는 효과 함수
-    const sessionId = localStorage.getItem("userId");
+    const sessionId = localStorage.getItem("token");
     if (sessionId) {
       setIsLogin(true);
     }
@@ -66,12 +69,37 @@ const POST = () => {
         // setPostdate(targetPost.postDate);
         setCommentData(res.data.commentInfoDtoList);
         // console.log(res.data.commentInfoDtoList);
-        console.log(res.data);
       })
       .catch((err) => {
         alert("잘못된 접근 입니다.");
         navigate("/postlist", { replace: true });
       });
+
+    if (localStorage.getItem("token") !== null) {
+      axios({
+        method: "get",
+        url: `http://15.165.98.14:8080/users/user`,
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
+        },
+      }).then((res) => {
+        setLoginId(res.data.nickname);
+      });
+    }
+
+    // 닉네임 불러올 공간
+    // axios({
+    //   method: "get",
+    //   url: `http://15.165.98.14:8080/`,
+    // })
+    //   .then((res) => {
+    //     setNickname(res.nickname);
+    //   })
+    //   .catch((err) => {
+    //     console.log("닉네임을 불러오지 못했습니다.", err);
+    //   });
 
     // if (targetPost) {
     //   //일기가 존재할 때
@@ -119,17 +147,34 @@ const POST = () => {
             }`,
           },
         })
-          .then((res) => {
+          .then(() => {
+            // const newComment = {
+            //   postId: id,
+            //   commentId: commentsData[commentsData.length - 1].postId + 1,
+            //   createdDate: new Date(
+            //     new Date().getTime() + 32400000
+            //   ).toISOString(),
+            //   content: comment,
+            //   writerDto: {
+            //     nickname: loginId,
+            //   },
+            // };
+            setCommentData([
+              ...commentsData,
+              {
+                postId: parseInt(id),
+                commentId: commentsData[commentsData.length - 1].postId + 1,
+                createdDate: new Date(
+                  new Date().getTime() + 32400000
+                ).toISOString(),
+                content: comment,
+                writerDto: {
+                  nickname: loginId,
+                },
+              },
+            ]);
             setComment("");
-            axios
-              .get(`http://15.165.98.14:8080/posts/post/${id}`)
-              .then((res) => {
-                // ...이전 코드...
-                setCommentData(res.data.commentInfoDtoList);
-              })
-              .catch((err) => {
-                console.log(err.data);
-              });
+            // window.location.reload();
           })
           .catch((err) => {
             console.log(err.data);
@@ -180,8 +225,9 @@ const POST = () => {
   // console.log(writer);
   // console.log(writer === JSON.parse(localStorage.getItem("userId")));
   // console.log(commentsData);
+  console.log(commentsData);
 
-  if (writer === JSON.parse(localStorage.getItem("userId"))) {
+  if (writer === loginId) {
     return (
       <div className="show_post">
         <Myheader login={isLogin} />
@@ -260,6 +306,7 @@ const POST = () => {
               post_id={id}
               commentdata={commentsData}
               commentonRemove={commentonRemove}
+              userId={loginId}
             />
           </div>
         </div>
@@ -327,6 +374,7 @@ const POST = () => {
               post_id={id}
               commentdata={commentsData}
               commentonRemove={commentonRemove}
+              userId={loginId}
             />
           </div>
         </div>

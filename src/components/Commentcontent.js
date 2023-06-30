@@ -3,27 +3,37 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { post } from "jquery";
 
-const Commentcontent = ({ post_id, commentdata, commentonRemove }) => {
+const Commentcontent = ({ post_id, commentdata, userId }) => {
   const getStringDate = (date) => {
     return new Date(date).toISOString().replace("T", " ").split(".")[0];
   };
 
   // const commentfilter = commentdata.filter((it) => it.postid === post_id);
-  const [comment, setComment] = useState(commentdata);
+  const [comment, setComment] = useState([]);
 
   const today = new Date(new Date().getTime() + 32400000)
     .toISOString()
     .split("T")[0];
 
   const [loginId, setLoginId] = useState();
+  const [userNickname, setUserNickname] = useState("");
+
+  // const userEmail = jwt.decode(
+  //   JSON.parse(localStorage.getItem("token")).accessToken
+  // );
 
   useEffect(() => {
     // 페이지가 로드될 때 실행되는 효과 함수
-    const sessionId = localStorage.getItem("userId");
+    const sessionId = localStorage.getItem("toekn");
     if (sessionId) {
-      setLoginId(JSON.parse(localStorage.getItem("userId")));
+      setLoginId(JSON.parse(localStorage.getItem("token")));
     }
+    setUserNickname(userId);
   }, []);
+
+  useEffect(() => {
+    setComment(commentdata);
+  }, [commentdata]);
 
   const deleteHandler = (a) => {
     if (window.confirm("댓글을 삭제하시겠습니까?")) {
@@ -62,6 +72,8 @@ const Commentcontent = ({ post_id, commentdata, commentonRemove }) => {
   // );
   // console.log(commentdata);
 
+  console.log(userNickname);
+
   return (
     <>
       {comment.map((it) => (
@@ -69,9 +81,9 @@ const Commentcontent = ({ post_id, commentdata, commentonRemove }) => {
           <div className="first_row">
             <span className="comment_id">{it.writerDto.nickname} </span>
             <span className="comment_date">
-              {/* {getStringDate(it.create_date).split(' ')[0] === today
-                ? getStringDate(it.create_date)
-                : getStringDate(it.create_date).split(' ')[0]} */}
+              {getStringDate(it.createdDate).split("T")[0] === today
+                ? getStringDate(it.createdDate)
+                : getStringDate(it.createdDate).split(" ")[0]}
             </span>
           </div>
           <div className="second_row">
@@ -80,7 +92,7 @@ const Commentcontent = ({ post_id, commentdata, commentonRemove }) => {
             >
               {it.content}
             </span>
-            {loginId === it.writerDto.nickname && (
+            {userNickname === it.writerDto.nickname && (
               <Button
                 variant="link"
                 onClick={() => deleteHandler(it.commentId)}
