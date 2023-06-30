@@ -1,59 +1,61 @@
 .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
     width: 900px;
     height: 624px;
     margin: auto;
     margin-top: 120px;
     gap: 20px;
-  }
+}
   
-  .box {
+.box {
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-  }
-  
-  .livecam {
-    width: 600px;
-    height: 600px;
-  }
-  
-  .verticalContainer {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    height: 600px;
+}
+
+.livecam {
+    width: 100%;
+    height: 100%;
+}
+
+.verticalContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height: 100%;
     gap: 20px;
-  }
-  
-  .logContainer {
+}
+
+.logContainer {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    height: 300px;
-  }
-  
-  .log_record {
+    width: 100%;
+    height: 50%;
+}
+
+.log_record {
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    width: 300px;
-    height: 50px;
-  }
+    width: 100%;
+    height: 20%;
+}
 
-  .log_number {
+.log_number {
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    width: 300px;
-    height: 250px;
-  }
+    width: 100%;
+    height: 80%;
+}
 
-  .service_function {
-    width: 300px;
-    height: 280px;
-  }
-  
+.service_function {
+    width: 100%;
+    height: 100%;
+}
