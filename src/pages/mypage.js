@@ -13,10 +13,13 @@ const MYPAGE = () => {
   const [name, setName] = useState('');
   const [serialNumber, setSerialNumber] = useState('');
   const [ageNumber, setAgeNumber] = useState('');
-  const [timeNumber, setTimeNumber] = useState('');
+  const [timeNumber1, setTimeNumber1] = useState('');
+  const [timeNumber2, setTimeNumber2] = useState('');
   const [verified, setVerified] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const timeRef1 = useRef();
+  const timeRef2 = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +33,8 @@ const MYPAGE = () => {
         setName(foundUser.name);
         setSerialNumber(foundUser.serialnumber);
         setAgeNumber(foundUser.agenumber);
-        setTimeNumber(foundUser.timenumber.join('~'));
+        setTimeNumber1(foundUser.timenumber[0]);
+        setTimeNumber2(foundUser.timenumber[1]);
       }
     }
   }, [session]);
@@ -64,8 +68,8 @@ const MYPAGE = () => {
       return;
     }
 
-    const timeRange = timeNumber.split('~');
-    if (timeRange.length !== 2 || timeRange.some(time => isNaN(time) || time < 0 || time > 24)) {
+    const timeRange = [timeNumber1, timeNumber2];
+    if (timeRange.some(time => isNaN(time) || time < 0 || time > 24)) {
       alert('이용 시간대는 0~24 사이의 두 개의 숫자로 지정해야 합니다. 예: 9~18');
       timeRef.current.focus();
       return;
@@ -82,7 +86,7 @@ const MYPAGE = () => {
         name: name || currentUser.name,
         serialnumber: serialNumber || currentUser.serialnumber,
         agenumber: ageNumber || currentUser.agenumber,
-        timenumber: timeNumber.split('~') || currentUser.timenumber
+        timenumber: [timeNumber1, timeNumber2] || currentUser.timenumber
       };
 
       if (
@@ -91,7 +95,8 @@ const MYPAGE = () => {
         currentUser.name === updatedUser.name &&
         currentUser.serialnumber === updatedUser.serialnumber &&
         currentUser.agenumber === updatedUser.agenumber &&
-        currentUser.timenumber.join('~') === updatedUser.timenumber.join('~')
+        currentUser.timenumber[0] === updatedUser.timenumber[0] &&
+        currentUser.timenumber[1] === updatedUser.timenumber[1]
       ) {
         alert('수정된 부분이 없습니다.');
         navigate('/service');
@@ -129,14 +134,18 @@ const MYPAGE = () => {
                       <input type="email" className="emailInput" placeholder={`이메일: ${currentUser.email}`} disabled />
                       <input type="password" className="pwInput" placeholder="비밀번호 변경(6글자 이상)" onChange={(e) => setNewPassword(e.target.value)} minLength="6" />
                       <input ref={confirmPwRef} type="password" className="pwInput" placeholder="비밀번호 확인(6글자 이상)" onChange={(e) => setNewPasswordConfirmation(e.target.value)} minLength="6" />
-                      <hr className="hr" style={{ marginBottom: "0px" }} />
+                      <hr className="hr" style={{ marginBottom: "10px", marginTop: "25px" }} />
                       <input type="text" className="nameInput" placeholder={`이름: ${currentUser.name}`} onChange={(e) => setName(e.target.value)} />
                       <input type="text" className="serialnumberInput" placeholder={`시리얼넘버: ${currentUser.serialnumber}`} onChange={(e) => setSerialNumber(e.target.value)} />
                       <input type="text" className="phoneInput" placeholder={`전화번호: ${currentUser.phone}`} onChange={(e) => setPhoneNumber(e.target.value)} pattern="\d{11}" maxLength="11" />
-                      <hr className="hr" style={{ marginBottom: "0px" }} />
+                      <hr className="hr" style={{ marginBottom: "10px", marginTop: "25px" }} />
                       <input ref={ageRef} type="text" className="ageInput" placeholder={`연령: ${currentUser.agenumber}`} onChange={(e) => setAgeNumber(e.target.value)} />
-                      <input ref={timeRef} type="text" className="timeInput" placeholder={`이용 시간대: ${currentUser.timenumber.join('~')}`} onChange={(e) => setTimeNumber(e.target.value)} />
-                      <hr />
+                      <div>
+                        <input ref={timeRef1} type="time" className="timeInput" value onChange={(e) => setTimeNumber1(e.target.value)} />
+                        &nbsp; ~ &nbsp;
+                        <input ref={timeRef2} type="time" className="timeInput" onChange={(e) => setTimeNumber2(e.target.value)} />
+                      </div>
+                      <hr className="hr" style={{ marginBottom: "10px", marginTop: "25px" }} />
                     </div>
                     <label className="showPw">
                       <input type="checkbox" className="" checked={showPassword} onChange={() => setShowPassword(!showPassword)} /> 비밀번호 표시
@@ -154,11 +163,11 @@ const MYPAGE = () => {
       }
       return (
         <div className="mypage_pwcheck">
-                <h1>회원정보수정</h1>
-                <form onSubmit={verifyPassword}>
-                    <input type="password" style = {{textAlign: "center"}} className="mypagepwInput" placeholder="비밀번호 확인" onChange={(e) => setPassword(e.target.value)} />
-                    <input type="submit" className="mypage_button" value="확인" />
-                </form>
+          <h1>회원정보수정</h1>
+          <form onSubmit={verifyPassword}>
+            <input type="password" style={{ textAlign: "center" }} className="mypagepwInput" placeholder="비밀번호 확인" onChange={(e) => setPassword(e.target.value)} />
+            <input type="submit" className="mypage_button" value="확인" />
+          </form>
         </div>
       );
     }
