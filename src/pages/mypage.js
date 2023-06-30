@@ -15,8 +15,11 @@ const MYPAGE = () => {
   const [ageNumber, setAgeNumber] = useState('');
   const [timeNumber1, setTimeNumber1] = useState('');
   const [timeNumber2, setTimeNumber2] = useState('');
-  const [verified, setVerified] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [verified, setVerified] = useState(true);
+  const [currentUser, setCurrentUser] = useState({
+    username: "aaaa",
+    email: "aaaa@aa.aaa"
+  });
   const [showPassword, setShowPassword] = useState(false);
   const timeRef1 = useRef();
   const timeRef2 = useRef();
