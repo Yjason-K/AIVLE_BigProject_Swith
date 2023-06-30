@@ -4,7 +4,10 @@ import './myheader.scss';
 import logo from '../img/logo.png';
 
 const Myheader = () => {
-  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [userId, setUserId] = useState(() => {
+    const storedUserId = localStorage.getItem("userId");
+    return storedUserId && storedUserId !== 'null' ? storedUserId : null;
+  });
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,15 +42,17 @@ const Myheader = () => {
                 <span>Home</span>
               </Link>
             </li>
-            <li>
-              {location.pathname === '/service' ? (
-                <span style={{cursor: "pointer"}}>Service</span>
-              ) : (
-                <Link to="/service">
-                  <span>Service</span>
-                </Link>
-              )}
-            </li>
+            {userId && (
+              <li>
+                {location.pathname === '/service' ? (
+                  <span style={{cursor: "pointer"}}>Service</span>
+                ) : (
+                  <Link to="/service">
+                    <span>Service</span>
+                  </Link>
+                )}
+              </li>
+            )}
             <li>
               <Link to="/team21">
                 <span>Team</span>
