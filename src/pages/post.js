@@ -4,7 +4,7 @@ import { commentContext, dataContext } from "../App";
 
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ReactHtmlParser from "react-html-parser";
+import parse from "html-react-parser";
 import Commentcontent from "../components/Commentcontent";
 import { postContext } from "../App";
 import { Button } from "react-bootstrap";
@@ -265,7 +265,7 @@ const POST = () => {
             </Button>
           </div>
           <div className="content_wrapper">
-            <div className="post_content">{ReactHtmlParser(content)}</div>
+            <div className="post_content">{parse(content)}</div>
           </div>
           <div className="comment_section">
             <textarea
@@ -332,7 +332,7 @@ const POST = () => {
             </div>
           </div>
           <div className="content_wrapper">
-            <div className="post_content">{ReactHtmlParser(content)}</div>
+            <div className="post_content">{parse(content)}</div>
           </div>
           <div className="comment_section">
             <textarea
