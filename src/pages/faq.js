@@ -7,7 +7,7 @@ import { Accordion } from "react-bootstrap";
 import "../style/accordion.css";
 
 const FAQ = () => {
-  const session = localStorage.getItem("sessionId");
+  const session = localStorage.getItem("token");
   const [sessionId, setSessionId] = useState(false);
 
   useEffect(() => {

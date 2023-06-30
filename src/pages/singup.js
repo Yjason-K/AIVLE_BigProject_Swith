@@ -5,8 +5,8 @@ import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
-import '../style/singup.css';
-import jaerong from '../img/jaerong.png';
+import "../style/singup.css";
+import jaerong from "../img/jaerong.png";
 
 const SIGNUP = () => {
   const navigate = useNavigate();
@@ -141,17 +141,17 @@ const SIGNUP = () => {
   const serialnumberRef = useRef();
 
   const [idInfo, setIdInfo] = useState({
-    name: '',
-    id: '',
-    pw: '',
-    checkpw: '',
-    serialnumber: '',
-    phone: '',
-    email: '',
-    agenumber: '',
-    timenumber: '',
+    name: "",
+    id: "",
+    pw: "",
+    checkpw: "",
+    serialnumber: "",
+    phone: "",
+    email: "",
+    agenumber: "",
+    timenumber: "",
   });
-  const [showpw, setShowPw] = useState('password');
+  const [showpw, setShowPw] = useState("password");
 
   const setinfo = (e) => {
     const { name, value } = e.target;
@@ -165,42 +165,42 @@ const SIGNUP = () => {
   };
 
   const showPwBt = () => {
-    showpw === 'password' ? setShowPw('text') : setShowPw('password');
+    showpw === "password" ? setShowPw("text") : setShowPw("password");
   };
 
   const newRegis = (e) => {
     e.preventDefault();
     if (!isCheckOne || !isCheckTwo) {
-      alert('이용 약관에 모두 동의해주세요.');
+      alert("이용 약관에 모두 동의해주세요.");
       return;
     }
 
     if (idInfo.pw !== idInfo.checkpw) {
-      alert('비밀번호가 일치하지 않습니다.');
+      alert("비밀번호가 일치하지 않습니다.");
       confirmPwRef.current.focus();
       return;
     }
 
     const age = Number(idInfo.agenumber);
     if (isNaN(age) || age < 0 || age > 120) {
-      alert('연령은 0~120 사이의 값이어야 합니다.');
+      alert("연령은 0~120 사이의 값이어야 합니다.");
       ageRef.current.focus();
       return;
     }
 
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     if (!emailRegex.test(idInfo.email)) {
-      alert('이메일 형식이 올바르지 않습니다.');
+      alert("이메일 형식이 올바르지 않습니다.");
       emailRef.current.focus();
       return;
     }
 
-    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
     const isUserExist = existingUsers.some(
       (user) => user.username === idInfo.id
     );
     if (isUserExist) {
-      alert('이미 존재하는 닉네임입니다.');
+      alert("이미 존재하는 닉네임입니다.");
       nicknameRef.current.focus();
       return;
     }
@@ -209,7 +209,7 @@ const SIGNUP = () => {
       (user) => user.email === idInfo.email
     );
     if (isEmailExist) {
-      alert('이미 등록된 이메일입니다.');
+      alert("이미 등록된 이메일입니다.");
       emailRef.current.focus();
       return;
     }
@@ -218,7 +218,7 @@ const SIGNUP = () => {
       (user) => user.serialnumber === idInfo.serialnumber
     );
     if (isSerialExist) {
-      alert('이미 존재하는 시리얼넘버입니다.');
+      alert("이미 존재하는 시리얼넘버입니다.");
       serialnumberRef.current.focus();
       return;
     }
@@ -235,29 +235,27 @@ const SIGNUP = () => {
     };
     existingUsers.push(newUser);
 
-    localStorage.setItem('users', JSON.stringify(existingUsers));
-    window.alert('회원가입 성공!');
-    navigate('/login', { replace: true });
 
-    // axios({
-    //   method: "post",
-    //   url: "http://15.165.98.14:8080/users/signup",
-    //   data: {
-    //     name: idInfo.name,
-    //     nickname: idInfo.id,
-    //     password: idInfo.pw,
-    //     serialNumber: idInfo.serialnumber,
-    //     phoneNumber: idInfo.phone,
-    //     email: idInfo.email,
-    //   },
-    // })
-    //   .then((res) => {
-    //     alert("회원가입 성공!");
-    //     navigate("/login");
-    //   })
-    //   .catch((err) => {
-    //     window.alert(err.data);
-    //   });
+    axios({
+      method: "post",
+      url: "http://15.165.98.14:8080/users/signup",
+      data: {
+        name: idInfo.name,
+        nickname: idInfo.id,
+        password: idInfo.pw,
+        serialNumber: idInfo.serialnumber,
+        phoneNumber: idInfo.phone,
+        email: idInfo.email,
+      },
+    })
+      .then((res) => {
+        alert("회원가입 성공!");
+        navigate("/login");
+        console.log("회원가입 성공!");
+      })
+      .catch((err) => {
+        window.alert(err.data);
+      });
   };
   useEffect(() => {
     // localStorage에서 timenumber 가져오기
@@ -300,7 +298,7 @@ const SIGNUP = () => {
               <form onSubmit={newRegis}>
                 <div
                   onClick={() =>
-                    !isCheck && alert('이용 약관에 모두 동의해주세요.')
+                    !isCheck && alert("이용 약관에 모두 동의해주세요.")
                   }
                 >
                   <input
@@ -444,7 +442,7 @@ const SIGNUP = () => {
                     type="checkbox"
                     className="showPw"
                     onClick={showPwBt}
-                  />{' '}
+                  />{" "}
                   비밀번호 표시
                 </label>
                 <br />
@@ -462,7 +460,7 @@ const SIGNUP = () => {
           <div className="register_terms_of_service">
             <h1 className="h3 mb-3 fw-normal">이용 약관</h1>
             <textarea
-              style={{ resize: 'none', width: '650px', height: '250px' }}
+              style={{ resize: "none", width: "650px", height: "250px" }}
               value={termsOfService1}
               readOnly
             ></textarea>
@@ -477,7 +475,7 @@ const SIGNUP = () => {
             <br />
             <br />
             <textarea
-              style={{ resize: 'none', width: '650px', height: '250px' }}
+              style={{ resize: "none", width: "650px", height: "250px" }}
               value={termsOfService2}
               readOnly
             ></textarea>
@@ -504,7 +502,7 @@ const SIGNUP = () => {
               <img
                 src={previewImgage}
                 alt="Preview"
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               />
             )}
             <p>

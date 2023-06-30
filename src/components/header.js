@@ -1,30 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import './myheader.scss';
-import logo from '../img/logo.png';
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import "./myheader.scss";
+import logo from "../img/logo.png";
 
 const Myheader = () => {
-  const [userId, setUserId] = useState(() => {
-    const storedUserId = localStorage.getItem("userId");
-    return storedUserId && storedUserId !== 'null' ? storedUserId : null;
-  });
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const handler = () => {
-      setUserId(localStorage.getItem("userId"));
-    };
-    window.addEventListener("storage", handler);
-    return () => {
-      window.removeEventListener("storage", handler);
-    };
+    const userId = localStorage.getItem('token');
+    if (userId) {
+      setIsLogin(true);
+    }
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('userId');
-    setUserId(null);
-    navigate('/main', { replace: true });
+    localStorage.removeItem('token');
+    setIsLogin(false);
+    navigate('/main', { repalce: true });
   };
 
   return (

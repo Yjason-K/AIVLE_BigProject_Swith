@@ -1,13 +1,14 @@
 // post 게시글 확인 페이지
-import Myheader from '../components/header';
-import { commentContext, dataContext } from '../App';
+import Myheader from "../components/header";
+import { commentContext, dataContext } from "../App";
 
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
-import Commentcontent from '../components/Commentcontent';
-import { postContext } from '../App';
-import { Button } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import parse from "html-react-parser";
+import Commentcontent from "../components/Commentcontent";
+import { postContext } from "../App";
+import { Button } from "react-bootstrap";
+import axios from "axios";
 
 const POST = () => {
   const navigate = useNavigate();
@@ -17,10 +18,13 @@ const POST = () => {
   const [views, setViews] = useState();
   const [likes, setLikes] = useState();
   const [writer, setWriter] = useState();
+  const [loginId, setLoginId] = useState("");
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [postdate, setPostdate] = useState(null);
+  const [commentsData, setCommentData] = useState([]);
+  const [targetPost, setTargetPost] = useState({});
 
   const postList = useContext(dataContext);
   const { onRemove, viewCountUpdate } = useContext(postContext);
@@ -28,68 +32,183 @@ const POST = () => {
     useContext(commentContext);
   const { id } = useParams();
 
+  const [nickname, setNickname] = useState("");
+
+  // axios({
+  //   method: "get",
+  //   url: `http://15.165.98.14:8080/posts/post/${id}`,
+  // })
+  //   .then((res) => {
+  //     console.log(res.data);
+  //   })
+  //   .catch((error) => {
+  //     console.log("오류가 발생했습니다:", error);
+  //   });
+
   useEffect(() => {
     // 페이지가 로드될 때 실행되는 효과 함수
-    const sessionId = localStorage.getItem('userId');
+    const sessionId = localStorage.getItem("token");
     if (sessionId) {
       setIsLogin(true);
     }
   }, []);
 
   useEffect(() => {
-    const targetPost = postList.find((it) => parseInt(it.id) === parseInt(id));
-    if (targetPost) {
-      //일기가 존재할 때
-      setPost(targetPost);
-      setLikes(targetPost.likes);
-      setViews(targetPost.views + 1); // 여기서 views 값을 증가시킴
-      setWriter(targetPost.writer);
-      setTitle(targetPost.title);
-      setContent(targetPost.content);
-      setPostdate(targetPost.postDate);
-      viewCountUpdate(
-        id,
-        title,
-        content,
-        writer,
-        postdate,
-        likes,
-        targetPost.views + 1
-      ); // 변경된 views 값을 전달
-    } else {
-      // 일기가 없을 때
-      alert('잘못된 접근 입니다.');
-      navigate('/postlist', { replace: true });
+    axios({
+      method: "get",
+      url: `http://15.165.98.14:8080/posts/post/${id}`,
+    })
+      .then((res) => {
+        setTargetPost(res.data);
+        setPost(res.data);
+        setLikes(res.data.likeCount);
+        setViews(res.data.searchCount); // 여기서 views 값을 증가시킴
+        setWriter(res.data.writerDto.nickname);
+        setTitle(res.data.title);
+        setContent(res.data.content);
+        // setPostdate(targetPost.postDate);
+        setCommentData(res.data.commentInfoDtoList);
+        // console.log(res.data.commentInfoDtoList);
+      })
+      .catch((err) => {
+        alert("잘못된 접근 입니다.");
+        navigate("/postlist", { replace: true });
+      });
+
+    if (localStorage.getItem("token") !== null) {
+      axios({
+        method: "get",
+        url: `http://15.165.98.14:8080/users/user`,
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
+        },
+      }).then((res) => {
+        setLoginId(res.data.nickname);
+      });
     }
+
+    // 닉네임 불러올 공간
+    // axios({
+    //   method: "get",
+    //   url: `http://15.165.98.14:8080/`,
+    // })
+    //   .then((res) => {
+    //     setNickname(res.nickname);
+    //   })
+    //   .catch((err) => {
+    //     console.log("닉네임을 불러오지 못했습니다.", err);
+    //   });
+
+    // if (targetPost) {
+    //   //일기가 존재할 때
+    //   setPost(targetPost);
+    //   setLikes(targetPost.likes);
+    //   setViews(targetPost.views + 1); // 여기서 views 값을 증가시킴
+    //   setWriter(targetPost.writer);
+    //   setTitle(targetPost.title);
+    //   setContent(targetPost.content);
+    //   // setPostdate(targetPost.postDate);
+    //   setCommentData(targetPost.commentInfoDtoList);
+    //   // viewCountUpdate(
+    //   //   id,
+    //   //   title,
+    //   //   content,
+    //   //   writer,
+    //   //   postdate,
+    //   //   likes,
+    //   //   targetPost.views + 1
+    //   // ); // 변경된 views 값을 전달
+    // } else {
+    //   // 일기가 없을 때
+    //   alert("잘못된 접근 입니다.");
+    //   navigate("/postlist", { replace: true });
+    // }
   }, []);
 
-  useEffect(() => {
-    viewCountUpdate(id, title, content, writer, postdate, likes, views);
-  }, [id, title, content, writer, postdate, likes, views]);
+  // useEffect(() => {
+  //   viewCountUpdate(id, title, content, writer, postdate, likes, views);
+  // }, [id, title, content, writer, postdate, likes, views]);
 
   const createclick = () => {
     if (isLogin) {
       if (comment.length !== 0) {
-        commentonCreate(id, comment);
-        setComment('');
+        // commentonCreate(id, comment);
+        axios({
+          method: "post",
+          url: `http://15.165.98.14:8080/comments/${id}`,
+          data: {
+            content: comment,
+          },
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("token")).accessToken
+            }`,
+          },
+        })
+          .then(() => {
+            // const newComment = {
+            //   postId: id,
+            //   commentId: commentsData[commentsData.length - 1].postId + 1,
+            //   createdDate: new Date(
+            //     new Date().getTime() + 32400000
+            //   ).toISOString(),
+            //   content: comment,
+            //   writerDto: {
+            //     nickname: loginId,
+            //   },
+            // };
+            setCommentData([
+              ...commentsData,
+              {
+                postId: parseInt(id),
+                commentId: commentsData[commentsData.length - 1].postId + 1,
+                createdDate: new Date(
+                  new Date().getTime() + 32400000
+                ).toISOString(),
+                content: comment,
+                writerDto: {
+                  nickname: loginId,
+                },
+              },
+            ]);
+            setComment("");
+            // window.location.reload();
+          })
+          .catch((err) => {
+            console.log(err.data);
+          });
       } else {
-        window.alert('댓글을 입력해주세요.');
+        window.alert("댓글을 입력해주세요.");
       }
     } else {
-      alert('로그인 후 이용가능합니다!');
+      alert("로그인 후 이용가능합니다!");
     }
   };
 
   const postdeletehandler = () => {
-    if (window.confirm('게시글을 삭제하시겠습니까?')) {
-      onRemove(id);
-      postonRemove(id);
-      navigate('/postlist', { replace: true });
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      axios({
+        method: "delete",
+        url: `http://15.165.98.14:8080/posts/post/${id}`,
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
+        },
+      })
+        .then((res) => {
+          navigate("/postlist", { replace: true });
+        })
+        .catch((err) => {
+          console.log(err.data);
+        });
     }
   };
 
   const editButtonClickHandler = () => {
-    if (window.confirm('게시글을 수정하시겠습니까?')) {
+    if (window.confirm("게시글을 수정하시겠습니까?")) {
       navigate(`/edit/${id}`);
     }
   };
@@ -97,12 +216,18 @@ const POST = () => {
   const title_date = (date) => {
     const title_d =
       new Date(date).toISOString().slice(0, 10) +
-      ' ' +
+      " " +
       new Date(date).toISOString().slice(11, 19);
     return title_d;
   };
 
-  if (writer === JSON.parse(localStorage.getItem('userId'))?.id) {
+  // console.log(JSON.parse(localStorage.getItem("userId")));
+  // console.log(writer);
+  // console.log(writer === JSON.parse(localStorage.getItem("userId")));
+  // console.log(commentsData);
+  console.log(commentsData);
+
+  if (writer === loginId) {
     return (
       <div className="show_post">
         <Myheader login={isLogin} />
@@ -140,14 +265,14 @@ const POST = () => {
             </Button>
           </div>
           <div className="content_wrapper">
-            <div className="post_content">{ReactHtmlParser(content)}</div>
+            <div className="post_content">{parse(content)}</div>
           </div>
           <div className="comment_section">
             <textarea
               placeholder={
                 isLogin
-                  ? '인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.'
-                  : '로그인 후 사용할 수 있습니다.'
+                  ? "인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."
+                  : "로그인 후 사용할 수 있습니다."
               }
               maxlength="600"
               value={comment}
@@ -162,7 +287,7 @@ const POST = () => {
                 variant="outline-dark"
                 className="to_postlist"
                 onClick={() => {
-                  navigate('/postlist');
+                  navigate("/postlist");
                 }}
               >
                 목록으로
@@ -179,8 +304,9 @@ const POST = () => {
           <div className="comment_all">
             <Commentcontent
               post_id={id}
-              commentdata={commentdata}
+              commentdata={commentsData}
               commentonRemove={commentonRemove}
+              userId={loginId}
             />
           </div>
         </div>
@@ -206,21 +332,21 @@ const POST = () => {
             </div>
           </div>
           <div className="content_wrapper">
-            <div className="post_content">{ReactHtmlParser(content)}</div>
+            <div className="post_content">{parse(content)}</div>
           </div>
           <div className="comment_section">
             <textarea
               placeholder={
                 isLogin
-                  ? '인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요.'
-                  : '로그인 후 사용할 수 있습니다.'
+                  ? "인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."
+                  : "로그인 후 사용할 수 있습니다."
               }
               maxlength="600"
               value={comment}
               onChange={(e) => {
                 setComment(e.target.value);
               }}
-              style={{ height: 86, backgroundColor: '#F8F8F8' }}
+              style={{ height: 86, backgroundColor: "#F8F8F8" }}
               disabled={!isLogin}
             ></textarea>
             <div className="comment_btn">
@@ -228,7 +354,7 @@ const POST = () => {
                 variant="outline-dark"
                 className="to_postlist"
                 onClick={() => {
-                  navigate('/postlist');
+                  navigate("/postlist");
                 }}
               >
                 목록으로
@@ -246,8 +372,9 @@ const POST = () => {
           <div className="comment_all">
             <Commentcontent
               post_id={id}
-              commentdata={commentdata}
+              commentdata={commentsData}
               commentonRemove={commentonRemove}
+              userId={loginId}
             />
           </div>
         </div>

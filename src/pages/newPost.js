@@ -1,29 +1,30 @@
 // newPost
-import { useEffect, useState, useContext, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
+import { useEffect, useState, useContext, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Button } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 
-import Myheader from '../components/header';
-import { postContext, dataContext } from '../App';
+import Myheader from "../components/header";
+import { postContext, dataContext } from "../App";
 
 const NMEWPOST = () => {
   // 로그인 검증
   useEffect(() => {
-    if (session && session !== 'null') {
+    if (session && session !== "null") {
       setSessionId(true);
     }
   }, []);
 
   // 로그인 세션정보
-  const session = localStorage.getItem('sessionId');
+  const session = localStorage.getItem("token");
   const [sessionId, setSessionId] = useState(false);
 
   // 제목, 본문 내용
-  const [postTitle, setPostTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [postTitle, setPostTitle] = useState("");
+  const [content, setContent] = useState("");
 
   // Ref
   const titleRef = useRef();
@@ -34,37 +35,89 @@ const NMEWPOST = () => {
 
   const navigate = useNavigate();
 
-  const originData = localStorage.getItem('posts');
+  const originData = localStorage.getItem("posts");
   const data = useContext(dataContext);
 
   const { onCreate } = useContext(postContext);
 
   const handleSubmit = () => {
     if (postTitle.length < 4) {
-      alert('제목을 입력해주세요');
+      alert("제목을 입력해주세요");
       titleRef.current.focus();
       return;
     }
 
     if (content.length < 10) {
-      alert('일기를 입력해주세요');
+      alert("일기를 입력해주세요");
       titleRef.current.focus();
       return;
     }
 
-    if (window.confirm('게시글을 저장하시겠습니까?')) {
-      onCreate(postTitle, content);
-      navigate('/postlist', { replace: true });
+    if (window.confirm("게시글을 저장하시겠습니까?")) {
+      const formData = new FormData();
+      formData.append(
+        "data",
+        new Blob([JSON.stringify({ title: postTitle, content: content })], {
+          type: "application/json",
+        })
+      );
+
+      // formData.append("key", new Blob([JSON.stringify(data)] , {type: "application/json"}))
+
+      // formData.append("title", postTitle);
+      // formData.append("content", content);
+      files.slice(1).forEach((file, index) => {
+        formData.append(`files`, file);
+      });
+
+      axios({
+        method: "post",
+        url: "http://15.165.98.14:8080/posts/new",
+        data: formData,
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
+        },
+      })
+        .then((res) => {
+          navigate("/postlist", { replace: true });
+          console.log("게시글 업로드 성공");
+        })
+        .catch((err) => {
+          console.log(err.data);
+        });
+
+      // axios({
+      //   method: "post",
+      //   url: "http://15.165.98.14:8080/posts/new",
+      //   data: {
+      //     title: postTitle,
+      //     content: content,
+      //   },
+      //   headers: {
+      //     Authorization: `Bearer ${
+      //       JSON.parse(localStorage.getItem("token")).accessToken
+      //     }`,
+      //   },
+      // })
+      //   .then((res) => {
+      //     navigate("/postlist", { replace: true });
+      //     // onCreate(postTitle, content);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.data);
+      //   });
     }
   };
 
   const handlCancel = () => {
     if (
       window.confirm(
-        '게시글 작성을 취소하시겠습니까? 작성된 내용은 내용은 저장되지 않습니다.'
+        "게시글 작성을 취소하시겠습니까? 작성된 내용은 내용은 저장되지 않습니다."
       )
     ) {
-      navigate('/postlist', { replace: true });
+      navigate("/postlist", { replace: true });
     }
   };
 
@@ -79,7 +132,7 @@ const NMEWPOST = () => {
   };
 
   if (att_num > 3) {
-    window.alert('이미지는 최대 3개까지 업로드 가능합니다.');
+    window.alert("이미지는 최대 3개까지 업로드 가능합니다.");
     setAttNum(3);
   }
   if (att_num < 0) {
@@ -139,6 +192,9 @@ const NMEWPOST = () => {
     setSelectedImage(selectedImages[index]);
   };
 
+  // 파일 업로드 처리를 위한 상태
+  const [files, setFiles] = useState([]);
+
   const handleFileChange = (e, index) => {
     const file = e.target.files[0];
     if (file) {
@@ -151,8 +207,24 @@ const NMEWPOST = () => {
         });
       };
       reader.readAsDataURL(file);
+      setFiles((prevFiles) => {
+        const newFiles = [...prevFiles];
+        newFiles[index] = file;
+        return newFiles;
+      });
     }
   };
+
+  // const handleFileChange = (e, index) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setSelectedImages((prevSelectedImages) => {
+  //       const newSelectedImages = [...prevSelectedImages];
+  //       newSelectedImages[index] = file;
+  //       return newSelectedImages;
+  //     });
+  //   }
+  // };
 
   return (
     <div className="newpost">
@@ -194,7 +266,7 @@ const NMEWPOST = () => {
           <CKEditor
             editor={ClassicEditor}
             config={{
-              placeholder: '내용을 입력하세요.',
+              placeholder: "내용을 입력하세요.",
             }}
             onChange={(event, editor) => {
               const data = editor.getData();
@@ -208,9 +280,9 @@ const NMEWPOST = () => {
               style={{
                 marginRight: 20,
                 marginLeft: 10,
-                fontWeight: 'bold',
+                fontWeight: "bold",
                 fontSize: 14,
-                color: 'rgb(41, 41, 41)',
+                color: "rgb(41, 41, 41)",
               }}
             >
               이미지 업로드하기
@@ -238,7 +310,7 @@ const NMEWPOST = () => {
           }}
         >
           <Modal.Header closeButton>
-            <Modal.Title style={{ fontSize: '17px', fontWeight: 'bold' }}>
+            <Modal.Title style={{ fontSize: "17px", fontWeight: "bold" }}>
               이미지 미리보기
             </Modal.Title>
           </Modal.Header>
@@ -247,7 +319,7 @@ const NMEWPOST = () => {
               <img
                 src={selectedImage}
                 alt="Preview"
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               />
             )}
           </Modal.Body>

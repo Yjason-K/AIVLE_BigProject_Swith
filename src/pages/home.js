@@ -57,7 +57,7 @@ const UncontrolledExample = () => {
 };
 
 const HOME = () => {
-  const session = localStorage.getItem("sessionId");
+  const session = localStorage.getItem("toekn");
   const [sessionId, setSessionId] = useState(false);
   const featureDetail1Ref = useRef(null);
   const featureDetail2Ref = useRef(null);

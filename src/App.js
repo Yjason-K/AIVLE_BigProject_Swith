@@ -148,7 +148,7 @@ function App() {
         id: dataId,
         title,
         content,
-        writer: JSON.parse(localStorage.getItem("userId")).id, //로그인 정보 받아서 닉네임이랑 연결 예정
+        writer: JSON.parse(localStorage.getItem("userId")), //로그인 정보 받아서 닉네임이랑 연결 예정
         postDate: new Date().getTime() + 32400000,
         likes: 0,
         views: 0,
