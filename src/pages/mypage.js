@@ -5,20 +5,24 @@ import { Link, useNavigate } from "react-router-dom";
 
 const MYPAGE = () => {
   const session = JSON.parse(localStorage.getItem("token"));
-  const [sessionId, setSessionId] = useState(false);
+  const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+  const foundUser = storedUsers.find((user) => user.username === session) || {};
+
+  const [sessionId, setSessionId] = useState(session && session !== "null");
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [name, setName] = useState('');
-  const [serialNumber, setSerialNumber] = useState('');
-  const [ageNumber, setAgeNumber] = useState('');
-  const [timeNumber1, setTimeNumber1] = useState('');
-  const [timeNumber2, setTimeNumber2] = useState('');
-  const [verified, setVerified] = useState(true);
+  const [phoneNumber, setPhoneNumber] = useState(foundUser.phone || '');
+  const [name, setName] = useState(foundUser.name || '');
+  const [serialNumber, setSerialNumber] = useState(foundUser.serialnumber || '');
+  const [ageNumber, setAgeNumber] = useState(foundUser.agenumber || '');
+  const [timeNumber1, setTimeNumber1] = useState(foundUser.timenumber ? foundUser.timenumber[0] : '');
+  const [timeNumber2, setTimeNumber2] = useState(foundUser.timenumber ? foundUser.timenumber[1] : '');
+  const [verified, setVerified] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     username: "aaaa",
-    email: "aaaa@aa.aaa"
+    email: "aaaa@aa.aaa",
+    password: "111111"
   });
   const [showPassword, setShowPassword] = useState(false);
   const timeRef1 = useRef();
@@ -26,6 +30,7 @@ const MYPAGE = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const session = JSON.parse(localStorage.getItem("token"));
     if (session && session !== "null") {
       setSessionId(true);
       const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -40,7 +45,8 @@ const MYPAGE = () => {
         setTimeNumber2(foundUser.timenumber[1]);
       }
     }
-  }, [session]);
+  }, []);
+
 
   const verifyPassword = (e) => {
     e.preventDefault();
@@ -57,6 +63,16 @@ const MYPAGE = () => {
 
   const updateUserInfo = (e) => {
     e.preventDefault();
+    console.log({
+      newPassword,
+      newPasswordConfirmation,
+      name,
+      serialNumber,
+      phoneNumber,
+      ageNumber,
+      timeNumber1,
+      timeNumber2,
+    });
 
     if (newPassword && newPassword !== newPasswordConfirmation) {
       alert('입력한 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
@@ -132,7 +148,18 @@ const MYPAGE = () => {
                     width="25"
                     height="25"
                     fill="currentColor"
-                    className="bi bi-arrow-left Arrows"
+                    style={{
+                      position: 'absolute',
+                      left: '37px',
+                      top: '30px',
+                      cursor: 'pointer',
+                      backgroundColor: 'rgb(242, 242, 242)',
+                      padding: '4px',
+                      borderRadius: '10px',
+                      textDecoration: 'none',
+                      fill: 'black',
+                      transition: 'all ease-in-out 0.15s'
+                    }}
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -155,9 +182,9 @@ const MYPAGE = () => {
                       <hr className="hr" style={{ marginBottom: "10px", marginTop: "25px" }} />
                       <input ref={ageRef} type="text" className="ageInput" placeholder={`연령: ${currentUser.agenumber}`} onChange={(e) => setAgeNumber(e.target.value)} />
                       <div>
-                        <input ref={timeRef1} type="time" className="timeInput" value onChange={(e) => setTimeNumber1(e.target.value)} />
+                        <input ref={timeRef1} type="time" className="timeInput" onChange={(e) => { setTimeNumber1(parseInt(e.target.value.split(":")[0])); }} />
                         &nbsp; ~ &nbsp;
-                        <input ref={timeRef2} type="time" className="timeInput" onChange={(e) => setTimeNumber2(e.target.value)} />
+                        <input ref={timeRef2} type="time" className="timeInput" onChange={(e) => { setTimeNumber2(parseInt(e.target.value.split(":")[0])); }} />
                       </div>
                       <hr className="hr" style={{ marginBottom: "10px", marginTop: "25px" }} />
                     </div>
