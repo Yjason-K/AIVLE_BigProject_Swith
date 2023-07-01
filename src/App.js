@@ -25,6 +25,7 @@ import LOGIN from "./pages/login";
 import SIGNUP from "./pages/singup";
 import SERVICE from "./pages/service";
 import FindID from "./pages/findid";
+import NotFound from "./pages/notfound";
 
 import "./App.css";
 
@@ -279,6 +280,7 @@ function App() {
                 <Route path="/signup" element={<SIGNUP />} />
                 <Route path="/findid" element={<FindID />} />
                 <Route path="/service" element={<SERVICE />} />
+                <Route path="/*" element={<NotFound />} />
               </Routes>
               <Footer />
             </div>

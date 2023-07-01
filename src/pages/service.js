@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Myheader from "../components/header";
 import "../style/service.css";
 import { useNavigate } from "react-router-dom";
 import LOG from "../components/logComponent";
-import EventSource from "eventsource";
 
 const SERVICE = () => {
   const session = localStorage.getItem("token");
@@ -52,7 +51,8 @@ const SERVICE = () => {
   //   });
   // }, [serial]);
 
-  const fetchSSE = () => {
+  //fallback: {"https": require.resolve("https-browserify"),  "http": require.resolve("stream-http")}
+  useEffect(() => {
     const eventSource = new EventSource(
       `http://15.165.98.14:8080/notifications/subscribe/123456`
     );
@@ -65,7 +65,7 @@ const SERVICE = () => {
     eventSource.onmessage = async (e) => {
       const res = await e.data;
       const parsedData = JSON.parse(res);
-      setLogData([...logData, parsedData]);
+      setLogData((prevLogData) => [...prevLogData, parsedData]);
 
       // 받아오는 data로 할 일
     };
@@ -76,17 +76,19 @@ const SERVICE = () => {
 
       if (e.error) {
         // 에러 발생 시 할 일
-        console.log(eventSource.readyState);
+        console.log("연결 실패!!", eventSource.readyState);
       }
 
       if (e.target.readyState === EventSource.CLOSED) {
-        // 종료 시 할 일
+        console.log("SSE가 종료되었습니다"); // 종료 시 할 일
       }
     };
-  };
+    return () => {
+      eventSource.close(); // EventSource 연결 종료
+    };
+  });
 
-  fetchSSE();
-
+  console.log(logData);
   return (
     <div className="service">
       <Myheader isLogin={session} />
