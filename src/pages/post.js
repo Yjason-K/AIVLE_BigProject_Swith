@@ -9,6 +9,7 @@ import Commentcontent from "../components/Commentcontent";
 import { postContext } from "../App";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import ATTDOWN from "../components/attachDown";
 
 const POST = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const POST = () => {
   const [postdate, setPostdate] = useState(null);
   const [commentsData, setCommentData] = useState([]);
   const [targetPost, setTargetPost] = useState({});
+  const [attData, setAttData] = useState([]);
 
   const postList = useContext(dataContext);
   const { onRemove, viewCountUpdate } = useContext(postContext);
@@ -69,6 +71,7 @@ const POST = () => {
         // setPostdate(targetPost.postDate);
         setCommentData(res.data.commentInfoDtoList);
         // console.log(res.data.commentInfoDtoList);
+        setAttData(res.data.attachmentInfoDto);
       })
       .catch((err) => {
         alert("잘못된 접근 입니다.");
@@ -265,8 +268,9 @@ const POST = () => {
             </Button>
           </div>
           <div className="content_wrapper">
-            <div className="post_content">{parse(content)}</div>
+            <div className="post_content">{parse(String(content))}</div>
           </div>
+          <ATTDOWN attach={attData} />
           <div className="comment_section">
             <textarea
               placeholder={
@@ -332,8 +336,9 @@ const POST = () => {
             </div>
           </div>
           <div className="content_wrapper">
-            <div className="post_content">{parse(content)}</div>
+            <div className="post_content">{parse(String(content))}</div>
           </div>
+          <ATTDOWN attach={attData} />
           <div className="comment_section">
             <textarea
               placeholder={
