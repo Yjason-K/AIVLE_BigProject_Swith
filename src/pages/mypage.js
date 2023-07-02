@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const MYPAGE = () => {
   const session = JSON.parse(localStorage.getItem("token"));
-  const [sessionId, setSessionId] = useState(false);
+  const [sessionId, setSessionId] = useState(session && session !== "null");
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('');
