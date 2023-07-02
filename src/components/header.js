@@ -4,22 +4,27 @@ import "./myheader.scss";
 import logo from "../img/logo.png";
 
 const Myheader = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const initialLoginState = Boolean(localStorage.getItem('token'));
+  const [isLogin, setIsLogin] = useState(initialLoginState);
   const navigate = useNavigate();
   const location = useLocation();
 
-
   useEffect(() => {
-    const userId = localStorage.getItem('token');
-    if (userId) {
-      setIsLogin(true);
-    }
+    const handler = () => {
+      const token = localStorage.getItem('token');
+      setIsLogin(Boolean(token));
+    };
+
+    window.addEventListener('storage', handler);
+    return () => {
+      window.removeEventListener('storage', handler);
+    };
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLogin(false);
-    navigate('/main', { repalce: true });
+    navigate('/main', { replace: true });
   };
 
   return (
