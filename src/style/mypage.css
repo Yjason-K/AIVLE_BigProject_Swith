@@ -11,6 +11,16 @@
     padding-bottom: 35px;
   }
 
+.editArea::before {
+    content: '회원정보수정';
+    position: absolute;
+    top: 65px;
+    color:#5f5f5f;
+    left: 40px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
 .mypage_main{
     height: 814px;
     margin-top: 100px;
