@@ -6,6 +6,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import "../style/post.css"
 
 import Myheader from "../components/header";
 import { postContext, dataContext } from "../App";
@@ -318,7 +319,7 @@ const NMEWPOST = () => {
         </Modal>
         <div style={{marginTop: "35px", marginBottom: "10px"}}>
           <div className="newpost_btn_wrapper" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button variant="dark" className="postviewbutton_cancel"
+            <Button className="postviewbutton_cancel"
               onClick={handlCancel} style={{ marginLeft: '2px', width: "10%", height: "30px", fontSize: "15px" }}>
               Cancel
             </Button>

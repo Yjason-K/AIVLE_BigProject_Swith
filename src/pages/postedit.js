@@ -124,8 +124,7 @@ const POSTEDIT = () => {
           <div className="newpost_btn_wrapper" style={{ display: 'flex', justifyContent: 'space-between' }}>              
           <Link to={"/postlist"} className="linkButtondesign">
             <Button
-              variant="dark"
-              className="postviewbutton_save"
+              className="postviewbutton_cancel"
               style={{ marginLeft: '2px', width: "100%", height: "30px", fontSize: "15px" }}
               onClick={() => {
                 if (window.confirm("게시글 수정을 취소하시겠습니까?")) {
