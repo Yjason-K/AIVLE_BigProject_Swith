@@ -6,6 +6,7 @@ import service1 from "../img/home_service1.png";
 import service2 from "../img/home_service2.png";
 import service3 from "../img/home_service3.png";
 import "../style/home.css"
+import ScrollToTopButton from "../components/ScrollToTopButton";
 
 const UncontrolledExample = () => {
   return (
@@ -217,7 +218,7 @@ const HOME = () => {
           <hr style={{ width: "80%" }} />
         </center>
       </div>
-
+      <ScrollToTopButton />
     </div>
   );
 };
