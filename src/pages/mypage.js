@@ -15,8 +15,8 @@ const MYPAGE = () => {
   const [ageNumber, setAgeNumber] = useState('');
   const [timeNumber1, setTimeNumber1] = useState('');
   const [timeNumber2, setTimeNumber2] = useState('');
-  const [verified, setVerified] = useState(true);
-  const [currentUser, setCurrentUser] = useState(true);
+  const [verified, setVerified] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const timeRef1 = useRef();
   const timeRef2 = useRef();
@@ -54,16 +54,6 @@ const MYPAGE = () => {
 
   const updateUserInfo = (e) => {
     e.preventDefault();
-    console.log({
-      newPassword,
-      newPasswordConfirmation,
-      name,
-      serialNumber,
-      phoneNumber,
-      ageNumber,
-      timeNumber1,
-      timeNumber2,
-    });
 
     if (newPassword && newPassword !== newPasswordConfirmation) {
       alert('입력한 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
