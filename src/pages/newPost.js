@@ -319,12 +319,12 @@ const NMEWPOST = () => {
         <div style={{marginTop: "35px", marginBottom: "10px"}}>
           <div className="newpost_btn_wrapper" style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button variant="dark" className="postviewbutton_cancel"
-              onClick={handlCancel} style={{ marginLeft: '2px', width: "10%", height: "25px" }}>
+              onClick={handlCancel} style={{ marginLeft: '2px', width: "10%", height: "30px", fontSize: "15px" }}>
               Cancel
             </Button>
 
             <Button variant="dark" className="postviewbutton_save"
-              onClick={handleSubmit} style={{ width: "10%", marginRight: '1px' }}>
+              onClick={handleSubmit} style={{ width: "10%", marginRight: '1px', fontSize: "15px" }}>
               Save
             </Button>
           </div>
