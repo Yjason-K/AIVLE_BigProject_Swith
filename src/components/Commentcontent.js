@@ -54,16 +54,18 @@ const Commentcontent = ({ post_id, commentdata }) => {
       })
         .then((res) => {
           console.log("댓글 삭제완료!");
-          axios
-            .get(`http://15.165.98.14:8080/posts/post/${post_id}`)
-            .then((res) => {
-              // ...이전 코드...
-              setComment(res.data.commentInfoDtoList);
-              console.log(res.data.commentInfoDtoList);
-            })
-            .catch((err) => {
-              console.log("댓글을 불러오지 못했습니다.", err.data);
-            });
+          setTimeout(() => {
+            axios
+              .get(`http://15.165.98.14:8080/posts/post/${post_id}`)
+              .then((res) => {
+                // ...이전 코드...
+                setComment(res.data.commentInfoDtoList);
+                console.log(res.data.commentInfoDtoList);
+              })
+              .catch((err) => {
+                console.log("댓글을 불러오지 못했습니다.", err.data);
+              });
+          }, 300);
         })
         .catch((err) => {
           alert("댓글 삭제 불가!");
@@ -71,7 +73,7 @@ const Commentcontent = ({ post_id, commentdata }) => {
     }
   };
 
-  console.log("닉네임", userNickname);
+  console.log(comment);
 
   return (
     <>

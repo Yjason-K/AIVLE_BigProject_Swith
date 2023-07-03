@@ -114,34 +114,34 @@ const POST = () => {
           },
         })
           .then(() => {
-            // const newComment = {
-            //   postId: id,
-            //   commentId: commentsData[commentsData.length - 1].postId + 1,
-            //   createdDate: new Date(
-            //     new Date().getTime() + 32400000
-            //   ).toISOString(),
-            //   content: comment,
-            //   writerDto: {
-            //     nickname: loginId,
+            // setCommentData((preserve) => [
+            //   ...preserve,
+            //   {
+            //     postId: parseInt(id),
+            //     commentId:
+            //       commentsData === []
+            //         ? 0
+            //         : commentsData[commentsData.length - 1].postId + 1,
+            //     createdDate: new Date(
+            //       new Date().getTime() + 32400000
+            //     ).toISOString(),
+            //     content: comment,
+            //     writerDto: {
+            //       nickname: loginId,
+            //     },
             //   },
-            // };
-            setCommentData((preserve) => [
-              ...preserve,
-              {
-                postId: parseInt(id),
-                commentId:
-                  commentsData === []
-                    ? 0
-                    : commentsData[commentsData.length - 1].postId + 1,
-                createdDate: new Date(
-                  new Date().getTime() + 32400000
-                ).toISOString(),
-                content: comment,
-                writerDto: {
-                  nickname: loginId,
-                },
-              },
-            ]);
+            // ]);
+            setTimeout(() => {
+              axios
+                .get(`http://15.165.98.14:8080/posts/post/${id}`)
+                .then((res) => {
+                  // ...이전 코드...
+                  setCommentData(res.data.commentInfoDtoList);
+                })
+                .catch((err) => {
+                  console.log("댓글을 불러오지 못했습니다.", err.data);
+                });
+            }, 300);
             setComment("");
             // window.location.reload();
           })
