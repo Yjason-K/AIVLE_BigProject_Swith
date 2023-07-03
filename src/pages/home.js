@@ -86,44 +86,22 @@ const HOME = () => {
       <div style={{ marginBottom: "100px" }}>
         <Myheader isLogin={sessionId} />
       </div>
+
       <div style={{ marginBottom: "50px" }}>
         <UncontrolledExample />
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          margin: "auto",
-          width: "75%",
-          gap: "1rem",
-        }}
-      >
+
+      <div style={{ marginBottom: "20px" }}>
+        <center><h1><b>메인 서비스 소개</b></h1></center>
+      </div>
+
+      <div className = "main_feature">
         <div style={{ flex: 1 }}>
-          <div
-            className="feature_name"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <center>WIFI Pose estimation</center>
+          <div className="feature_name">
+            <center><b>WIFI Pose estimation</b></center>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "200px",
-            }}
-          >
-            <img
-              src="https://cdn.icon-icons.com/icons2/1104/PNG/512/wifi_78927.png"
-              width={"50%"}
-              height={"100%"}
-              alt="Image 1"
-            />
+          <div className = "" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "200px" }}>
+            <img src="https://cdn.icon-icons.com/icons2/1104/PNG/512/wifi_78927.png" width={"50%"} height={"100%"} alt="Image 1" />
           </div>
           <div className="view_button">
             <button className="view_detail" onClick={handleScrollToFeatureDetail1}>자세히 알아보기</button>
@@ -131,31 +109,12 @@ const HOME = () => {
         </div>
 
         <div style={{ flex: 1 }}>
-          <div
-            className="feature_name"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <center>IP Camera</center>
+          <div className="feature_name">
+            <center><b>IP Camera</b></center>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "200px",
-            }}
-          >
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNVxHHVicJIFxqQLE1neN1YxY7MzqrbcTX2w&usqp=CAU"
-              width={"50%"}
-              height={"100%"}
-              alt="Image 3"
-            />
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "200px" }}>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNVxHHVicJIFxqQLE1neN1YxY7MzqrbcTX2w&usqp=CAU"
+              width={"50%"} height={"100%"} alt="Image 3" />
           </div>
           <div className="view_button">
             <button className="view_detail" onClick={handleScrollToFeatureDetail2}>자세히 알아보기</button>
