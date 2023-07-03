@@ -97,68 +97,6 @@ const MYPAGE = () => {
       console.log("회원정보 수정 완료!");
       navigate("/service", { replace: true });
     });
-
-    // if (newPassword && newPassword !== newPasswordConfirmation) {
-    //   alert("입력한 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-    //   confirmPwRef.current.focus();
-    //   return;
-    // }
-
-    // const age = Number(ageNumber);
-    // if (isNaN(age) || age < 0 || age > 120) {
-    //   alert("연령은 0~120 사이의 값이어야 합니다.");
-    //   ageRef.current.focus();
-    //   return;
-    // }
-
-    // const timeRange = [timeNumber1, timeNumber2];
-    // if (timeRange.some((time) => isNaN(time) || time < 0 || time > 24)) {
-    //   alert(
-    //     "이용 시간대는 0~24 사이의 두 개의 숫자로 지정해야 합니다. 예: 9~18"
-    //   );
-    //   timeRef.current.focus();
-    //   return;
-    // }
-
-    // const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    // const currentUserIndex = storedUsers.findIndex(
-    //   (user) => user.username === session
-    // );
-
-    // if (currentUserIndex > -1) {
-    //   const updatedUser = {
-    //     ...currentUser,
-    //     password: newPassword || currentUser.password,
-    //     phone: phoneNumber || currentUser.phone,
-    //     name: name || currentUser.name,
-    //     serialnumber: serialNumber || currentUser.serialnumber,
-    //     agenumber: ageNumber || currentUser.agenumber,
-    //     timenumber: [timeNumber1, timeNumber2] || currentUser.timenumber,
-    //   };
-
-    //   if (
-    //     currentUser.password === updatedUser.password &&
-    //     currentUser.phone === updatedUser.phone &&
-    //     currentUser.name === updatedUser.name &&
-    //     currentUser.serialnumber === updatedUser.serialnumber &&
-    //     currentUser.agenumber === updatedUser.agenumber &&
-    //     currentUser.timenumber[0] === updatedUser.timenumber[0] &&
-    //     currentUser.timenumber[1] === updatedUser.timenumber[1]
-    //   ) {
-    //     alert("수정된 부분이 없습니다.");
-    //     navigate("/service");
-    //     return;
-    //   }
-
-    //   storedUsers[currentUserIndex] = updatedUser;
-    //   localStorage.setItem("users", JSON.stringify(storedUsers));
-    //   setCurrentUser(updatedUser);
-
-    //   alert("회원 정보가 성공적으로 수정되었습니다.");
-    //   navigate("/service");
-    // } else {
-    //   alert("회원 정보를 찾을 수 없습니다.");
-    // }
   };
 
   // const withdraw = () => {
@@ -179,21 +117,29 @@ const MYPAGE = () => {
           <div className="mypage_main">
             <center>
               <div className="mypageFrame">
-                <Link to="/service">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="currentColor"
-                    className="bi bi-arrow-left Arrows"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-                    />
-                  </svg>
-                </Link>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  className="bi bi-arrow-left Arrows"
+                  viewBox="0 0 16 16"
+                  style={{ marginBottom: "10px" }}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "개인정보 수정을 취소하시겠습니까? \n작성된 정보는 저장되지 않습니다!"
+                      )
+                    ) {
+                      navigate("/home", { replace: true });
+                    }
+                  }}
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                  />
+                </svg>
                 <div className="editArea">
                   <form onSubmit={updateUserInfo}>
                     <div>
