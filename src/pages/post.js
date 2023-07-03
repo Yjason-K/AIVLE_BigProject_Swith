@@ -166,7 +166,10 @@ const POST = () => {
               ...preserve,
               {
                 postId: parseInt(id),
-                commentId: commentsData[commentsData.length - 1].postId + 1,
+                commentId:
+                  commentsData === []
+                    ? 0
+                    : commentsData[commentsData.length - 1].postId + 1,
                 createdDate: new Date(
                   new Date().getTime() + 32400000
                 ).toISOString(),

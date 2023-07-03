@@ -1,9 +1,9 @@
-import { Fragment, useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Myheader from '../components/header';
-import { Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
-import axios from 'axios';
+import { Fragment, useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Myheader from "../components/header";
+import { Button } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 
 import "../style/singup.css";
 import jaerong from "../img/jaerong.png";
@@ -155,8 +155,8 @@ const SIGNUP = () => {
 
   const setinfo = (e) => {
     const { name, value } = e.target;
-    if (name === 'timenumber1' || name === 'timenumber2') {
-      const [hour] = value.split(':');
+    if (name === "timenumber1" || name === "timenumber2") {
+      const [hour] = value.split(":");
       const numericValue = parseInt(hour, 10);
       setIdInfo({ ...idInfo, [name]: numericValue });
     } else {
@@ -235,7 +235,6 @@ const SIGNUP = () => {
     };
     existingUsers.push(newUser);
 
-
     axios({
       method: "post",
       url: "http://15.165.98.14:8080/users/signup",
@@ -257,17 +256,6 @@ const SIGNUP = () => {
         window.alert(err.data);
       });
   };
-  useEffect(() => {
-    // localStorage에서 timenumber 가져오기
-    const timeRangeArray = JSON.parse(localStorage.getItem('timenumber'));
-    if (timeRangeArray) {
-      setIdInfo({
-        ...idInfo,
-        timenumber1: timeRangeArray[0],
-        timenumber2: timeRangeArray[1],
-      });
-    }
-  }, []);
 
   // 시리얼 번호 찾기 안내 Modal
   const [showModal, setShowModal] = useState(false);
@@ -370,7 +358,10 @@ const SIGNUP = () => {
                     onChange={setinfo}
                     disabled={!isCheck}
                   />
-                  <hr className="hr" style={{ marginBottom: '0px', marginTop: "15px" }} />
+                  <hr
+                    className="hr"
+                    style={{ marginBottom: "0px", marginTop: "15px" }}
+                  />
 
                   <input
                     ref={serialnumberRef}
@@ -394,7 +385,10 @@ const SIGNUP = () => {
                     시리얼 번호 안내
                   </Button>
 
-                  <hr className="hr" style={{ marginBottom: '0px', marginTop: "15px" }} />
+                  <hr
+                    className="hr"
+                    style={{ marginBottom: "0px", marginTop: "15px" }}
+                  />
 
                   <div className="tooltipContainer ageInputContainer">
                     <input
@@ -409,9 +403,13 @@ const SIGNUP = () => {
                       onChange={setinfo}
                       disabled={!isCheck}
                     />
-                    <span className="tooltiptext">영유아와 고령자한테 제공되는<br />알림 종류가 각각 다릅니다!</span>
+                    <span className="tooltiptext">
+                      영유아와 고령자한테 제공되는
+                      <br />
+                      알림 종류가 각각 다릅니다!
+                    </span>
                   </div>
-                  <div className='timeinput_area'>
+                  <div className="timeinput_area">
                     <div className="tooltipContainer timeInputContainer">
                       <input
                         ref={timeRef1}
@@ -422,7 +420,7 @@ const SIGNUP = () => {
                         onChange={setinfo}
                         disabled={!isCheck}
                       />
-                    &nbsp; ~ &nbsp;
+                      &nbsp; ~ &nbsp;
                       <input
                         ref={timeRef2}
                         type="time"
@@ -432,7 +430,9 @@ const SIGNUP = () => {
                         onChange={setinfo}
                         disabled={!isCheck}
                       />
-                      <span className="tooltiptext">이용 시간대를 설정해주세요.</span>
+                      <span className="tooltiptext">
+                        이용 시간대를 설정해주세요.
+                      </span>
                     </div>
                   </div>
                 </div>

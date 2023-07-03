@@ -61,7 +61,7 @@ const LOGIN = () => {
       },
     })
       .then((res) => {
-        console.log(res.data);
+        console.log("로그인 성공");
         localStorage.setItem("token", JSON.stringify(res.data));
         navigate("/service", { replace: true });
       })
@@ -140,9 +140,9 @@ const LOGIN = () => {
               </div>
             </div>
             <div className="loginArea_right">
-              <span className="platformTextbox">Sign Up Now</span>
+              <span className="platformTextbox">Stay With</span>
               <span className="platformTextbox2">
-                {/* 로그인해서 저희 서비스를 이용해 보세요. */}
+                wifi를 이용하여 안전 뭐라무러ㅏ~~~
               </span>
             </div>
           </div>
