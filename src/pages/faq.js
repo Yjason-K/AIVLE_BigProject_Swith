@@ -66,8 +66,8 @@ const FAQ = () => {
             // marginTop: 30,
           }}
         >
-          <h2 style={{ fontWeight: "bold" }}>자주묻는질문</h2>
-          <div className="faq_accordion" style={{ width: "80%" }}>
+          <h2 style={{ fontWeight: "bold", marginTop: "25px" }}>자주묻는질문</h2>
+          <div className="faq_accordion" style={{ width: "80%", marginTop: "-48px" }}>
             <Accordion defaultActiveKey="0" className="mt-5 p-3">
               <Accordion.Item eventKey="0" className="item">
                 <Accordion.Header>
