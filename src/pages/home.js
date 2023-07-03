@@ -2,9 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import Myheader from "../components/header";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import service1 from "../img/home_service1.png";
+import service1_1 from "../img/home_service1_1.png";
+import service1_2 from "../img/home_service1_2.png";
 import service2 from "../img/home_service2.png";
-import service3 from "../img/home_service3.png";
+import service3_1 from "../img/home_service3_1.png";
+import service3_2 from "../img/home_service3_2.png";
+import service3_3 from "../img/home_service3_3.png";
 import "../style/home.css"
 import ScrollToTopButton from "../components/ScrollToTopButton";
 
@@ -13,13 +16,10 @@ const UncontrolledExample = () => {
     <center>
       <Carousel style={{ width: "80%" }}>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={service1}
-            width="100%"
-            height="500px"
-            alt="1st slide"
-          />
+          <div className="image_container_1">
+            <img src={service1_1} alt="image1" />
+            <img src={service1_2} alt="image1" />
+          </div>
           <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
             <h3>집에서 한시라도 눈을 뗄 수가 없나요?</h3>
             사랑하는 이들의 안전을 지키기 위해 많은 고민을 하고 있다면<br /> S.with 서비스를 이용하는 것은 어떠신가요?
@@ -39,13 +39,11 @@ const UncontrolledExample = () => {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={service3}
-            width="100%"
-            height="500px"
-            alt="3rd slide"
-          />
+          <div className="image_container_3">
+            <img src={service3_1} alt="image1" width={"37%"} />
+            <img src={service3_2} alt="image2" width={"26%"} />
+            <img src={service3_3} alt="image3" width={"37%"} />
+          </div>
           <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
             <h3>안전사고가 일어나도 걱정마세요!</h3>
             S.with 서비스는 위험 상황 발생 즉시 알림을 보내 골든 타임을 확보하고,<br />
@@ -95,12 +93,12 @@ const HOME = () => {
         <center><h1><b>메인 서비스 소개</b></h1></center>
       </div>
 
-      <div className = "main_feature">
+      <div className="main_feature">
         <div style={{ flex: 1 }}>
           <div className="feature_name">
             <center><b>WIFI Pose estimation</b></center>
           </div>
-          <div className = "" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "200px" }}>
+          <div className="" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "200px" }}>
             <img src="https://cdn.icon-icons.com/icons2/1104/PNG/512/wifi_78927.png" width={"50%"} height={"100%"} alt="Image 1" />
           </div>
           <div className="view_button">

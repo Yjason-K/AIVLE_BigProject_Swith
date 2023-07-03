@@ -1,3 +1,20 @@
+.image_container_1 {
+  display: flex;
+}
+
+.image_container_1 img {
+  width: 50%;
+  height: 500px;
+}
+
+.image_container_3 {
+  display: flex;
+}
+
+.image_container_3 img {
+  height: 500px;
+}
+
 .main_feature {
   display: flex;
   justify-content: space-between;
