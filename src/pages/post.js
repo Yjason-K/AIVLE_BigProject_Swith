@@ -162,8 +162,8 @@ const POST = () => {
             //     nickname: loginId,
             //   },
             // };
-            setCommentData([
-              ...commentsData,
+            setCommentData((preserve) => [
+              ...preserve,
               {
                 postId: parseInt(id),
                 commentId: commentsData[commentsData.length - 1].postId + 1,
