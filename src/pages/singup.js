@@ -349,7 +349,7 @@ const SIGNUP = () => {
                       disabled={!isCheck}
                     />
                     {errors.pw && (
-                        <div className="tooltiptext">{errors.pw}</div>
+                      <div className="tooltiptext">{errors.pw}</div>
                     )}
                   </div>
 
@@ -476,33 +476,35 @@ const SIGNUP = () => {
             </div>
           </div>
           <div className="register_terms_of_service">
-            <h1 className="h3 mb-3 fw-normal">이용 약관</h1>
-            <textarea
-              style={{ resize: "none", width: "650px", height: "250px" }}
-              value={termsOfService1}
-              readOnly
-            ></textarea>
-            <div className="checkbox-container">
-              &nbsp;&nbsp;&nbsp;개인 정보 수집 및 이용 약관에 동의합니다.&nbsp;
-              <input
-                type="checkbox"
-                onChange={() => setIsCheckOne(!isCheckOne)}
-              />
-            </div>
-            <br />
-            <br />
-            <br />
-            <textarea
-              style={{ resize: "none", width: "650px", height: "250px" }}
-              value={termsOfService2}
-              readOnly
-            ></textarea>
-            <div className="checkbox-container">
-              &nbsp;&nbsp;&nbsp;개인 정보 보호 약관에 동의합니다.&nbsp;
-              <input
-                type="checkbox"
-                onChange={() => setIsCheckTwo(!isCheckTwo)}
-              />
+            <div>
+              <h1 className="h3 mb-3 fw-normal">이용 약관</h1>
+              <textarea
+                style={{ resize: "none", width: "86%", height: "250px" }}
+                value={termsOfService1}
+                readOnly
+              ></textarea>
+              <div className="checkbox-container">
+                &nbsp;&nbsp;&nbsp;개인 정보 수집 및 이용 약관에 동의합니다.&nbsp;
+                <input
+                  type="checkbox"
+                  onChange={() => setIsCheckOne(!isCheckOne)}
+                />
+              </div>
+              <br />
+              <br />
+              <br />
+              <textarea
+                style={{ resize: "none", width: "86%", height: "250px" }}
+                value={termsOfService2}
+                readOnly
+              ></textarea>
+              <div className="checkbox-container">
+                &nbsp;&nbsp;&nbsp;개인 정보 보호 약관에 동의합니다.&nbsp;
+                <input
+                  type="checkbox"
+                  onChange={() => setIsCheckTwo(!isCheckTwo)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -537,7 +539,7 @@ const SIGNUP = () => {
           </Modal.Footer>
         </Modal>
       </Fragment>
-    </div>
+    </div >
   );
 };
 
