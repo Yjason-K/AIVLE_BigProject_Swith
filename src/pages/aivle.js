@@ -73,71 +73,73 @@ const AIVLE = () => {
             <center>팀원 소개</center>
           </h1>
         </div>
-        <div className="team-row">
-          {teamMembers.slice(0, 3).map((member, index) => (
-            <div key={index} className="team-card">
-              <div className="card">
-                <div className="card-inner">
-                  <div className="card-front">
-                    <img
-                      src={member.image}
-                      className="card-img-top"
-                      alt="team member"
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{member.name}</h5>
-                      <p className="card-text">{member.description}</p>
+        <div className="team_wrapper">
+          <div className="team-row">
+            {teamMembers.slice(0, 3).map((member, index) => (
+              <div key={index} className="team-card">
+                <div className="card">
+                  <div className="card-inner">
+                    <div className="card-front">
+                      <img
+                        src={member.image}
+                        className="card-img-top"
+                        alt="team member"
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">{member.name}</h5>
+                        <p className="card-text">{member.description}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="card-back">
-                    <div className="card-back-content">
-                      <a
-                        href={member.git}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="github-link"
-                      >
-                        GitHub
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="team-row" style={{ marginTop: "50px" }}>
-          {teamMembers.slice(3).map((member, index) => (
-            <div key={index} className="team-card">
-              <div className="card">
-                <div className="card-inner">
-                  <div className="card-front">
-                    <img
-                      src={member.image}
-                      className="card-img-top"
-                      alt="team member"
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{member.name}</h5>
-                      <p className="card-text">{member.description}</p>
-                    </div>
-                  </div>
-                  <div className="card-back">
-                    <div className="card-back-content">
-                      <a
-                        href={member.git}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="github-link"
-                      >
-                        GitHub
-                      </a>
+                    <div className="card-back">
+                      <div className="card-back-content">
+                        <a
+                          href={member.git}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="github-link"
+                        >
+                          GitHub
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="team-row" style={{ marginTop: "50px" }}>
+            {teamMembers.slice(3).map((member, index) => (
+              <div key={index} className="team-card">
+                <div className="card">
+                  <div className="card-inner">
+                    <div className="card-front">
+                      <img
+                        src={member.image}
+                        className="card-img-top"
+                        alt="team member"
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">{member.name}</h5>
+                        <p className="card-text">{member.description}</p>
+                      </div>
+                    </div>
+                    <div className="card-back">
+                      <div className="card-back-content">
+                        <a
+                          href={member.git}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="github-link"
+                        >
+                          GitHub
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
