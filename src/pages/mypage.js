@@ -2,12 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import Myheader from "../components/header";
 import "../style/mypage.css";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import axios from "axios";
 
 const MYPAGE = () => {
-  const session = JSON.parse(localStorage.getItem("token"));
   const [sessionId, setSessionId] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(""); // 기존 pwd
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -42,25 +42,11 @@ const MYPAGE = () => {
       setUserEmail(res.data.email);
       setNickname(res.data.nickname);
       setSerialNumber(res.data.serialNumber);
+      setName(res.data.name);
+      setPhoneNumber(res.data.phoneNumber);
+      setSessionId(true);
     });
   }, []);
-
-  useEffect(() => {
-    if (session && session !== "null") {
-      setSessionId(true);
-      const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-      const foundUser = storedUsers.find((user) => user.username === session);
-      if (foundUser) {
-        setCurrentUser(foundUser);
-        setPhoneNumber(foundUser.phone);
-        setName(foundUser.name);
-        setSerialNumber(foundUser.serialnumber);
-        setAgeNumber(foundUser.agenumber);
-        setTimeNumber1(foundUser.timenumber[0]);
-        setTimeNumber2(foundUser.timenumber[1]);
-      }
-    }
-  }, [session]);
 
   const verifyPassword = (e) => {
     e.preventDefault();
@@ -77,16 +63,14 @@ const MYPAGE = () => {
           JSON.parse(localStorage.getItem("token")).accessToken
         }`,
       },
-    }).then((res) => {
-      setVerified(true);
-      setCurrentUser(true);
-    });
-
-    if (currentUser && currentUser.password === password) {
-      setVerified(true);
-    } else {
-      alert("비밀번호가 잘못되었습니다.");
-    }
+    })
+      .then((res) => {
+        setVerified(true);
+        setCurrentUser(true);
+      })
+      .catch((err) => {
+        window.alert("비밀번호가 일치하지 않습니다!");
+      });
   };
 
   const confirmPwRef = useRef();
@@ -217,18 +201,20 @@ const MYPAGE = () => {
                         type="text"
                         className="idInput"
                         value={nickname}
+                        placeholder="닉네임: 4글자 이상"
                         onChange={(e) => setNickname(e.target.value)}
+                        minLength="4"
                       />
                       <input
                         type="email"
                         className="emailInput"
-                        placeholder={`이메일: ${currentUser.email}`}
+                        placeholder={`이메일: ${userEmail}`}
                         disabled
                       />
                       <input
                         type="password"
                         className="pwInput"
-                        placeholder="비밀번호 변경(6글자 이상)"
+                        placeholder="비밀번호 변경(특수문자, 영어 소문자, 숫자 포함 8글자 이상)"
                         onChange={(e) => setNewPassword(e.target.value)}
                         minLength="6"
                       />
@@ -236,7 +222,7 @@ const MYPAGE = () => {
                         ref={confirmPwRef}
                         type="password"
                         className="pwInput"
-                        placeholder="비밀번호 확인(6글자 이상)"
+                        placeholder="비밀번호 변경(특수문자, 영어 소문자, 숫자 포함 8글자 이상)"
                         onChange={(e) =>
                           setNewPasswordConfirmation(e.target.value)
                         }
@@ -249,22 +235,20 @@ const MYPAGE = () => {
                       <input
                         type="text"
                         className="nameInput"
-                        placeholder={`이름: ${currentUser.name}`}
-                        onChange={(e) => setName(e.target.value)}
+                        placeholder={`이름: ${name}`}
+                        disabled
                       />
                       <input
                         type="text"
                         className="serialnumberInput"
-                        placeholder={`시리얼넘버: ${currentUser.serialnumber}`}
-                        onChange={(e) => setSerialNumber(e.target.value)}
+                        placeholder={`시리얼넘버: ${serialNumber}`}
+                        disabled
                       />
                       <input
                         type="text"
                         className="phoneInput"
-                        placeholder={`전화번호: ${currentUser.phone}`}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        pattern="\d{11}"
-                        maxLength="11"
+                        placeholder={`전화번호: ${phoneNumber}`}
+                        disabled
                       />
                       <hr
                         className="hr"
@@ -274,7 +258,7 @@ const MYPAGE = () => {
                         ref={ageRef}
                         type="text"
                         className="ageInput"
-                        placeholder={`연령: ${currentUser.agenumber}`}
+                        placeholder={`연령: ${80}`}
                         onChange={(e) => setAgeNumber(e.target.value)}
                       />
                       <div>
@@ -315,26 +299,29 @@ const MYPAGE = () => {
                       회원정보수정
                     </button>
                   </form>
+                  <Button
+                    variant="outline-danger"
+                    className="withdraw_button"
+                    onClick={() => {
+                      axios({
+                        method: "delete",
+                        url: `http://15.165.98.14:8080/users/withdraw/${serialNumber}`,
+                        headers: {
+                          Authorization: `Bearer ${
+                            JSON.parse(localStorage.getItem("token"))
+                              .accessToken
+                          }`,
+                        },
+                      }).then(() => {
+                        console.log("회원탈퇴 성공!");
+                        localStorage.removeItem("token");
+                        navigate("/main", { replace: true });
+                      });
+                    }}
+                  >
+                    회원탈퇴
+                  </Button>
                 </div>
-                <button
-                  onClick={() => {
-                    axios({
-                      method: "delete",
-                      url: `http://15.165.98.14:8080/users/withdraw/${serialNumber}`,
-                      headers: {
-                        Authorization: `Bearer ${
-                          JSON.parse(localStorage.getItem("token")).accessToken
-                        }`,
-                      },
-                    }).then(() => {
-                      console.log("회원탈퇴 성공!");
-                      localStorage.removeItem("token");
-                      navigate("/main", { replace: true });
-                    });
-                  }}
-                >
-                  회원탈퇴
-                </button>
               </div>
             </center>
           </div>
