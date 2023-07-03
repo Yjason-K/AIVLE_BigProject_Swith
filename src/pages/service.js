@@ -95,7 +95,7 @@ const SERVICE = () => {
             .toISOString()
             .replace("T", " ")
             .split(".")[0]
-            .slice(2, 16);
+            .slice(2, 19);
 
           if (jsonres !== "EventStream Created. [userId=123456]") {
             const parseD = jsonres;

@@ -550,3 +550,11 @@
 .blink {
   animation: blink 1.5s infinite;
 }
+
+/* att in post */
+.download {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 10px;
+}
