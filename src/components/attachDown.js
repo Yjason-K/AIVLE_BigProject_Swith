@@ -21,8 +21,10 @@ const ATTDOWN = (attach) => {
     return (
       <div key={it.id}>
         <div className="download">
-          <span>{it.originalFileName}</span>
+          <span className="filename">{it.originalFileName}</span>
           <Button
+            variant="dark"
+            className="down_btn"
             onClick={() => {
               setShowModals((prev) => {
                 const updatedModals = [...prev];
@@ -40,7 +42,7 @@ const ATTDOWN = (attach) => {
               rel="noopener noreferrer"
               onClick={() => {}}
             >
-              <AiOutlineDownload size="30" />
+              <AiOutlineDownload size="25" />
             </a>
           </div>
           <Modal
