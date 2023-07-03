@@ -42,19 +42,6 @@ const POSTLIST = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios({
-  //     method: "get",
-  //     url: `http://15.165.98.14:8080/posts/postList?page=${currentPage}`,
-  //   })
-  //     .then((res) => {
-  //       setData(res.data.content);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.data);
-  //     });
-  // });
-
   // pagination 번호 처리
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;

@@ -75,8 +75,9 @@ const NMEWPOST = () => {
         url: "http://15.165.98.14:8080/posts/new",
         data: formData,
         headers: {
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
-            }`,
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
         },
       })
         .then((res) => {
@@ -86,27 +87,6 @@ const NMEWPOST = () => {
         .catch((err) => {
           console.log(err.data);
         });
-
-      // axios({
-      //   method: "post",
-      //   url: "http://15.165.98.14:8080/posts/new",
-      //   data: {
-      //     title: postTitle,
-      //     content: content,
-      //   },
-      //   headers: {
-      //     Authorization: `Bearer ${
-      //       JSON.parse(localStorage.getItem("token")).accessToken
-      //     }`,
-      //   },
-      // })
-      //   .then((res) => {
-      //     navigate("/postlist", { replace: true });
-      //     // onCreate(postTitle, content);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.data);
-      //   });
     }
   };
 
@@ -316,15 +296,31 @@ const NMEWPOST = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <div style={{marginTop: "35px", marginBottom: "10px"}}>
-          <div className="newpost_btn_wrapper" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button variant="dark" className="postviewbutton_cancel"
-              onClick={handlCancel} style={{ marginLeft: '2px', width: "10%", height: "30px", fontSize: "15px" }}>
+        <div style={{ marginTop: "35px", marginBottom: "10px" }}>
+          <div
+            className="newpost_btn_wrapper"
+            style={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <Button
+              variant="dark"
+              className="postviewbutton_cancel"
+              onClick={handlCancel}
+              style={{
+                marginLeft: "2px",
+                width: "10%",
+                height: "30px",
+                fontSize: "15px",
+              }}
+            >
               Cancel
             </Button>
 
-            <Button variant="dark" className="postviewbutton_save"
-              onClick={handleSubmit} style={{ width: "10%", marginRight: '1px', fontSize: "15px" }}>
+            <Button
+              variant="dark"
+              className="postviewbutton_save"
+              onClick={handleSubmit}
+              style={{ width: "10%", marginRight: "1px", fontSize: "15px" }}
+            >
               Save
             </Button>
           </div>

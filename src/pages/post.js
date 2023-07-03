@@ -28,13 +28,7 @@ const POST = () => {
   const [targetPost, setTargetPost] = useState({});
   const [attData, setAttData] = useState([]);
 
-  const postList = useContext(dataContext);
-  const { onRemove, viewCountUpdate } = useContext(postContext);
-  const { commentdata, postonRemove, commentonCreate, commentonRemove } =
-    useContext(commentContext);
   const { id } = useParams();
-
-  const [nickname, setNickname] = useState("");
 
   // axios({
   //   method: "get",
@@ -93,10 +87,6 @@ const POST = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   viewCountUpdate(id, title, content, writer, postdate, likes, views);
-  // }, [id, title, content, writer, postdate, likes, views]);
-
   const createclick = () => {
     if (isLogin) {
       if (comment.length !== 0) {
@@ -114,23 +104,6 @@ const POST = () => {
           },
         })
           .then(() => {
-            // setCommentData((preserve) => [
-            //   ...preserve,
-            //   {
-            //     postId: parseInt(id),
-            //     commentId:
-            //       commentsData === []
-            //         ? 0
-            //         : commentsData[commentsData.length - 1].postId + 1,
-            //     createdDate: new Date(
-            //       new Date().getTime() + 32400000
-            //     ).toISOString(),
-            //     content: comment,
-            //     writerDto: {
-            //       nickname: loginId,
-            //     },
-            //   },
-            // ]);
             setTimeout(() => {
               axios
                 .get(`http://15.165.98.14:8080/posts/post/${id}`)
@@ -278,7 +251,6 @@ const POST = () => {
             <Commentcontent
               post_id={id}
               commentdata={commentsData}
-              commentonRemove={commentonRemove}
               userId={loginId}
             />
           </div>
@@ -347,7 +319,6 @@ const POST = () => {
             <Commentcontent
               post_id={id}
               commentdata={commentsData}
-              commentonRemove={commentonRemove}
               userId={loginId}
             />
           </div>
