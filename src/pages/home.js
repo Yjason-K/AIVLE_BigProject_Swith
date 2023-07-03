@@ -15,6 +15,7 @@ const UncontrolledExample = () => {
   return (
     <center>
       <Carousel style={{ width: "80%" }}>
+
         <Carousel.Item>
           <div className="image_container_1">
             <img src={service1_1} alt="image1" />
@@ -25,6 +26,7 @@ const UncontrolledExample = () => {
             사랑하는 이들의 안전을 지키기 위해 많은 고민을 하고 있다면<br /> S.with 서비스를 이용하는 것은 어떠신가요?
           </Carousel.Caption>
         </Carousel.Item>
+
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -38,6 +40,7 @@ const UncontrolledExample = () => {
             실시간 행동 추정으로 위험 상황 감지가 가능한 AI 서비스를 이용해서 집에서도 안심하고 지내세요!
           </Carousel.Caption>
         </Carousel.Item>
+        
         <Carousel.Item>
           <div className="image_container_3">
             <img src={service3_1} alt="image1" width={"37%"} />
