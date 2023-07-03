@@ -16,36 +16,6 @@ const LOGIN = () => {
     setLoginInfo({ ...loginInfo, [name]: value });
   };
 
-  // const signIn = () => {
-  //   if (loginInfo.email === "" || loginInfo.pw === "") {
-  //     alert("아이디와 비밀번호를 입력해주세요.");
-  //     return;
-  //   }
-
-  //   const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-  //   const foundUser = storedUsers.find(
-  //     (user) => user.email === loginInfo.email && user.password === loginInfo.pw
-  //   );
-
-  //   if (foundUser) {
-  //     localStorage.setItem(
-  //       "userId",
-  //       JSON.stringify({
-  //         id: foundUser.username,
-  //       })
-  //     );
-  //     alert("로그인 성공!");
-  //   } else {
-  //     alert("아이디 또는 비밀번호를 확인하세요.");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (loginInfo.email !== "" && loginInfo.pw !== "") {
-  //     handleLogin();
-  //   }
-  // }, [loginInfo]);
-
   const handleLogin = () => {
     if (loginInfo.email === "" || loginInfo.pw === "") {
       alert("아이디와 비밀번호를 입력해주세요.");

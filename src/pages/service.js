@@ -7,7 +7,6 @@ import favicon from "../img/favicon.png";
 
 const SERVICE = () => {
   const session = localStorage.getItem("token");
-  const [sessionId, setSessionId] = useState(false);
   const navigate = useNavigate();
 
   // 세션 체크
@@ -16,7 +15,7 @@ const SERVICE = () => {
   }
 
   const [logData, setLogData] = useState([]);
-  const [detection, setDetection] = useState("로그가 뜨면 이곳에 보여집니다."); // 3초 보여줄곳
+  // const [detection, setDetection] = useState("로그가 뜨면 이곳에 보여집니다."); // 3초 보여줄곳
 
   useEffect(() => {
     if (Notification.permission !== "granted") {
@@ -24,26 +23,8 @@ const SERVICE = () => {
     }
   }, []);
 
-  // axios({
-  //   method: "get",
-  //   url: "http://15.165.98.14:8080/???",
-  //   headers: {
-  //     Authorization: `Bearer ${
-  //       JSON.parse(localStorage.getItem("token")).accessToken
-  //     }`,
-  //   },
-  // }).then((res) => {
-  //   setLogData(res.data)
-  //   setDetection(res.data.detection)
-  //   setTimeout(() => {
-  //   setDetection("");
-  //   }, 3000);
-  // }).catch((err) => {
-  //   console.log("로그를 가져오지 못했습니다.", err)
-  // });
-
-  const [serial, setSerial] = useState();
-
+  // const [serial, setSerial] = useState();
+  // token을 통한 유저 정보 가져올때
   // useEffect(() => {
   //   axios({
   //     method: "get",
@@ -58,7 +39,6 @@ const SERVICE = () => {
   //   });
   // }, [serial]);
 
-  //fallback: {"https": require.resolve("https-browserify"),  "http": require.resolve("stream-http")}
   useEffect(() => {
     const eventSource = new EventSource(
       `http://15.165.98.14:8080/notifications/subscribe/123456`
@@ -102,10 +82,11 @@ const SERVICE = () => {
             parseD.time = logTime;
             console.log(parseD);
             const a = parseD.log;
-            setDetection(a);
-            setTimeout(() => {
-              setDetection("");
-            }, 3000);
+
+            // setDetection(a);
+            // setTimeout(() => {
+            //   setDetection("");
+            // }, 3000);
             setLogData((prevLogData) => [parseD, ...prevLogData]);
             if (Notification.permission === "granted") {
               const notification = new Notification(
@@ -148,7 +129,7 @@ const SERVICE = () => {
       <Myheader isLogin={session} />
       <div className="container">
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span className="log_detection">{detection}</span>
+          {/* <span className="log_detection">{detection}</span> */}
           <div className="livecam">라이브캠</div>
         </div>
         <div className="verticalContainer">

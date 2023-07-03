@@ -134,16 +134,7 @@ const POSTLIST = () => {
               <span id="DescHead">추천</span>
               <span id="DescHead">조회수</span>
             </div>
-            {/* <PostComponent
-              data={currentPosts(posts)}
-              currentPage={currentPage}
-            /> */}
             <PostComponent currentPage={currentPage} />
-            {/* <NumPagination
-              postsPerPage={postsPerPage}
-              totalPosts={posts.length}
-              paginate={setCurrentPage}
-            /> */}
             <NumPagination paginate={setCurrentPage} totalPages={totalPages} />
           </div>
           <div className="btn_area">

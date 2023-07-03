@@ -91,43 +91,6 @@ const POST = () => {
         setLoginId(res.data.nickname);
       });
     }
-
-    // 닉네임 불러올 공간
-    // axios({
-    //   method: "get",
-    //   url: `http://15.165.98.14:8080/`,
-    // })
-    //   .then((res) => {
-    //     setNickname(res.nickname);
-    //   })
-    //   .catch((err) => {
-    //     console.log("닉네임을 불러오지 못했습니다.", err);
-    //   });
-
-    // if (targetPost) {
-    //   //일기가 존재할 때
-    //   setPost(targetPost);
-    //   setLikes(targetPost.likes);
-    //   setViews(targetPost.views + 1); // 여기서 views 값을 증가시킴
-    //   setWriter(targetPost.writer);
-    //   setTitle(targetPost.title);
-    //   setContent(targetPost.content);
-    //   // setPostdate(targetPost.postDate);
-    //   setCommentData(targetPost.commentInfoDtoList);
-    //   // viewCountUpdate(
-    //   //   id,
-    //   //   title,
-    //   //   content,
-    //   //   writer,
-    //   //   postdate,
-    //   //   likes,
-    //   //   targetPost.views + 1
-    //   // ); // 변경된 views 값을 전달
-    // } else {
-    //   // 일기가 없을 때
-    //   alert("잘못된 접근 입니다.");
-    //   navigate("/postlist", { replace: true });
-    // }
   }, []);
 
   // useEffect(() => {
@@ -193,6 +156,8 @@ const POST = () => {
     }
   };
 
+  console.log(loginId);
+
   const postdeletehandler = () => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       axios({
@@ -205,6 +170,7 @@ const POST = () => {
         },
       })
         .then((res) => {
+          console.log("게시글이 삭제되었습니다.");
           navigate("/postlist", { replace: true });
         })
         .catch((err) => {
