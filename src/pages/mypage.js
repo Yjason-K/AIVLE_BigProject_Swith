@@ -71,10 +71,11 @@ const MYPAGE = () => {
 
   const confirmPwRef = useRef();
   const ageRef = useRef();
+  const nicknameRef = useRef();
 
   const updateUserInfo = (e) => {
     e.preventDefault();
-
+    
     if (newPassword !== newPasswordConfirmation) {
       window.alert("비밀번호가 일치하지 않습니다!")
       return;
@@ -148,9 +149,11 @@ const MYPAGE = () => {
                   <form onSubmit={updateUserInfo}>
                     <div>
                       <input
+                        ref={nicknameRef}                      
                         type="text"
                         className="idInput"
-                        placeholder={`닉네임: ${nickname}`}
+                        value={nickname}
+                        placeholder="닉네임: (4글자 이상)"
                         onChange={(e) => setNickname(e.target.value)}
                         minLength="4"
                       />
