@@ -14,13 +14,9 @@ const MYPAGE = () => {
   const [name, setName] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
   const [ageNumber, setAgeNumber] = useState("");
-  const [timeNumber1, setTimeNumber1] = useState("");
-  const [timeNumber2, setTimeNumber2] = useState("");
   const [verified, setVerified] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const timeRef1 = useRef();
-  const timeRef2 = useRef();
   const navigate = useNavigate();
 
   // 변경 예정
@@ -75,7 +71,6 @@ const MYPAGE = () => {
 
   const confirmPwRef = useRef();
   const ageRef = useRef();
-  const timeRef = useRef();
 
   const updateUserInfo = (e) => {
     e.preventDefault();
@@ -99,6 +94,7 @@ const MYPAGE = () => {
       },
     }).then((res) => {
       console.log("회원정보 수정 완료!");
+      window.alert("회원정보 수정 완료!")
       navigate("/service", { replace: true });
     });}
 
@@ -154,8 +150,7 @@ const MYPAGE = () => {
                       <input
                         type="text"
                         className="idInput"
-                        value={nickname}
-                        placeholder="닉네임: 4글자 이상"
+                        placeholder={`닉네임: ${nickname}`}
                         onChange={(e) => setNickname(e.target.value)}
                         minLength="4"
                       />
@@ -216,20 +211,9 @@ const MYPAGE = () => {
                         onChange={(e) => setAgeNumber(e.target.value)}
                       />
                       <div>
-                        <input
-                          ref={timeRef1}
-                          type="time"
-                          className="timeInput"
-                          value
-                          onChange={(e) => setTimeNumber1(e.target.value)}
-                        />
+                        <input type="time" className="timeInput" />
                         &nbsp; ~ &nbsp;
-                        <input
-                          ref={timeRef2}
-                          type="time"
-                          className="timeInput"
-                          onChange={(e) => setTimeNumber2(e.target.value)}
-                        />
+                        <input type="time" className="timeInput" />
                       </div>
                       <hr
                         className="hr"
@@ -245,7 +229,7 @@ const MYPAGE = () => {
                       />{" "}
                       비밀번호 표시
                     </label>
-                    <div style={{ marginTop: "-10px" }}>
+                    <div style={{ marginTop: "-20px", marginBottom: "-20px" }}>
                       <br />
                       수정 할 부분을 입력하세요.
                     </div>
