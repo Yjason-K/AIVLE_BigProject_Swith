@@ -1,6 +1,6 @@
 // newPost
-import { useEffect, useState, useContext, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Button } from "react-bootstrap";
@@ -8,18 +8,20 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 import Myheader from "../components/header";
-import { postContext, dataContext } from "../App";
 
 const NMEWPOST = () => {
   // 로그인 검증
   useEffect(() => {
-    if (session && session !== "null") {
+    const session = localStorage.getItem("token");
+    if (!session) {
+      window.alert("잘못된 접근입니다!");
+      navigate("/postlist", { replace: true });
+    } else {
       setSessionId(true);
     }
   }, []);
 
-  // 로그인 세션정보
-  const session = localStorage.getItem("token");
+  // // 로그인 세션정보
   const [sessionId, setSessionId] = useState(false);
 
   // 제목, 본문 내용
@@ -34,11 +36,6 @@ const NMEWPOST = () => {
   };
 
   const navigate = useNavigate();
-
-  const originData = localStorage.getItem("posts");
-  const data = useContext(dataContext);
-
-  const { onCreate } = useContext(postContext);
 
   const handleSubmit = () => {
     if (postTitle.length < 4) {

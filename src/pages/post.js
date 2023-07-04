@@ -1,12 +1,10 @@
 // post 게시글 확인 페이지
 import Myheader from "../components/header";
-import { commentContext, dataContext } from "../App";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import parse from "html-react-parser";
 import Commentcontent from "../components/Commentcontent";
-import { postContext } from "../App";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import ATTDOWN from "../components/attachDown";
@@ -55,10 +53,10 @@ const POST = () => {
       url: `http://15.165.98.14:8080/posts/post/${id}`,
     })
       .then((res) => {
-        setTargetPost(res.data);
+        setTargetPost(res.data); // 혹시 몰라 전체 데이터 받아오기
         setPost(res.data);
         setLikes(res.data.likeCount);
-        setViews(res.data.searchCount); // 여기서 views 값을 증가시킴
+        setViews(res.data.searchCount);
         setWriter(res.data.writerDto.nickname);
         setTitle(res.data.title);
         setContent(res.data.content);
@@ -66,6 +64,7 @@ const POST = () => {
         setCommentData(res.data.commentInfoDtoList);
         // console.log(res.data.commentInfoDtoList);
         setAttData(res.data.attachmentInfoDto);
+        setPostdate(res.data.createdDate.replace("T", " "));
       })
       .catch((err) => {
         alert("잘못된 접근 입니다.");
