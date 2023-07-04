@@ -80,9 +80,13 @@ const MYPAGE = () => {
   const updateUserInfo = (e) => {
     e.preventDefault();
 
-    axios({
+    if (newPassword !== newPasswordConfirmation) {
+      window.alert("비밀번호가 일치하지 않습니다!")
+      return;
+    } else {
+      axios({
       method: "put",
-      url: `http://15.165.98.14:8080/users/edit/143`,
+      url: `http://15.165.98.14:8080/users/edit`,
       data: {
         nickname: nickname,
         password: newPasswordConfirmation,
@@ -96,7 +100,8 @@ const MYPAGE = () => {
     }).then((res) => {
       console.log("회원정보 수정 완료!");
       navigate("/service", { replace: true });
-    });
+    });}
+
   };
 
   // const withdraw = () => {
@@ -161,21 +166,21 @@ const MYPAGE = () => {
                         disabled
                       />
                       <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         className="pwInput"
                         placeholder="비밀번호 변경(특수문자, 영어 소문자, 숫자 포함 8글자 이상)"
                         onChange={(e) => setNewPassword(e.target.value)}
-                        minLength="6"
+                        minLength="8"
                       />
                       <input
                         ref={confirmPwRef}
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         className="pwInput"
                         placeholder="비밀번호 변경(특수문자, 영어 소문자, 숫자 포함 8글자 이상)"
                         onChange={(e) =>
                           setNewPasswordConfirmation(e.target.value)
                         }
-                        minLength="6"
+                        minLength="8"
                       />
                       <hr
                         className="hr"
