@@ -38,7 +38,9 @@ const LOGIN = () => {
         navigate("/service", { replace: true });
       })
       .catch((err) => {
-        window.alert(err.data);
+        if(err.response){
+          window.alert("아이디 또는 비밀번호를 확인해주세요.")
+        }
       });
   };
 

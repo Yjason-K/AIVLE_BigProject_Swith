@@ -381,7 +381,7 @@ const SIGNUP = () => {
                     <input
                       ref={nameRef}
                       type="text"
-                      className="signnameInput"
+                      className="nameInput"
                       required
                       minLength={2}
                       placeholder="이름(2글자 이상)"
@@ -398,7 +398,7 @@ const SIGNUP = () => {
                     <input
                       ref={emailRef}
                       type="email"
-                      className="signemailInput"
+                      className="emailInput"
                       required
                       placeholder="아이디(example@gmail.com)"
                       name="email"
