@@ -558,12 +558,12 @@
   justify-content: flex-start;
   margin-left: 12px;
   height: 30px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .down_btn {
   font-size: 12px;
-  width: 70px;
+  width: 75px;
   padding-bottom: 0px;
   padding-top: 0px;
   margin-right: 10px;

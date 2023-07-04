@@ -42,7 +42,7 @@ const ATTDOWN = (attach) => {
               rel="noopener noreferrer"
               onClick={() => {}}
             >
-              <AiOutlineDownload size="25" />
+              <AiOutlineDownload style={{marginRight: "7px"}} size="35" />
             </a>
           </div>
           <Modal
