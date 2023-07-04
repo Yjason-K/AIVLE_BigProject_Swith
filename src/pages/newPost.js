@@ -40,13 +40,13 @@ const NMEWPOST = () => {
 
   const handleSubmit = () => {
     if (postTitle.length < 4) {
-      alert("제목을 입력해주세요");
+      alert("제목을 입력해주세요(4글자 이상)");
       titleRef.current.focus();
       return;
     }
 
     if (content.length < 10) {
-      alert("일기를 입력해주세요");
+      alert("내용을 입력해주세요(10글자 이상)");
       titleRef.current.focus();
       return;
     }
@@ -214,7 +214,7 @@ const NMEWPOST = () => {
               className="title-input"
               type="text"
               maxLength={30}
-              placeholder="제목을 입력해주세요"
+              placeholder="제목을 입력해주세요(4글자 이상)"
               value={postTitle}
               onChange={onChangeContent}
               name="title"
@@ -227,7 +227,7 @@ const NMEWPOST = () => {
           <CKEditor
             editor={ClassicEditor}
             config={{
-              placeholder: "내용을 입력하세요.",
+              placeholder: "내용을 입력하세요(10글자 이상)",
             }}
             onChange={(event, editor) => {
               const data = editor.getData();

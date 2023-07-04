@@ -45,7 +45,7 @@ const POSTEDIT = () => {
 
   const saveHandler = () => {
     if (postTitle.length < 4) {
-      alert("제목을 입력해주세요");
+      alert("제목을 입력해주세요(4글자 이상)");
       titleRef.current.focus();
       return;
     }
@@ -96,7 +96,7 @@ const POSTEDIT = () => {
               }}
               type="text"
               maxLength={30}
-              placeholder="제목을 입력해주세요"
+              placeholder="제목을 입력해주세요(4글자 이상)"
               value={postTitle}
               onChange={onChangeContent}
               name="title"
@@ -109,7 +109,7 @@ const POSTEDIT = () => {
           <CKEditor
             editor={ClassicEditor}
             config={{
-              placeholder: "내용을 입력하세요.",
+              placeholder: "내용을 입력하세요(10글자 이상)",
             }}
             data={content}
             onChange={(event, editor) => {
