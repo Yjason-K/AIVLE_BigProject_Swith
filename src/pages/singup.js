@@ -197,44 +197,6 @@ const SIGNUP = () => {
       return;
     }
 
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const isUserExist = existingUsers.some(
-      (user) => user.username === idInfo.id
-    );
-    if (isUserExist) {
-      alert("이미 존재하는 닉네임입니다.");
-      nicknameRef.current.focus();
-      return;
-    }
-
-    const isEmailExist = existingUsers.some(
-      (user) => user.email === idInfo.email
-    );
-    if (isEmailExist) {
-      alert("이미 등록된 이메일입니다.");
-      emailRef.current.focus();
-      return;
-    }
-
-    const isSerialExist = existingUsers.some(
-      (user) => user.serialnumber === idInfo.serialnumber
-    );
-    if (isSerialExist) {
-      alert("이미 존재하는 시리얼넘버입니다.");
-      serialnumberRef.current.focus();
-      return;
-    }
-
-    const newUser = {
-      username: idInfo.id,
-      password: idInfo.pw,
-      name: idInfo.name,
-      serialnumber: idInfo.serialnumber,
-      phone: idInfo.phone,
-      email: idInfo.email
-    };
-    existingUsers.push(newUser);
-
     const data = {
       name: idInfo.name,
       nickname: idInfo.id,
@@ -262,14 +224,18 @@ const SIGNUP = () => {
         navigate("/login");
         console.log("회원가입 성공!");
       })
-      .catch((err) => {
+      .catch((err, mess) => {
         console.log(err);
+        console.log(mess)
+        
+        window.alert(err.message);
+        window.alert(err.code)
         if (err.response && err.response.data && err.response.data.field === "name" && err.response.data.defaultMessage) {
           const errorMessage = err.response.data.defaultMessage;
-          alert(errorMessage);
+          // alert(errorMessage);
           nameRef.current.focus();
         } else {
-          window.alert(err.response.data);
+          // window.alert(err.response.data);
         }
       });
   };
