@@ -6,6 +6,7 @@ body {
 
 .image_container_1 {
   display: flex;
+  opacity: 0.7;
 }
 
 .image_container_1 img {
@@ -15,6 +16,7 @@ body {
 
 .image_container_3 {
   display: flex;
+  opacity: 0.7;
 }
 
 .image_container_3 img {

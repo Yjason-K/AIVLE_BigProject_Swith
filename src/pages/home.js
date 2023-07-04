@@ -21,7 +21,7 @@ const UncontrolledExample = () => {
             <img src={service1_1} alt="image1" />
             <img src={service1_2} alt="image1" />
           </div>
-          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
             <h3>집에서 한시라도 눈을 뗄 수가 없나요?</h3>
             사랑하는 이들의 안전을 지키기 위해 많은 고민을 하고 있다면<br /> S.with 서비스를 이용하는 것은 어떠신가요?
           </Carousel.Caption>
@@ -34,8 +34,9 @@ const UncontrolledExample = () => {
             width="100%"
             height="500px"
             alt="2nd slide"
+            style={{ opacity: "0.7" }}
           />
-          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
             <h3>S.with 서비스는 WIFI와 IP카메라를 활용한<br /> 위험 상황 감지가 가능합니다!</h3>
             실시간 행동 추정으로 위험 상황 감지가 가능한 AI 서비스를 이용해서 집에서도 안심하고 지내세요!
           </Carousel.Caption>
@@ -47,7 +48,7 @@ const UncontrolledExample = () => {
             <img src={service3_2} alt="image2" width={"26%"} />
             <img src={service3_3} alt="image3" width={"37%"} />
           </div>
-          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
             <h3>안전사고가 일어나도 걱정마세요!</h3>
             S.with 서비스는 위험 상황 발생 즉시 알림을 보내 골든 타임을 확보하고,<br />
             빠른 대처를 통해 2차 사고 예방이 가능합니다.<br />이제 고민을 덜고, 사랑하는 이들을 위해 S.with 서비스를 선택하세요.
