@@ -16,7 +16,9 @@ const LOGIN = () => {
     setLoginInfo({ ...loginInfo, [name]: value });
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+
     if (loginInfo.email === "" || loginInfo.pw === "") {
       alert("아이디와 비밀번호를 입력해주세요.");
       return;
@@ -73,7 +75,7 @@ const LOGIN = () => {
                 </span>
               </div>
               <div className="login_loginArea">
-                <form>
+                <form onSubmit={handleLogin}>
                   <input
                     type="email"
                     className="emailInput"
@@ -92,21 +94,17 @@ const LOGIN = () => {
                   <Link to="/findid">
                     <span className="findId">아이디 · 비밀번호 찾기</span>
                   </Link>
-                </form>
-                <div className="loginbuttonarea">
-                  <button
-                    type="submit"
-                    className="loginButton"
-                    onClick={handleLogin}
-                  >
-                    로그인
-                  </button>
-                  <Link to="/main">
-                    <button type="submit" className="loginButton loginButton2">
-                      로그인 없이 보기
+                  <div className="loginbuttonarea">
+                    <button type="submit" className="loginButton">
+                      로그인
                     </button>
-                  </Link>
-                </div>
+                    <Link to="/main">
+                      <button type="submit" className="loginButton loginButton2">
+                        로그인 없이 보기
+                      </button>
+                    </Link>
+                  </div>
+                </form>
               </div>
             </div>
             <div className="loginArea_right">
