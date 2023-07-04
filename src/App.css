@@ -533,3 +533,46 @@
   margin-top: -50px;
   width: 1000px;
 }
+
+/* log */
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1.5s infinite;
+}
+
+/* att in post */
+.download {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 12px;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.down_btn {
+  font-size: 12px;
+  width: 70px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-right: 10px;
+}
+
+.filename {
+  flex-grow: 0.1;
+  font-size: 12px;
+  font-weight: 700;
+  vertical-align: middle;
+  margin-top: 6px;
+}

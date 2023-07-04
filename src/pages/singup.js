@@ -1,9 +1,9 @@
-import { Fragment, useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Myheader from '../components/header';
-import { Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
-import axios from 'axios';
+import { Fragment, useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Myheader from "../components/header";
+import { Button } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 
 import "../style/singup.css";
 import jaerong from "../img/jaerong.png";
@@ -388,7 +388,10 @@ const SIGNUP = () => {
                     onChange={setinfo}
                     disabled={!isCheck}
                   />
-                  <hr className="hr" style={{ marginBottom: '0px', marginTop: "15px" }} />
+                  <hr
+                    className="hr"
+                    style={{ marginBottom: "0px", marginTop: "15px" }}
+                  />
 
                   <input
                     ref={serialnumberRef}
@@ -412,7 +415,10 @@ const SIGNUP = () => {
                     시리얼 번호 안내
                   </Button>
 
-                  <hr className="hr" style={{ marginBottom: '0px', marginTop: "15px" }} />
+                  <hr
+                    className="hr"
+                    style={{ marginBottom: "0px", marginTop: "15px" }}
+                  />
 
                   <div className="tooltipContainer ageInputContainer">
                     <input
@@ -440,6 +446,7 @@ const SIGNUP = () => {
                         onChange={setinfo}
                         disabled={!isCheck}
                       />
+                      &nbsp; ~ &nbsp;
                       &nbsp; ~ &nbsp;
                       <input
                         type="time"

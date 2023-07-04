@@ -3,10 +3,10 @@ import Myheader from "../components/header";
 import "../style/service.css";
 import { useNavigate } from "react-router-dom";
 import LOG from "../components/logComponent";
+import favicon from "../img/favicon.png";
 
 const SERVICE = () => {
   const session = localStorage.getItem("token");
-  const [sessionId, setSessionId] = useState(false);
   const navigate = useNavigate();
 
   // 세션 체크
@@ -15,28 +15,16 @@ const SERVICE = () => {
   }
 
   const [logData, setLogData] = useState([]);
-  const [detection, setDetection] = useState();
+  // const [detection, setDetection] = useState("로그가 뜨면 이곳에 보여집니다."); // 3초 보여줄곳
 
-  // axios({
-  //   method: "get",
-  //   url: "http://15.165.98.14:8080/???",
-  //   headers: {
-  //     Authorization: `Bearer ${
-  //       JSON.parse(localStorage.getItem("token")).accessToken
-  //     }`,
-  //   },
-  // }).then((res) => {
-  //   setLogData(res.data)
-  //   setDetection(res.data.detection)
-  //   setTimeout(() => {
-  //   setDetection("");
-  //   }, 3000);
-  // }).catch((err) => {
-  //   console.log("로그를 가져오지 못했습니다.", err)
-  // });
+  useEffect(() => {
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+  }, []);
 
-  const [serial, setSerial] = useState();
-
+  // const [serial, setSerial] = useState();
+  // token을 통한 유저 정보 가져올때
   // useEffect(() => {
   //   axios({
   //     method: "get",
@@ -51,7 +39,6 @@ const SERVICE = () => {
   //   });
   // }, [serial]);
 
-  //fallback: {"https": require.resolve("https-browserify"),  "http": require.resolve("stream-http")}
   useEffect(() => {
     const eventSource = new EventSource(
       `http://15.165.98.14:8080/notifications/subscribe/123456`
@@ -62,13 +49,61 @@ const SERVICE = () => {
       console.log(eventSource.readyState);
     };
 
-    eventSource.onmessage = async (e) => {
-      const res = await e.data;
+    eventSource.onmessage = (e) => {
+      console.log("Data get!");
+      console.log(e);
+      const res = e.data;
+      console.log(res);
       const parsedData = JSON.parse(res);
-      setLogData((prevLogData) => [...prevLogData, parsedData]);
+      console.log(parsedData);
+      // setLogData((prevLogData) => [...prevLogData, parsedData]);
 
       // 받아오는 data로 할 일
     };
+    eventSource.addEventListener(
+      "sse",
+      function (e) {
+        // console.log("Data get!");
+        // console.log(e);
+        const res = e.data;
+        if (res !== "EventStream Created. [userId=123456]") {
+          // ...
+          const jsonres = JSON.parse(res);
+
+          const now = new Date().getTime() + 32400000;
+          const logTime = new Date(parseInt(now))
+            .toISOString()
+            .replace("T", " ")
+            .split(".")[0]
+            .slice(2, 19);
+
+          if (jsonres !== "EventStream Created. [userId=123456]") {
+            const parseD = jsonres;
+            parseD.time = logTime;
+            console.log(parseD);
+            const a = parseD.log;
+
+            // setDetection(a);
+            // setTimeout(() => {
+            //   setDetection("");
+            // }, 3000);
+            setLogData((prevLogData) => [parseD, ...prevLogData]);
+            if (Notification.permission === "granted") {
+              const notification = new Notification(
+                "위험행동이 감지되었습니다..",
+                {
+                  body: a,
+                  icon: favicon,
+                }
+              );
+            }
+          }
+
+          // console.log(logData);
+        }
+      },
+      false
+    );
 
     eventSource.onerror = (e) => {
       // 종료 또는 에러 발생 시 할 일
@@ -86,7 +121,7 @@ const SERVICE = () => {
     return () => {
       eventSource.close(); // EventSource 연결 종료
     };
-  });
+  }, []);
 
   console.log(logData);
   return (
@@ -94,7 +129,7 @@ const SERVICE = () => {
       <Myheader isLogin={session} />
       <div className="container">
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span className="log_detection">이상탐지</span>
+          {/* <span className="log_detection">{detection}</span> */}
           <div className="livecam">라이브캠</div>
         </div>
         <div className="verticalContainer">
@@ -107,26 +142,26 @@ const SERVICE = () => {
               <span id="listcHead">CAM</span>
             </div>
             <div className="log">
-              <span id="listcHead">230629_1629</span>
+              <span id="listcHead">23-06-29 16:29:01</span>
               <span id="listcHead">아이 낙상이 감지되었습니다.</span>
               <span id="listcHead">●</span>
               <span id="listcHead">●</span>
             </div>
             <div className="log">
-              <span id="listcHead">230629_1630</span>
+              <span id="listcHead">23-06-29 16:29:02</span>
               <span id="listcHead">아이의 뒤집힘이 감지되었습니다.</span>
               <span id="listcHead">●</span>
               <span id="listcHead">●</span>
             </div>
             <div className="log">
-              <span id="listcHead">230630_1240</span>
+              <span id="listcHead">23-06-29 16:29:03</span>
               <span id="listcHead">
                 위험 지대에서 아이의 행동이 감지되었습니다.
               </span>
               <span id="listcHead">●</span>
               <span id="listcHead"></span>
             </div>
-            <LOG log={logData} />
+            <LOG logData={logData} />
           </div>
         </div>
       </div>

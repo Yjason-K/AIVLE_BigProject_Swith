@@ -1,14 +1,13 @@
 // post 게시글 확인 페이지
 import Myheader from "../components/header";
-import { commentContext, dataContext } from "../App";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import parse from "html-react-parser";
 import Commentcontent from "../components/Commentcontent";
-import { postContext } from "../App";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import ATTDOWN from "../components/attachDown";
 
 const POST = () => {
   const navigate = useNavigate();
@@ -25,14 +24,9 @@ const POST = () => {
   const [postdate, setPostdate] = useState(null);
   const [commentsData, setCommentData] = useState([]);
   const [targetPost, setTargetPost] = useState({});
+  const [attData, setAttData] = useState([]);
 
-  const postList = useContext(dataContext);
-  const { onRemove, viewCountUpdate } = useContext(postContext);
-  const { commentdata, postonRemove, commentonCreate, commentonRemove } =
-    useContext(commentContext);
   const { id } = useParams();
-
-  const [nickname, setNickname] = useState("");
 
   // axios({
   //   method: "get",
@@ -59,16 +53,18 @@ const POST = () => {
       url: `http://15.165.98.14:8080/posts/post/${id}`,
     })
       .then((res) => {
-        setTargetPost(res.data);
+        setTargetPost(res.data); // 혹시 몰라 전체 데이터 받아오기
         setPost(res.data);
         setLikes(res.data.likeCount);
-        setViews(res.data.searchCount); // 여기서 views 값을 증가시킴
+        setViews(res.data.searchCount);
         setWriter(res.data.writerDto.nickname);
         setTitle(res.data.title);
         setContent(res.data.content);
         // setPostdate(targetPost.postDate);
         setCommentData(res.data.commentInfoDtoList);
         // console.log(res.data.commentInfoDtoList);
+        setAttData(res.data.attachmentInfoDto);
+        setPostdate(res.data.createdDate.replace("T", " "));
       })
       .catch((err) => {
         alert("잘못된 접근 입니다.");
@@ -88,48 +84,7 @@ const POST = () => {
         setLoginId(res.data.nickname);
       });
     }
-
-    // 닉네임 불러올 공간
-    // axios({
-    //   method: "get",
-    //   url: `http://15.165.98.14:8080/`,
-    // })
-    //   .then((res) => {
-    //     setNickname(res.nickname);
-    //   })
-    //   .catch((err) => {
-    //     console.log("닉네임을 불러오지 못했습니다.", err);
-    //   });
-
-    // if (targetPost) {
-    //   //일기가 존재할 때
-    //   setPost(targetPost);
-    //   setLikes(targetPost.likes);
-    //   setViews(targetPost.views + 1); // 여기서 views 값을 증가시킴
-    //   setWriter(targetPost.writer);
-    //   setTitle(targetPost.title);
-    //   setContent(targetPost.content);
-    //   // setPostdate(targetPost.postDate);
-    //   setCommentData(targetPost.commentInfoDtoList);
-    //   // viewCountUpdate(
-    //   //   id,
-    //   //   title,
-    //   //   content,
-    //   //   writer,
-    //   //   postdate,
-    //   //   likes,
-    //   //   targetPost.views + 1
-    //   // ); // 변경된 views 값을 전달
-    // } else {
-    //   // 일기가 없을 때
-    //   alert("잘못된 접근 입니다.");
-    //   navigate("/postlist", { replace: true });
-    // }
   }, []);
-
-  // useEffect(() => {
-  //   viewCountUpdate(id, title, content, writer, postdate, likes, views);
-  // }, [id, title, content, writer, postdate, likes, views]);
 
   const createclick = () => {
     if (isLogin) {
@@ -148,31 +103,17 @@ const POST = () => {
           },
         })
           .then(() => {
-            // const newComment = {
-            //   postId: id,
-            //   commentId: commentsData[commentsData.length - 1].postId + 1,
-            //   createdDate: new Date(
-            //     new Date().getTime() + 32400000
-            //   ).toISOString(),
-            //   content: comment,
-            //   writerDto: {
-            //     nickname: loginId,
-            //   },
-            // };
-            setCommentData([
-              ...commentsData,
-              {
-                postId: parseInt(id),
-                commentId: commentsData[commentsData.length - 1].postId + 1,
-                createdDate: new Date(
-                  new Date().getTime() + 32400000
-                ).toISOString(),
-                content: comment,
-                writerDto: {
-                  nickname: loginId,
-                },
-              },
-            ]);
+            setTimeout(() => {
+              axios
+                .get(`http://15.165.98.14:8080/posts/post/${id}`)
+                .then((res) => {
+                  // ...이전 코드...
+                  setCommentData(res.data.commentInfoDtoList);
+                })
+                .catch((err) => {
+                  console.log("댓글을 불러오지 못했습니다.", err.data);
+                });
+            }, 300);
             setComment("");
             // window.location.reload();
           })
@@ -187,6 +128,8 @@ const POST = () => {
     }
   };
 
+  console.log(loginId);
+
   const postdeletehandler = () => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       axios({
@@ -199,6 +142,7 @@ const POST = () => {
         },
       })
         .then((res) => {
+          console.log("게시글이 삭제되었습니다.");
           navigate("/postlist", { replace: true });
         })
         .catch((err) => {
@@ -265,8 +209,9 @@ const POST = () => {
             </Button>
           </div>
           <div className="content_wrapper">
-            <div className="post_content">{parse(content)}</div>
+            <div className="post_content">{parse(String(content))}</div>
           </div>
+          <ATTDOWN attach={attData} />
           <div className="comment_section">
             <textarea
               placeholder={
@@ -305,7 +250,6 @@ const POST = () => {
             <Commentcontent
               post_id={id}
               commentdata={commentsData}
-              commentonRemove={commentonRemove}
               userId={loginId}
             />
           </div>
@@ -332,8 +276,9 @@ const POST = () => {
             </div>
           </div>
           <div className="content_wrapper">
-            <div className="post_content">{parse(content)}</div>
+            <div className="post_content">{parse(String(content))}</div>
           </div>
+          <ATTDOWN attach={attData} />
           <div className="comment_section">
             <textarea
               placeholder={
@@ -373,7 +318,6 @@ const POST = () => {
             <Commentcontent
               post_id={id}
               commentdata={commentsData}
-              commentonRemove={commentonRemove}
               userId={loginId}
             />
           </div>

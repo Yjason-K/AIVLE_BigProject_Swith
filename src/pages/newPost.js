@@ -1,6 +1,6 @@
 // newPost
-import { useEffect, useState, useContext, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Button } from "react-bootstrap";
@@ -9,18 +9,20 @@ import axios from "axios";
 import "../style/post.css"
 
 import Myheader from "../components/header";
-import { postContext, dataContext } from "../App";
 
 const NMEWPOST = () => {
   // 로그인 검증
   useEffect(() => {
-    if (session && session !== "null") {
+    const session = localStorage.getItem("token");
+    if (!session) {
+      window.alert("잘못된 접근입니다!");
+      navigate("/postlist", { replace: true });
+    } else {
       setSessionId(true);
     }
   }, []);
 
-  // 로그인 세션정보
-  const session = localStorage.getItem("token");
+  // // 로그인 세션정보
   const [sessionId, setSessionId] = useState(false);
 
   // 제목, 본문 내용
@@ -35,11 +37,6 @@ const NMEWPOST = () => {
   };
 
   const navigate = useNavigate();
-
-  const originData = localStorage.getItem("posts");
-  const data = useContext(dataContext);
-
-  const { onCreate } = useContext(postContext);
 
   const handleSubmit = () => {
     if (postTitle.length < 4) {
@@ -76,8 +73,9 @@ const NMEWPOST = () => {
         url: "http://15.165.98.14:8080/posts/new",
         data: formData,
         headers: {
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
-            }`,
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
         },
       })
         .then((res) => {
@@ -87,27 +85,6 @@ const NMEWPOST = () => {
         .catch((err) => {
           console.log(err.data);
         });
-
-      // axios({
-      //   method: "post",
-      //   url: "http://15.165.98.14:8080/posts/new",
-      //   data: {
-      //     title: postTitle,
-      //     content: content,
-      //   },
-      //   headers: {
-      //     Authorization: `Bearer ${
-      //       JSON.parse(localStorage.getItem("token")).accessToken
-      //     }`,
-      //   },
-      // })
-      //   .then((res) => {
-      //     navigate("/postlist", { replace: true });
-      //     // onCreate(postTitle, content);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.data);
-      //   });
     }
   };
 
@@ -319,13 +296,17 @@ const NMEWPOST = () => {
         </Modal>
         <div style={{marginTop: "35px", marginBottom: "10px"}}>
           <div className="newpost_btn_wrapper" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button className="postviewbutton_cancel"
+            <Button variant="dark" className="postviewbutton_cancel"
               onClick={handlCancel} style={{ marginLeft: '2px', width: "10%", height: "30px", fontSize: "15px" }}>
               Cancel
             </Button>
 
-            <Button variant="dark" className="postviewbutton_save"
-              onClick={handleSubmit} style={{ width: "10%", marginRight: '1px', fontSize: "15px" }}>
+            <Button
+              variant="dark"
+              className="postviewbutton_save"
+              onClick={handleSubmit}
+              style={{ width: "10%", marginRight: "1px", fontSize: "15px" }}
+            >
               Save
             </Button>
           </div>

@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { post } from "jquery";
 
-const Commentcontent = ({ post_id, commentdata, userId }) => {
+const Commentcontent = ({ post_id, commentdata }) => {
   const getStringDate = (date) => {
     return new Date(date).toISOString().replace("T", " ").split(".")[0];
   };
-
-  // const commentfilter = commentdata.filter((it) => it.postid === post_id);
   const [comment, setComment] = useState([]);
 
   const today = new Date(new Date().getTime() + 32400000)
@@ -18,17 +15,26 @@ const Commentcontent = ({ post_id, commentdata, userId }) => {
   const [loginId, setLoginId] = useState();
   const [userNickname, setUserNickname] = useState("");
 
-  // const userEmail = jwt.decode(
-  //   JSON.parse(localStorage.getItem("token")).accessToken
-  // );
-
   useEffect(() => {
     // 페이지가 로드될 때 실행되는 효과 함수
     const sessionId = localStorage.getItem("toekn");
     if (sessionId) {
       setLoginId(JSON.parse(localStorage.getItem("token")));
     }
-    setUserNickname(userId);
+
+    if (localStorage.getItem("token") !== null) {
+      axios({
+        method: "get",
+        url: `http://15.165.98.14:8080/users/user`,
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
+        },
+      }).then((res) => {
+        setUserNickname(res.data.nickname);
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -48,16 +54,18 @@ const Commentcontent = ({ post_id, commentdata, userId }) => {
       })
         .then((res) => {
           console.log("댓글 삭제완료!");
-          axios
-            .get(`http://15.165.98.14:8080/posts/post/${post_id}`)
-            .then((res) => {
-              // ...이전 코드...
-              setComment(res.data.commentInfoDtoList);
-              console.log(res.data.commentInfoDtoList);
-            })
-            .catch((err) => {
-              console.log("댓글을 불러오지 못했습니다.", err.data);
-            });
+          setTimeout(() => {
+            axios
+              .get(`http://15.165.98.14:8080/posts/post/${post_id}`)
+              .then((res) => {
+                // ...이전 코드...
+                setComment(res.data.commentInfoDtoList);
+                console.log(res.data.commentInfoDtoList);
+              })
+              .catch((err) => {
+                console.log("댓글을 불러오지 못했습니다.", err.data);
+              });
+          }, 300);
         })
         .catch((err) => {
           alert("댓글 삭제 불가!");
@@ -65,14 +73,7 @@ const Commentcontent = ({ post_id, commentdata, userId }) => {
     }
   };
 
-  // console.log(
-  //   commentfilter.filter(
-  //     (it) => it.comment_id !== loginId && it.comment !== "dddddddddd"
-  //   )
-  // );
-  // console.log(commentdata);
-
-  console.log(userNickname);
+  console.log(comment);
 
   return (
     <>
@@ -92,6 +93,9 @@ const Commentcontent = ({ post_id, commentdata, userId }) => {
             >
               {it.content}
             </span>
+            {/* {console.log(it.writerDto.nickname)}
+            {console.log(userNickname)}
+            {console.log(it.writerDto.nickname === userNickname)} */}
             {userNickname === it.writerDto.nickname && (
               <Button
                 variant="link"
