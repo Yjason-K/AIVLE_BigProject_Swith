@@ -333,17 +333,16 @@ const SIGNUP = () => {
         console.log("회원가입 성공!");
       })
       .catch((err) => {
-        // console.log(err);
-        // console.log(err.response);
-        
-        window.alert(err.response.data.message);
-        // window.alert(err.code)
-        if (err.response && err.response.data && err.response.data.field === "name" && err.response.data.defaultMessage) {
-          const errorMessage = err.response.data.defaultMessage;
-          // alert(errorMessage);
-          nameRef.current.focus();
+        if (err.response) {
+          if (err.response.data.message === "Nickname already in use") {
+            window.alert("중복된 닉네임입니다.");
+            nicknameRef.current.focus();
+          } else if (err.response.data.message === "Email address already in use") {
+            window.alert("중복된 이메일입니다.");
+            emailRef.current.focus();
+          }
         } else {
-          // window.alert(err.response.data);
+          window.alert("서버가 꺼져 있습니다.")
         }
       });
   };
@@ -382,7 +381,7 @@ const SIGNUP = () => {
                     <input
                       ref={nameRef}
                       type="text"
-                      className="nameInput"
+                      className="signnameInput"
                       required
                       minLength={2}
                       placeholder="이름(2글자 이상)"
@@ -399,7 +398,7 @@ const SIGNUP = () => {
                     <input
                       ref={emailRef}
                       type="email"
-                      className="emailInput"
+                      className="signemailInput"
                       required
                       placeholder="아이디(example@gmail.com)"
                       name="email"
