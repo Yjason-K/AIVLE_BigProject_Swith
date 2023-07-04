@@ -37,7 +37,9 @@ const SIGNUP = () => {
   });
 
   const [showpw, setShowPw] = useState("password");
-  const nameRegex = /^[^\d\s!@#$%^&*]+$/;
+  // const nameRegex = /^[^\d\s!@#$%^&*]+$/;
+  // const nameRegex = /^[A-Za-z\uAC00-\uD7A3]+$/;
+  const nameRegex = /^[A-Za-z가-힣]+$/;
   const pwRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,30}$/;
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   const [showNameTooltip, setShowNameTooltip] = useState(false);
@@ -224,12 +226,12 @@ const SIGNUP = () => {
         navigate("/login");
         console.log("회원가입 성공!");
       })
-      .catch((err, mess) => {
-        console.log(err);
-        console.log(mess)
+      .catch((err) => {
+        // console.log(err);
+        // console.log(err.response);
         
-        window.alert(err.message);
-        window.alert(err.code)
+        window.alert(err.response.data.message);
+        // window.alert(err.code)
         if (err.response && err.response.data && err.response.data.field === "name" && err.response.data.defaultMessage) {
           const errorMessage = err.response.data.defaultMessage;
           // alert(errorMessage);
@@ -279,7 +281,7 @@ const SIGNUP = () => {
                       minLength={2}
                       placeholder="이름(2글자 이상)"
                       name="name"
-                      pattern="^[^\d\s!@#$%^&*]+$"
+                      pattern="^[A-Za-z\uAC00-\uD7A3]+$"
                       onChange={handleNameChange}
                       disabled={!isCheck}
                     />
