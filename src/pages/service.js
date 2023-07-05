@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Myheader from "../components/header";
 import "../style/service.css";
 import { useNavigate } from "react-router-dom";
 import LOG from "../components/logComponent";
 import favicon from "../img/favicon.png";
+import Webcam from "react-webcam";
 
 const SERVICE = () => {
   const session = localStorage.getItem("token");
@@ -123,14 +124,54 @@ const SERVICE = () => {
     };
   }, []);
 
-  console.log(logData);
+  // camera setting
+  const webcamRef = useRef(null);
+  const [webcamStream, setWebcamStream] = useState(null);
+
+  useEffect(() => {
+    const enableWebcam = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        setWebcamStream(stream);
+      } catch (error) {
+        console.error("Error accessing webcam:", error);
+      }
+    };
+
+    enableWebcam();
+
+    // 컴포넌트 언마운트 시 웹캠 스트림 정리
+    return () => {
+      if (webcamStream) {
+        webcamStream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, []);
+
   return (
     <div className="service">
       <Myheader isLogin={session} />
       <div className="container">
         <div style={{ display: "flex", flexDirection: "column" }}>
           {/* <span className="log_detection">{detection}</span> */}
-          <div className="livecam">라이브캠</div>
+          <div className="livecam">
+            {" "}
+            {webcamStream ? (
+              <Webcam
+                audio={false}
+                ref={webcamRef}
+                videoConstraints={{
+                  width: 610,
+                  height: 360,
+                  facingMode: "user",
+                }}
+              />
+            ) : (
+              <div>No webcam available</div>
+            )}
+          </div>
         </div>
         <div className="verticalContainer">
           <div className="logContainer">
@@ -141,7 +182,7 @@ const SERVICE = () => {
               <span id="listcHead">Wi-fi</span>
               <span id="listcHead">CAM</span>
             </div>
-            <div className="log">
+            {/* <div className="log">
               <span id="listcHead">23-06-29 16:29:01</span>
               <span id="listcHead">아이 낙상이 감지되었습니다.</span>
               <span id="listcHead">●</span>
@@ -160,7 +201,7 @@ const SERVICE = () => {
               </span>
               <span id="listcHead">●</span>
               <span id="listcHead"></span>
-            </div>
+            </div> */}
             <LOG logData={logData} />
           </div>
         </div>

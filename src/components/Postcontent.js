@@ -2,22 +2,42 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Postcontent = ({ currentPage }) => {
+const Postcontent = ({ currentPage, bySearch, searchTerm, searchBy }) => {
   const [pageData, setPageData] = useState([]);
 
+  console.log(bySearch);
+  console.log(searchTerm);
+  console.log(searchBy);
+
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `http://15.165.98.14:8080/posts/postList?page=${currentPage - 1}`,
-    })
-      .then((res) => {
-        setPageData(res.data.content);
-        console.log(res);
+    if (!bySearch) {
+      axios({
+        method: "get",
+        url: `http://15.165.98.14:8080/posts/postList?page=${currentPage - 1}`,
       })
-      .catch((err) => {
-        console.log(err.data);
-      });
-  }, [currentPage]);
+        .then((res) => {
+          setPageData(res.data.content);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err.data);
+        });
+    } else {
+      axios({
+        method: "get",
+        url: `http://15.165.98.14:8080/posts/search?type=${searchBy}&content=${searchTerm}&page=${
+          currentPage - 1
+        }`,
+      })
+        .then((res) => {
+          setPageData(res.data.data);
+          // console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err.data);
+        });
+    }
+  }, [currentPage, bySearch, searchTerm, searchBy]);
 
   const getStringDate = (date) => {
     return date.slice(0, 10);
@@ -48,9 +68,9 @@ const Postcontent = ({ currentPage }) => {
         <span>
           {/* 댓글 개수 보여주는 거 같은디... */}
           {post.title}{" "}
-          <div style={{ color: "rgb(60,172,255)", display: "inline" }}>
-            {/* {post.commentInfoDtoList.length} */}0
-          </div>
+          {/* <div style={{ color: "rgb(60,172,255)", display: "inline" }}> */}
+          {/* {post.commentInfoDtoList.length} */}
+          {/* </div> */}
         </span>
         <span>{post.writer}</span>
         <span>{getStringDate(post.createTime)}</span>
