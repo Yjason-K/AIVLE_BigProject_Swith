@@ -12,7 +12,7 @@
 }
 
 .mypage_main{
-    height: 814px;
+    height: 754px;
     margin-top: 100px;
 }
 
@@ -23,7 +23,7 @@
   align-items: center;
   min-width: 400px;
   width: 400px;
-  height: 814px;
+  height: 754px;
   background-color: white;
   border-radius: 10px 0px 0px 10px;
   box-shadow: -5px 5px 15px -5px black;
@@ -88,4 +88,8 @@
 
 .withdraw_button {
   margin-top: 45px;
+}
+
+.editArea{
+  margin-bottom: -40px;
 }
