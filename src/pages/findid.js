@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../style/findid.css";
 import Myheader from "../components/header";
 import axios from "axios";
@@ -18,8 +18,7 @@ const FindID = () => {
       url: `http://15.165.98.14:8080/users/find?serialNumber=${serial}`,
     })
       .then((res) => {
-        window.alert("고객님 정보와 일치하는 아이디는 다음과 같습니다.");
-        window.alert(res.data);
+        window.alert("고객님 정보와 일치하는 아이디는 다음과 같습니다.\n" + res.data);
         console.log(res.data);
         setEmail(res.data);
         setSerialNumber("");
@@ -56,7 +55,22 @@ const FindID = () => {
       <Myheader />
       <div className="find_pwd">
         <div>
-          <center style={{ marginTop: "34px" }}>
+          <center style={{marginTop: "-30px"}}>
+          <Link to="/login">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                    className="bi bi-arrow-left Arrows_1"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                    />
+                  </svg>
+                </Link>
             <div className="find_id">
               <h1>아이디 찾기</h1>
               <div className="findEmailArea">

@@ -1,5 +1,6 @@
 .findpassword{
-    height: 814px;
+    height: 714px;
+    margin-bottom: 0px;
 }
 
 .find_pwd {
@@ -9,8 +10,25 @@
     align-items: center;
     justify-content: center;
     width: 25%;
-    margin: 10em auto;
+    height: 550px;
+    margin: 100px auto;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-sizing: border-box;
   }
+
+.Arrows_1 {
+    position: absolute;
+    cursor: pointer;
+    top: 27.5%;
+    left: 38.5%;
+    background-color: rgb(242, 242, 242);
+    padding: 4px;
+    border-radius: 10px;
+    text-decoration: none;
+    fill: black;
+    transition: all ease-in-out 0.15s;
+  }  
 
 .confirmPasswordInput,
 .emailInput,
