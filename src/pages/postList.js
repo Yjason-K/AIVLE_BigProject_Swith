@@ -17,8 +17,10 @@ const POSTLIST = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   // 검색을 위한 변수 설정
-  const [searchBy, setSearchBy] = useState("title");
+  const [searchBy, setSearchBy] = useState("제목");
   const [searchTerm, setSearchTerm] = useState("");
+  const [bySearch, setBySearch] = useState(false);
+  const [apiSearchTerm, setApiSearchTerm] = useState("");
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,27 +84,43 @@ const POSTLIST = () => {
 
   // 검색을 실행할때 - 빈 검색어 임력시 전체 데이터 불러오기
   const handleSearch = () => {
-    if (searchTerm.trim() === "") {
-      // 검색어가 비어있을 경우 전체 데이터를 설정합니다.
-      setPosts(data);
+    if (searchTerm !== "") {
+      setApiSearchTerm("");
+      setBySearch(true);
+      //api호출 통해서 pagination 재설정
+      axios({
+        method: "get",
+        url: "http://15.165.98.14:8080/posts/search?type=제목&content=&page=0",
+      })
+        .then((res) => {
+          setApiSearchTerm(searchTerm);
+          setTotalPosts(res.totalElements);
+          setTotalPages(res.totalPages);
+        })
+        .catch((err) => {
+          console.log(err.data);
+        });
+
+      // setTotalPosts(res.data.totalElements);
+      // setTotalPages(res.data.totalPages);
     } else {
-      const encodedSearchTerm = encodeURIComponent(searchTerm); // 검색어 인코딩
-      if (searchBy === "title") {
-        const filteredPosts = data.filter((it) => {
-          const encodedTitle = encodeURIComponent(it.title); // 제목 인코딩
-          return encodedTitle.includes(encodedSearchTerm);
+      setBySearch(false);
+      axios({
+        method: "get",
+        url: `http://15.165.98.14:8080/posts/search?type=${searchBy}&content=&page=0`,
+      })
+        .then((res) => {
+          console.log(res);
+          setTotalPosts(res.data.totalElements);
+          setTotalPages(res.data.totalPages);
+        })
+        .catch((err) => {
+          console.log(err.data);
         });
-        setPosts(filteredPosts);
-      } else if (searchBy === "writer") {
-        const filteredPosts = data.filter((it) => {
-          const encodedAuthor = encodeURIComponent(it.writer); // 작성자 인코딩
-          return encodedAuthor.includes(encodedSearchTerm);
-        });
-        setPosts(filteredPosts);
-      }
-      setCurrentPage(1); // 검색 시 첫 번째 페이지로 설정
     }
   };
+
+  console.log(searchTerm);
 
   return (
     <div className="postlist">
@@ -121,24 +139,31 @@ const POSTLIST = () => {
               <span id="DescHead">추천</span>
               <span id="DescHead">조회수</span>
             </div>
-            <PostComponent currentPage={currentPage} />
+            <PostComponent
+              currentPage={currentPage}
+              bySearch={bySearch}
+              searchTerm={apiSearchTerm}
+              searchBy={searchBy}
+            />
             <NumPagination paginate={setCurrentPage} totalPages={totalPages} />
           </div>
           <div className="btn_area">
             <div className="search_container">
               <select
                 value={searchBy}
-                onChange={handleSearchByChange}
+                onChange={(e) => {
+                  setSearchBy(e.target.value);
+                }}
                 style={{ height: 22.5, fontSize: "11px", borderRadius: "5px" }}
               >
-                <option value="title">제목</option>
-                <option value="writer">작성자</option>
+                <option value="제목">제목</option>
+                <option value="작성자">작성자</option>
               </select>
               <input
                 type="text"
                 placeholder="검색어를 입력하세요."
                 value={searchTerm}
-                onChange={handleSearchTermChange}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="search_title"
               />
               <Button

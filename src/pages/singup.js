@@ -141,7 +141,7 @@ const SIGNUP = () => {
     serialnumber: "",
     phone: "",
     email: "",
-    agenumber: ""
+    agenumber: "",
   });
 
   const [showpw, setShowPw] = useState("password");
@@ -149,22 +149,22 @@ const SIGNUP = () => {
   const pwRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,30}$/;
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   const [showNameTooltip, setShowNameTooltip] = useState(false);
-  const [nameErrorMessage, setNameErrorMessage] = useState('');
+  const [nameErrorMessage, setNameErrorMessage] = useState("");
   const [showEmailTooltip, setShowEmailTooltip] = useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [showPwTooltip, setShowPwTooltip] = useState(false);
 
   const handleEmailChange = (e) => {
     const { value } = e.target;
 
     if (!value) {
-      setEmailErrorMessage('이메일을 입력해주세요.');
+      setEmailErrorMessage("이메일을 입력해주세요.");
       setShowEmailTooltip(true);
     } else if (!emailRegex.test(value)) {
-      setEmailErrorMessage('올바른 이메일 형식이 아닙니다.(example@naver.com)');
+      setEmailErrorMessage("올바른 이메일 형식이 아닙니다.(example@naver.com)");
       setShowEmailTooltip(true);
     } else {
-      setEmailErrorMessage('');
+      setEmailErrorMessage("");
       setShowEmailTooltip(false);
     }
 
@@ -199,48 +199,48 @@ const SIGNUP = () => {
     name: "",
     email: "",
     pw: "",
-    checkpw: ""
+    checkpw: "",
   });
 
   const setinfo = (e) => {
     const { name, value } = e.target;
     switch (name) {
-      case 'name':
+      case "name":
         if (!nameRegex.test(value)) {
-          setErrors(prevErrors => ({
+          setErrors((prevErrors) => ({
             ...prevErrors,
-            name: '이름에는 숫자나 특수문자를 포함할 수 없습니다.'
+            name: "이름에는 숫자나 특수문자를 포함할 수 없습니다.",
           }));
         } else {
-          setErrors(prevErrors => ({
+          setErrors((prevErrors) => ({
             ...prevErrors,
-            name: ''
+            name: "",
           }));
         }
         break;
-      case 'pw':
+      case "pw":
         if (!pwRegex.test(value)) {
-          setErrors(prevErrors => ({
+          setErrors((prevErrors) => ({
             ...prevErrors,
-            pw: '비밀번호는 8 ~ 30자 사이, 숫자 1개 이상, 특수문자 1개 이상 포함해야 합니다.'
+            pw: "비밀번호는 8 ~ 30자 사이, 숫자 1개 이상, 특수문자 1개 이상 포함해야 합니다.",
           }));
         } else {
-          setErrors(prevErrors => ({
+          setErrors((prevErrors) => ({
             ...prevErrors,
-            pw: ''
+            pw: "",
           }));
         }
         break;
-      case 'email':
+      case "email":
         if (!emailRegex.test(value)) {
-          setErrors(prevErrors => ({
+          setErrors((prevErrors) => ({
             ...prevErrors,
-            email: '이메일 형식이 올바르지 않습니다. (example@naver.com)'
+            email: "이메일 형식이 올바르지 않습니다. (example@naver.com)",
           }));
         } else {
-          setErrors(prevErrors => ({
+          setErrors((prevErrors) => ({
             ...prevErrors,
-            email: ''
+            email: "",
           }));
         }
         break;
@@ -255,13 +255,13 @@ const SIGNUP = () => {
     const { value } = e.target;
 
     if (!value) {
-      setNameErrorMessage('');
+      setNameErrorMessage("");
       setShowNameTooltip(false);
     } else if (!nameRegex.test(value)) {
-      setNameErrorMessage('이름에는 숫자나 특수문자를 포함할 수 없습니다.');
+      setNameErrorMessage("이름에는 숫자나 특수문자를 포함할 수 없습니다.");
       setShowNameTooltip(true);
     } else {
-      setNameErrorMessage('');
+      setNameErrorMessage("");
       setShowNameTooltip(false);
     }
 
@@ -281,7 +281,9 @@ const SIGNUP = () => {
 
     const pwRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,30}$/;
     if (!pwRegex.test(idInfo.pw)) {
-      alert("비밀번호는 8 ~ 30자 사이, 숫자 1개 이상, 특수문자 1개 이상 포함해야 합니다.");
+      alert(
+        "비밀번호는 8 ~ 30자 사이, 숫자 1개 이상, 특수문자 1개 이상 포함해야 합니다."
+      );
       return;
     }
 
@@ -374,10 +376,12 @@ const SIGNUP = () => {
             </Link>
             <div className="register_Area">
               <form onSubmit={newRegis}>
-                <div onClick={() =>
-                  !isCheck && alert("이용 약관에 모두 동의해주세요.")
-                }>
-                  <div className='nametooltipContainer'>
+                <div
+                  onClick={() =>
+                    !isCheck && alert("이용 약관에 모두 동의해주세요.")
+                  }
+                >
+                  <div className="nametooltipContainer">
                     <input
                       ref={nameRef}
                       type="text"
@@ -391,10 +395,12 @@ const SIGNUP = () => {
                       disabled={!isCheck}
                     />
                     {showNameTooltip && (
-                      <div className="tooltiptext">이름에는 숫자나 특수문자를 포함할 수 없습니다.</div>
+                      <div className="tooltiptext">
+                        이름에는 숫자나 특수문자를 포함할 수 없습니다.
+                      </div>
                     )}
                   </div>
-                  <div className='emailtooltipContainer'>
+                  <div className="emailtooltipContainer">
                     <input
                       ref={emailRef}
                       type="email"
@@ -410,7 +416,7 @@ const SIGNUP = () => {
                     )}
                   </div>
 
-                  <div className='pwdtooltipContainer'>
+                  <div className="pwdtooltipContainer">
                     <input
                       type={showpw}
                       className="pwInput"
@@ -506,10 +512,14 @@ const SIGNUP = () => {
                       onChange={setinfo}
                       disabled={!isCheck}
                     />
-                    <div className="tooltiptext">영유아와 고령자한테 제공되는<br />알림 종류가 각각 다릅니다!</div>
+                    <div className="tooltiptext">
+                      영유아와 고령자한테 제공되는
+                      <br />
+                      알림 종류가 각각 다릅니다!
+                    </div>
                   </div>
 
-                  <div className='timeinput_area'>
+                  <div className="timeinput_area">
                     <div className="tooltipContainer timeInputContainer">
                       <input
                         type="time"
@@ -519,8 +529,7 @@ const SIGNUP = () => {
                         onChange={setinfo}
                         disabled={!isCheck}
                       />
-                      &nbsp; ~ &nbsp;
-                      &nbsp; ~ &nbsp;
+                      &nbsp; ~ &nbsp; &nbsp; ~ &nbsp;
                       <input
                         type="time"
                         className="timeInput"
@@ -529,7 +538,9 @@ const SIGNUP = () => {
                         onChange={setinfo}
                         disabled={!isCheck}
                       />
-                      <div className="tooltiptext">이용 시간대를 설정해주세요.</div>
+                      <div className="tooltiptext">
+                        이용 시간대를 설정해주세요.
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -564,7 +575,8 @@ const SIGNUP = () => {
                 readOnly
               ></textarea>
               <div className="checkbox-container">
-                &nbsp;&nbsp;&nbsp;개인 정보 수집 및 이용 약관에 동의합니다.&nbsp;
+                &nbsp;&nbsp;&nbsp;개인 정보 수집 및 이용 약관에
+                동의합니다.&nbsp;
                 <input
                   type="checkbox"
                   onChange={() => setIsCheckOne(!isCheckOne)}
@@ -588,10 +600,7 @@ const SIGNUP = () => {
             </div>
           </div>
         </div>
-        <Modal
-          show={showModal}
-          onHide={() => setShowModal(false)}
-        >
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>시리얼 번호 안내</Modal.Title>
           </Modal.Header>
@@ -619,7 +628,7 @@ const SIGNUP = () => {
           </Modal.Footer>
         </Modal>
       </Fragment>
-    </div >
+    </div>
   );
 };
 
