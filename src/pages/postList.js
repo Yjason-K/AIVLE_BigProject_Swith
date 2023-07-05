@@ -90,12 +90,12 @@ const POSTLIST = () => {
       //api호출 통해서 pagination 재설정
       axios({
         method: "get",
-        url: "http://15.165.98.14:8080/posts/search?type=제목&content=&page=0",
+        url: `http://15.165.98.14:8080/posts/search?type=${searchBy}&content=${searchTerm}&page=0`,
       })
         .then((res) => {
           setApiSearchTerm(searchTerm);
-          setTotalPosts(res.totalElements);
-          setTotalPages(res.totalPages);
+          setTotalPosts(res.data.totalElements);
+          setTotalPages(res.data.totalPages);
         })
         .catch((err) => {
           console.log(err.data);
@@ -120,7 +120,7 @@ const POSTLIST = () => {
     }
   };
 
-  console.log(searchTerm);
+  console.log(currentPage);
 
   return (
     <div className="postlist">

@@ -58,7 +58,7 @@ const Postcontent = ({ currentPage, bySearch, searchTerm, searchBy }) => {
   // 게시글 번호처리를 위한 array
   let a = [];
   for (let i = 1; i <= 10; i++) {
-    a.push((currentPage - 1) * 2 + i);
+    a.push((currentPage - 1) * 10 + i);
   }
 
   return pageData.map((post, idx) => (
