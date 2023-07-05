@@ -109,7 +109,7 @@ const POSTEDIT = () => {
           <CKEditor
             editor={ClassicEditor}
             config={{
-              placeholder: "내용을 입력하세요(10글자 이상)",
+              placeholder: "내용을 입력하세요(3글자 이상)",
             }}
             data={content}
             onChange={(event, editor) => {
