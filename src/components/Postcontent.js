@@ -37,7 +37,7 @@ const Postcontent = ({ currentPage, bySearch, searchTerm, searchBy }) => {
           console.log(err.data);
         });
     }
-  }, [currentPage, bySearch, searchTerm, searchBy]);
+  }, [currentPage, bySearch, searchTerm]);
 
   const getStringDate = (date) => {
     return date.slice(0, 10);
