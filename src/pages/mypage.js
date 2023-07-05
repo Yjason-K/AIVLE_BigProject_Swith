@@ -75,12 +75,24 @@ const MYPAGE = () => {
 
   const updateUserInfo = (e) => {
     e.preventDefault();
-    
+  
     if (newPassword !== newPasswordConfirmation) {
-      window.alert("비밀번호가 일치하지 않습니다!")
+      window.alert("비밀번호가 일치하지 않습니다!");
       return;
-    } else {
-      axios({
+    }
+  
+    const pwRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,30}$/;
+    if (newPassword && !pwRegex.test(newPassword)) {
+      window.alert("비밀번호는 특수문자, 숫자를 포함한 8글자 이상이어야 합니다!");
+      return;
+    }
+
+    if (nickname.length < 4) {
+      window.alert("닉네임은 4글자 이상이어야 합니다!");
+      return;
+    }
+  
+    axios({
       method: "put",
       url: `http://15.165.98.14:8080/users/edit`,
       data: {
@@ -93,13 +105,18 @@ const MYPAGE = () => {
           JSON.parse(localStorage.getItem("token")).accessToken
         }`,
       },
-    }).then((res) => {
-      console.log("회원정보 수정 완료!");
-      window.alert("회원정보 수정 완료!")
-      navigate("/service", { replace: true });
-    });}
-
+    })
+      .then((res) => {
+        console.log("회원정보 수정 완료!");
+        window.alert("회원정보 수정 완료!");
+        navigate("/service", { replace: true });
+      })
+      .catch((err) => {
+        console.error("회원정보 수정 실패:", err);
+        window.alert("회원정보 수정 실패");
+      });
   };
+  
 
   // const withdraw = () => {
   //   axios({
