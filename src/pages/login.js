@@ -102,7 +102,7 @@ const LOGIN = () => {
                     </button>
                     <Link to="/main">
                       <button type="submit" className="loginButton loginButton2">
-                        로그인 없이 보기
+                        로그인 없이 서비스 둘러 보기
                       </button>
                     </Link>
                   </div>
