@@ -90,7 +90,15 @@ const NMEWPOST = () => {
           console.log("게시글 업로드 성공");
         })
         .catch((err) => {
-          console.log(err.data);
+          if (err.response && err.response.status === 500) {
+            if (err.response.data && err.response.data.message) {
+              alert(err.response.data.message);
+            } else {
+              alert("1MB 이하의 사진을 업로드 해주세요.");
+            }
+          } else {
+            console.error(err);
+          }
         });
     }
   };
