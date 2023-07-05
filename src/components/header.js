@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import "./myheader.scss";
 import logo from "../img/logo.png";
 
@@ -31,67 +31,63 @@ const Myheader = () => {
     <div className="navigation">
       <div className="nav-container">
         <div className="brand">
-          <Link to="/main">
+          <NavLink to="/main">
             <img src={logo} style={{ width: '100px' }} alt="service_logo" />
-          </Link>
+          </NavLink>
         </div>
         <nav>
           <ul className="nav-list">
             <li>
-              <Link to="/main">
+              <NavLink to="/main" activeClassName="active">
                 <span>Home</span>
-              </Link>
+              </NavLink>
             </li>
             {isLogin && (
               <li>
-                {location.pathname === '/service' ? (
-                  <span style={{cursor: "pointer"}}>Service</span>
-                ) : (
-                  <Link to="/service">
-                    <span>Service</span>
-                  </Link>
-                )}
+                <NavLink to="/service" activeClassName="active">
+                  <span>Service</span>
+                </NavLink>
               </li>
             )}
             <li>
-              <Link to="/team21">
+              <NavLink to="/team21" activeClassName="active">
                 <span>Team</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/postlist">
+              <NavLink to="/postlist" activeClassName="active">
                 <span>Post</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/faq">
+              <NavLink to="/faq" activeClassName="active">
                 <span>FAQ</span>
-              </Link>
+              </NavLink>
             </li>
             {isLogin ? (
               <>
                 <li>
-                  <Link to="/mypage">
+                  <NavLink to="/mypage" activeClassName="active">
                     <span>Mypage</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/main" onClick={handleLogout}>
+                  <NavLink to="/main" onClick={handleLogout} activeClassName="active">
                     <span>Logout</span>
-                  </Link>
+                  </NavLink>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <Link to="/login">
+                  <NavLink to="/login" activeClassName="active">
                     <span>Login</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/signup">
+                  <NavLink to="/signup" activeClassName="active">
                     <span>Sign Up</span>
-                  </Link>
+                  </NavLink>
                 </li>
               </>
             )}
