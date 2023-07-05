@@ -272,6 +272,7 @@ const MYPAGE = () => {
                         },
                       }).then(() => {
                         console.log("회원탈퇴 성공!");
+                        window.alert("회원탈퇴 성공!")
                         localStorage.removeItem("token");
                         navigate("/main", { replace: true });
                       });
