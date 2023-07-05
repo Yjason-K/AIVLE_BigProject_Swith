@@ -64,7 +64,7 @@ const POST = () => {
         setCommentData(res.data.commentInfoDtoList);
         // console.log(res.data.commentInfoDtoList);
         setAttData(res.data.attachmentInfoDto);
-        setPostdate(res.data.createdDate.replace("T", " "));
+        setPostdate(new Date(res.data.createdDate).getTime() + 1000 * 60 * 60 * 18);
       })
       .catch((err) => {
         alert("잘못된 접근 입니다.");
@@ -186,7 +186,7 @@ const POST = () => {
                 조회수 : {views}, 추천수 : {likes}
               </p>
               <p className="postdate">
-                {postdate !== null && title_date(postdate)}
+                {title_date(postdate)}
               </p>
             </div>
           </div>
@@ -271,7 +271,7 @@ const POST = () => {
                 조회수 : {views}, 추천수 : {likes}
               </p>
               <p className="postdate">
-                {postdate !== null && title_date(postdate)}
+                {title_date(postdate)}
               </p>
             </div>
           </div>
