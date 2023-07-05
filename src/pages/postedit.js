@@ -11,6 +11,7 @@ import axios from "axios";
 
 const POSTEDIT = () => {
   const titleRef = useRef();
+  const contentRef = useRef();
   const { id: postid } = useParams();
   const postdata = useContext(dataContext);
   const { onEdit } = useContext(postContext);
@@ -21,6 +22,8 @@ const POSTEDIT = () => {
   const [views, setViews] = useState();
   const [author, setAuthor] = useState();
   const [like, setLike] = useState();
+  const [editorInstance, setEditorInstance] = useState(null);
+
 
   useEffect(() => {
     axios({
@@ -44,15 +47,21 @@ const POSTEDIT = () => {
   const navigate = useNavigate();
 
   const saveHandler = () => {
-    if (postTitle.length < 4) {
-      alert("제목을 입력해주세요(4글자 이상)");
+    const trimmedTitle = postTitle.trim();
+    if (trimmedTitle.length < 4) {
+      alert("제목을 입력해주세요(공백 제외 4글자 이상)");
       titleRef.current.focus();
       return;
     }
 
-    if (content.length < 10) {
-      alert("내용을 10글자 이상 입력해주세요");
-      titleRef.current.focus();
+    if (content.trim().length < 10) {
+      alert("내용을 입력해주세요(3글자 이상)");
+      if (contentRef.current) {
+        contentRef.current.scrollIntoView({ behavior: 'smooth' });
+        if (editorInstance) {
+          editorInstance.editing.view.focus();
+        }
+      }
       return;
     }
 
@@ -69,9 +78,8 @@ const POSTEDIT = () => {
         content: content,
       },
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("token")).accessToken
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
       },
     })
       .then((res) => {
@@ -105,16 +113,18 @@ const POSTEDIT = () => {
             />
           </div>
         </div>
-        <div className="newpostcontent">
+        <div ref={contentRef} className="newpostcontent">
           <CKEditor
             editor={ClassicEditor}
+            onReady={editor => {
+              setEditorInstance(editor);
+            }}
             config={{
               placeholder: "내용을 입력하세요(3글자 이상)",
             }}
             data={content}
             onChange={(event, editor) => {
               const data = editor.getData();
-              console.log({ editor, data });
               setContent(data);
             }}
           />

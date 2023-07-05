@@ -28,9 +28,11 @@ const NMEWPOST = () => {
   // 제목, 본문 내용
   const [postTitle, setPostTitle] = useState("");
   const [content, setContent] = useState("");
+  const [editorInstance, setEditorInstance] = useState(null);
 
   // Ref
   const titleRef = useRef();
+  const contentRef = useRef();
 
   const onChangeContent = (e) => {
     setPostTitle(e.target.value);
@@ -39,17 +41,23 @@ const NMEWPOST = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (postTitle.length < 4) {
-      alert("제목을 입력해주세요(4글자 이상)");
+    const trimmedTitle = postTitle.trim();
+    if (trimmedTitle.length < 4) {
+      alert("제목을 입력해주세요(공백 제외 4글자 이상)");
       titleRef.current.focus();
       return;
     }
 
-    if (content.length < 10) {
-      alert("내용을 입력해주세요(10글자 이상)");
-      titleRef.current.focus();
+    if (content.trim().length < 10) {
+      alert("내용을 입력해주세요(3글자 이상)");
+      if (contentRef.current) {
+        contentRef.current.scrollIntoView({ behavior: 'smooth' });
+        if (editorInstance) {
+          editorInstance.editing.view.focus();
+        }
+      }
       return;
-    }
+    }    
 
     if (window.confirm("게시글을 저장하시겠습니까?")) {
       const formData = new FormData();
@@ -73,9 +81,8 @@ const NMEWPOST = () => {
         url: "http://15.165.98.14:8080/posts/new",
         data: formData,
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("token")).accessToken
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+            }`,
         },
       })
         .then((res) => {
@@ -223,11 +230,14 @@ const NMEWPOST = () => {
             />
           </div>
         </div>
-        <div className="newpostcontent">
+        <div ref={contentRef} className="newpostcontent">
           <CKEditor
             editor={ClassicEditor}
             config={{
               placeholder: "내용을 입력하세요(3글자 이상)",
+            }}
+            onReady={(editor) => {
+              setEditorInstance(editor);
             }}
             onChange={(event, editor) => {
               const data = editor.getData();
@@ -294,7 +304,7 @@ const NMEWPOST = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <div style={{marginTop: "35px", marginBottom: "10px"}}>
+        <div style={{ marginTop: "35px", marginBottom: "10px" }}>
           <div className="newpost_btn_wrapper" style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button variant="dark" className="postviewbutton_cancel"
               onClick={handlCancel} style={{ marginLeft: '2px', width: "10%", height: "30px", fontSize: "15px" }}>
