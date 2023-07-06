@@ -99,12 +99,6 @@ function commentReducer(state, action) {
       );
       break;
     }
-    // case "EDIT": {
-    //   newState = state.map((it) =>
-    //     parseInt(it.id) == parseInt(action.data.id) ? { ...action.data } : it
-    //   );
-    //   break;
-    // }
     default:
       return state;
   }
@@ -119,7 +113,6 @@ export const dataContext = createContext();
 function App() {
   // 게시글 Id numnber 지정
   // 서버에서 받아오는거 보고 id지정 어떻게 받아올지 결정
-
   const [dataId, setDataId] = useState(() => {
     return localStorage.getItem("posts")
       ? JSON.parse(localStorage.getItem("posts"))[0]?.id + 1 || 0
@@ -149,7 +142,7 @@ function App() {
         id: dataId,
         title,
         content,
-        writer: JSON.parse(localStorage.getItem("userId")), //로그인 정보 받아서 닉네임이랑 연결 예정
+        writer: JSON.parse(localStorage.getItem("userId")),
         postDate: new Date().getTime() + 32400000,
         likes: 0,
         views: 0,
@@ -157,10 +150,12 @@ function App() {
     });
     setDataId(dataId + 1);
   };
+
   // REMOVE
   const onRemove = (targetId) => {
     dispatch({ type: "REMOVE", id: targetId });
   };
+  
   // EDIT
   const onEdit = (
     data_id,

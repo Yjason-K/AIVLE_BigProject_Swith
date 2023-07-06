@@ -16,7 +16,6 @@ const Commentcontent = ({ post_id, commentdata }) => {
   const [userNickname, setUserNickname] = useState("");
 
   useEffect(() => {
-    // 페이지가 로드될 때 실행되는 효과 함수
     const sessionId = localStorage.getItem("toekn");
     if (sessionId) {
       setLoginId(JSON.parse(localStorage.getItem("token")));
@@ -53,17 +52,13 @@ const Commentcontent = ({ post_id, commentdata }) => {
         },
       })
         .then((res) => {
-          console.log("댓글 삭제완료!");
           setTimeout(() => {
             axios
               .get(`http://15.165.98.14:8080/posts/post/${post_id}`)
               .then((res) => {
-                // ...이전 코드...
                 setComment(res.data.commentInfoDtoList);
-                console.log(res.data.commentInfoDtoList);
               })
               .catch((err) => {
-                console.log("댓글을 불러오지 못했습니다.", err.data);
               });
           }, 300);
         })
@@ -72,8 +67,6 @@ const Commentcontent = ({ post_id, commentdata }) => {
         });
     }
   };
-
-  console.log(comment);
 
   return (
     <>
@@ -93,9 +86,6 @@ const Commentcontent = ({ post_id, commentdata }) => {
             >
               {it.content}
             </span>
-            {/* {console.log(it.writerDto.nickname)}
-            {console.log(userNickname)}
-            {console.log(it.writerDto.nickname === userNickname)} */}
             {userNickname === it.writerDto.nickname && (
               <Button
                 variant="link"

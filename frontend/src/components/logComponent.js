@@ -3,7 +3,6 @@ const LOG = ({ logData }) => {
     return logData.slice(0, 10).map((it) => {
       return (
         <div className="log" key={it.time}>
-          {/* 각 요소에 고유한 key 추가 */}
           <span id="listcHead">{it.time}</span>
           <span id="listcHead">{it.log}</span>
           <span id="listcHead" className={it.wifi ? "blink" : ""}>
@@ -132,7 +131,6 @@ const LOG = ({ logData }) => {
     return logData.map((it) => {
       return (
         <div className="log" key={it.time}>
-          {/* 각 요소에 고유한 key 추가 */}
           <span id="listcHead">{it.time}</span>
           <span id="listcHead">{it.log}</span>
           <span id="listcHead" className={it.wifi ? "blink" : ""}>

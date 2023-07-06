@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./myheader.scss";
 import logo from "../img/logo.png";
 
@@ -7,7 +7,6 @@ const Myheader = () => {
   const initialLoginState = Boolean(localStorage.getItem('token'));
   const [isLogin, setIsLogin] = useState(initialLoginState);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const handler = () => {

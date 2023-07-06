@@ -139,23 +139,6 @@
   font-size: 11px;
 }
 
-/* .search_btn span {
-  color: white;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.search_btn:hover {
-  background-color: white;
-  color: black;
-  transition: all 500ms ease;
-}
-
-.search_btn span:hover {
-  color: black;
-  font-size: 11px;
-} */
-
 /* NewPost */
 
 .newPostArea {
@@ -239,6 +222,7 @@
 .postviewbutton_save:hover {
   transition: all 500ms ease;
 }
+
 /* attach */
 .attach_area {
   border: 1px solid gray;
@@ -479,7 +463,9 @@
 .btn-link {
   padding: 0 0 0 0;
 }
+
 /* pagination */
+
 .pagination_btn {
   display: flex;
   flex-direction: row;
@@ -535,6 +521,7 @@
 }
 
 /* log */
+
 @keyframes blink {
   0% {
     opacity: 0;
@@ -552,6 +539,7 @@
 }
 
 /* att in post */
+
 .download {
   display: flex;
   flex-direction: row;

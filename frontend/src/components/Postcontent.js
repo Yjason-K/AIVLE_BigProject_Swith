@@ -31,7 +31,6 @@ const Postcontent = ({ currentPage, bySearch, searchTerm, searchBy }) => {
       })
         .then((res) => {
           setPageData(res.data.data);
-          // console.log(res.data.data);
         })
         .catch((err) => {
           console.log(err.data);
@@ -46,7 +45,7 @@ const Postcontent = ({ currentPage, bySearch, searchTerm, searchBy }) => {
   function countCommentsByPostId(id) {
     const comments = JSON.parse(localStorage.getItem("comments"));
     if (!comments) {
-      return 0; // 댓글 데이터가 없는 경우 0을 반환
+      return 0;
     }
 
     const matchingComments = comments.filter(
@@ -66,11 +65,7 @@ const Postcontent = ({ currentPage, bySearch, searchTerm, searchBy }) => {
       <div className="noticedescription userPost">
         <span>{a[idx]}</span>
         <span>
-          {/* 댓글 개수 보여주는 거 같은디... */}
           {post.title}{" "}
-          {/* <div style={{ color: "rgb(60,172,255)", display: "inline" }}> */}
-          {/* {post.commentInfoDtoList.length} */}
-          {/* </div> */}
         </span>
         <span>{post.writer}</span>
         <span>{getStringDate(post.createTime)}</span>
