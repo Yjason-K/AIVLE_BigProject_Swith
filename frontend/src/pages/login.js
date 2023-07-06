@@ -38,8 +38,8 @@ const LOGIN = () => {
         navigate("/service", { replace: true });
       })
       .catch((err) => {
-        if(err.response){
-          window.alert("아이디 또는 비밀번호를 확인해주세요.")
+        if (err.response) {
+          window.alert("아이디 또는 비밀번호를 확인해주세요.");
         }
       });
   };
@@ -101,7 +101,10 @@ const LOGIN = () => {
                       로그인
                     </button>
                     <Link to="/main">
-                      <button type="submit" className="loginButton loginButton2">
+                      <button
+                        type="submit"
+                        className="loginButton loginButton2"
+                      >
                         로그인 없이 서비스 둘러 보기
                       </button>
                     </Link>
@@ -112,7 +115,8 @@ const LOGIN = () => {
             <div className="loginArea_right">
               <span className="platformTextbox">Stay With</span>
               <span className="platformTextbox2">
-                wifi를 이용하여 안전 뭐라무러ㅏ~~~
+                위험으로부터 <br />
+                소중한 순간을 지켜드립니다.
               </span>
             </div>
           </div>

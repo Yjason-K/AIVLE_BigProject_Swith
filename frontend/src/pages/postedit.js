@@ -1,11 +1,10 @@
 // edit  게시글 수정 페이지
 
-import { useEffect, useState, useContext, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Myheader from "../components/header";
-import { postContext, dataContext } from "../App";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 
@@ -13,17 +12,9 @@ const POSTEDIT = () => {
   const titleRef = useRef();
   const contentRef = useRef();
   const { id: postid } = useParams();
-  const postdata = useContext(dataContext);
-  const { onEdit } = useContext(postContext);
-  const filterdata = postdata.find((it) => it.id);
   const [postTitle, setPostTitle] = useState("");
   const [content, setContent] = useState();
-  const [date, setDate] = useState();
-  const [views, setViews] = useState();
-  const [author, setAuthor] = useState();
-  const [like, setLike] = useState();
   const [editorInstance, setEditorInstance] = useState(null);
-
 
   useEffect(() => {
     axios({
@@ -57,7 +48,7 @@ const POSTEDIT = () => {
     if (content.trim().length < 10) {
       alert("내용을 입력해주세요(3글자 이상)");
       if (contentRef.current) {
-        contentRef.current.scrollIntoView({ behavior: 'smooth' });
+        contentRef.current.scrollIntoView({ behavior: "smooth" });
         if (editorInstance) {
           editorInstance.editing.view.focus();
         }
@@ -66,28 +57,26 @@ const POSTEDIT = () => {
     }
 
     if (window.confirm("수정한 게시글을 저장시겠습니까?")) {
-      onEdit(postid, postTitle, content, author, date, like, views);
-      navigate("/postlist", { replace: true });
-    }
-
-    axios({
-      method: "put",
-      url: `http://15.165.98.14:8080/posts/edit/${postid}`,
-      data: {
-        title: postTitle,
-        content: content,
-      },
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+      axios({
+        method: "put",
+        url: `http://15.165.98.14:8080/posts/edit/${postid}`,
+        data: {
+          title: postTitle,
+          content: content,
+        },
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
           }`,
-      },
-    })
-      .then((res) => {
-        navigate("/postlist", { replace: true });
+        },
       })
-      .catch((err) => {
-        console.log("게시글을 수정하지 못했습니다.", err.data);
-      });
+        .then((res) => {
+          navigate("/postlist", { replace: true });
+        })
+        .catch((err) => {
+          console.log("게시글을 수정하지 못했습니다.", err.data);
+        });
+    }
   };
 
   return (
@@ -116,7 +105,7 @@ const POSTEDIT = () => {
         <div ref={contentRef} className="newpostcontent">
           <CKEditor
             editor={ClassicEditor}
-            onReady={editor => {
+            onReady={(editor) => {
               setEditorInstance(editor);
             }}
             config={{
