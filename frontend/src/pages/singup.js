@@ -132,6 +132,7 @@ const SIGNUP = () => {
   const confirmPwRef = useRef();
   const ageRef = useRef();
   const serialnumberRef = useRef();
+  const phonenumberRef = useRef();
 
   const [idInfo, setIdInfo] = useState({
     name: "",
@@ -149,10 +150,10 @@ const SIGNUP = () => {
   const pwRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,30}$/;
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   const [showNameTooltip, setShowNameTooltip] = useState(false);
-  const [nameErrorMessage, setNameErrorMessage] = useState("");
+  const [, setNameErrorMessage] = useState("");
   const [showEmailTooltip, setShowEmailTooltip] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
-  const [showPwTooltip, setShowPwTooltip] = useState(false);
+  const [, setShowPwTooltip] = useState(false);
 
   const handleEmailChange = (e) => {
     const { value } = e.target;
@@ -307,15 +308,6 @@ const SIGNUP = () => {
       return;
     }
 
-    const data = {
-      name: idInfo.name,
-      nickname: idInfo.id,
-      password: idInfo.pw,
-      serialNumber: idInfo.serialnumber,
-      phoneNumber: idInfo.phone,
-      email: idInfo.email,
-    };
-
     axios({
       method: "post",
       url: "http://15.165.98.14:8080/users/signup",
@@ -340,9 +332,12 @@ const SIGNUP = () => {
           } else if (err.response.data.message === "Email address already in use") {
             window.alert("중복된 이메일입니다.");
             emailRef.current.focus();
+          } else if (err.response.data.message === "Phone number already in use") {
+            window.alert("중복된 전화번호입니다.");
+            phonenumberRef.current.focus();
           }
         } else {
-          window.alert("서버가 꺼져 있습니다.")
+          window.alert("서버가 꺼져 있습니다.");
         }
       });
   };
@@ -454,6 +449,7 @@ const SIGNUP = () => {
                   />
 
                   <input
+                    ref={phonenumberRef}
                     type="text"
                     className="phoneInput"
                     required

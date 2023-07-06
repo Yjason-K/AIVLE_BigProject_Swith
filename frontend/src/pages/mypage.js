@@ -13,9 +13,9 @@ const MYPAGE = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
-  const [ageNumber, setAgeNumber] = useState("");
+  const [, setAgeNumber] = useState("");
   const [verified, setVerified] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [, setCurrentUser] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 

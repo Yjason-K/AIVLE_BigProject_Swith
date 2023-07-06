@@ -3,7 +3,6 @@ import Myheader from "../components/header";
 import "../style/service.css";
 import { useNavigate } from "react-router-dom";
 import LOG from "../components/logComponent";
-import favicon from "../img/favicon.png";
 import Webcam from "react-webcam";
 
 const SERVICE = () => {
@@ -28,10 +27,6 @@ const SERVICE = () => {
       `http://15.165.98.14:8080/notifications/subscribe/123456`
     );
 
-    eventSource.onmessage = (e) => {
-      const res = e.data;
-      const parsedData = JSON.parse(res);
-    };
     eventSource.addEventListener(
       "sse",
       function (e) {
@@ -48,16 +43,8 @@ const SERVICE = () => {
           if (jsonres !== "EventStream Created. [userId=123456]") {
             const parseD = jsonres;
             parseD.time = logTime;
-            const a = parseD.log;
             setLogData((prevLogData) => [parseD, ...prevLogData]);
             if (Notification.permission === "granted") {
-              const notification = new Notification(
-                "위험행동이 감지되었습니다..",
-                {
-                  body: a,
-                  icon: favicon,
-                }
-              );
             }
           }
         }
@@ -98,7 +85,7 @@ const SERVICE = () => {
         webcamStream.getTracks().forEach((track) => track.stop());
       }
     };
-  }, []);
+  }, [webcamStream]);
 
   return (
     <div className="service">
