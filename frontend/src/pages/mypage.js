@@ -71,14 +71,18 @@ const MYPAGE = () => {
   const updateUserInfo = (e) => {
     e.preventDefault();
 
+
     if (newPassword !== newPasswordConfirmation) {
       window.alert("비밀번호도 같이 변경해주세요!");
       return;
     }
 
+
     const pwRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,30}$/;
     if (newPassword && !pwRegex.test(newPassword)) {
-      window.alert("비밀번호는 특수문자, 숫자를 포함한 8글자 이상이어야 합니다!");
+      window.alert(
+        "비밀번호는 특수문자, 숫자를 포함한 8글자 이상이어야 합니다!"
+      );
       return;
     }
 
@@ -86,6 +90,7 @@ const MYPAGE = () => {
       window.alert("닉네임은 4글자 이상이어야 합니다!");
       return;
     }
+
 
     axios({
       method: "put",
@@ -241,7 +246,7 @@ const MYPAGE = () => {
                     variant="outline-danger"
                     className="withdraw_button"
                     onClick={() => {
-                      if (window.alert("정말로 탈퇴하시겠습니까?")) {
+                      if (window.confirm("정말로 탈퇴하시겠습니까?")) {
                         axios({
                           method: "delete",
                           url: `http://15.165.98.14:8080/users/withdraw/${serialNumber}`,
