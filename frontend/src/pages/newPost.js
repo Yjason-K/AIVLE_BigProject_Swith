@@ -1,4 +1,3 @@
-// newPost
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -7,11 +6,9 @@ import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import "../style/post.css"
-
 import Myheader from "../components/header";
 
 const NMEWPOST = () => {
-  // 로그인 검증
   useEffect(() => {
     const session = localStorage.getItem("token");
     if (!session) {
@@ -22,15 +19,11 @@ const NMEWPOST = () => {
     }
   }, []);
 
-  // // 로그인 세션정보
   const [sessionId, setSessionId] = useState(false);
-
-  // 제목, 본문 내용
   const [postTitle, setPostTitle] = useState("");
   const [content, setContent] = useState("");
   const [editorInstance, setEditorInstance] = useState(null);
 
-  // Ref
   const titleRef = useRef();
   const contentRef = useRef();
 
@@ -57,7 +50,7 @@ const NMEWPOST = () => {
         }
       }
       return;
-    }    
+    }
 
     if (window.confirm("게시글을 저장하시겠습니까?")) {
       const formData = new FormData();
@@ -68,10 +61,6 @@ const NMEWPOST = () => {
         })
       );
 
-      // formData.append("key", new Blob([JSON.stringify(data)] , {type: "application/json"}))
-
-      // formData.append("title", postTitle);
-      // formData.append("content", content);
       files.slice(1).forEach((file, index) => {
         formData.append(`files`, file);
       });
@@ -87,7 +76,6 @@ const NMEWPOST = () => {
       })
         .then((res) => {
           navigate("/postlist", { replace: true });
-          console.log("게시글 업로드 성공");
         })
         .catch((err) => {
           if (err.response && err.response.status === 500) {
@@ -97,7 +85,6 @@ const NMEWPOST = () => {
               alert("1MB 이하의 사진을 업로드 해주세요.");
             }
           } else {
-            console.error(err);
           }
         });
     }
@@ -113,7 +100,6 @@ const NMEWPOST = () => {
     }
   };
 
-  // 파일 갯수
   const [att_num, setAttNum] = useState(0);
 
   const att_plus = () => {
@@ -155,24 +141,6 @@ const NMEWPOST = () => {
     return fileInputs;
   };
 
-  // const renderPreview = () => {
-  //   const fileInputs = [];
-  //   for (let i = 1; i <= att_num; i++) {
-  //     fileInputs
-  //       .push(
-  //       <Button
-  //         key={i}
-  //         variant="outline-dark"
-  //         className="preview-button"
-  //         onClick={() => handlePreview(i)}
-  //       >
-  //         미리보기
-  //       </Button>
-  //       );
-  //   }
-  //   return fileInputs;
-  // };
-
   // 이미지 미리보기를 위한 모달 처리
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -206,17 +174,6 @@ const NMEWPOST = () => {
       });
     }
   };
-
-  // const handleFileChange = (e, index) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     setSelectedImages((prevSelectedImages) => {
-  //       const newSelectedImages = [...prevSelectedImages];
-  //       newSelectedImages[index] = file;
-  //       return newSelectedImages;
-  //     });
-  //   }
-  // };
 
   return (
     <div className="newpost">
@@ -279,8 +236,6 @@ const NMEWPOST = () => {
           </div>
           <div className="file_list">{renderFileInputs()}</div>
         </div>
-        {/* <div className="preivew">{renderPreview()}</div> */}
-        {/* // newPost 컴포넌트 내에 추가될 코드 */}
         <Modal
           show={showModal}
           onHide={() => {

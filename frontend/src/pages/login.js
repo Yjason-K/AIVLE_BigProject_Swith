@@ -33,7 +33,6 @@ const LOGIN = () => {
       },
     })
       .then((res) => {
-        console.log("로그인 성공");
         localStorage.setItem("token", JSON.stringify(res.data));
         navigate("/service", { replace: true });
       })

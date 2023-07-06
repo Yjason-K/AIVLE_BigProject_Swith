@@ -7,7 +7,7 @@ import axios from "axios";
 
 const MYPAGE = () => {
   const [sessionId, setSessionId] = useState(false);
-  const [password, setPassword] = useState(""); // 기존 pwd
+  const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -19,10 +19,7 @@ const MYPAGE = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  // 변경 예정
   const [nickname, setNickname] = useState("");
-
-  // 기본정보 불러오기
   const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
@@ -30,9 +27,8 @@ const MYPAGE = () => {
       method: "get",
       url: `http://15.165.98.14:8080/users/user`,
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("token")).accessToken
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
       },
     }).then((res) => {
       setUserEmail(res.data.email);
@@ -55,9 +51,8 @@ const MYPAGE = () => {
         password: password,
       },
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("token")).accessToken
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
       },
     })
       .then((res) => {
@@ -75,12 +70,12 @@ const MYPAGE = () => {
 
   const updateUserInfo = (e) => {
     e.preventDefault();
-  
+
     if (newPassword !== newPasswordConfirmation) {
-      window.alert("비밀번호가 일치하지 않습니다!");
+      window.alert("비밀번호도 같이 변경해주세요!");
       return;
     }
-  
+
     const pwRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,30}$/;
     if (newPassword && !pwRegex.test(newPassword)) {
       window.alert("비밀번호는 특수문자, 숫자를 포함한 8글자 이상이어야 합니다!");
@@ -91,7 +86,7 @@ const MYPAGE = () => {
       window.alert("닉네임은 4글자 이상이어야 합니다!");
       return;
     }
-  
+
     axios({
       method: "put",
       url: `http://15.165.98.14:8080/users/edit`,
@@ -101,33 +96,18 @@ const MYPAGE = () => {
         serialNumber: serialNumber,
       },
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("token")).accessToken
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
       },
     })
       .then((res) => {
-        console.log("회원정보 수정 완료!");
         window.alert("회원정보 수정 완료!");
         navigate("/service", { replace: true });
       })
       .catch((err) => {
-        console.error("회원정보 수정 실패:", err);
         window.alert("회원정보 수정 실패");
       });
   };
-  
-
-  // const withdraw = () => {
-  //   axios({
-  //     method: "delete",
-  //     url: `http://15.165.98.14:8080/users/withdraw/${serialNumber}`,
-  //   }).then(() => {
-  //     console.log("회원탈퇴 성공!");
-  //     localStorage.removeItem("token");
-  //     navigate("/main", { replace: true });
-  //   });
-  // };
 
   const renderContent = () => {
     if (sessionId) {
@@ -266,13 +246,11 @@ const MYPAGE = () => {
                           method: "delete",
                           url: `http://15.165.98.14:8080/users/withdraw/${serialNumber}`,
                           headers: {
-                            Authorization: `Bearer ${
-                              JSON.parse(localStorage.getItem("token"))
-                                .accessToken
-                            }`,
+                            Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))
+                              .accessToken
+                              }`,
                           },
                         }).then(() => {
-                          console.log("회원탈퇴 성공!");
                           window.alert("회원탈퇴 성공!")
                           localStorage.removeItem("token");
                           navigate("/main", { replace: true });

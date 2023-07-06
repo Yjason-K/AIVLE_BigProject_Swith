@@ -1,6 +1,4 @@
-// post 게시글 확인 페이지
 import Myheader from "../components/header";
-
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import parse from "html-react-parser";
@@ -11,7 +9,6 @@ import ATTDOWN from "../components/attachDown";
 
 const POST = () => {
   const navigate = useNavigate();
-
   const [isLogin, setIsLogin] = useState(false);
   const [post, setPost] = useState();
   const [views, setViews] = useState();
@@ -28,19 +25,7 @@ const POST = () => {
 
   const { id } = useParams();
 
-  // axios({
-  //   method: "get",
-  //   url: `http://15.165.98.14:8080/posts/post/${id}`,
-  // })
-  //   .then((res) => {
-  //     console.log(res.data);
-  //   })
-  //   .catch((error) => {
-  //     console.log("오류가 발생했습니다:", error);
-  //   });
-
   useEffect(() => {
-    // 페이지가 로드될 때 실행되는 효과 함수
     const sessionId = localStorage.getItem("token");
     if (sessionId) {
       setIsLogin(true);
@@ -53,16 +38,14 @@ const POST = () => {
       url: `http://15.165.98.14:8080/posts/post/${id}`,
     })
       .then((res) => {
-        setTargetPost(res.data); // 혹시 몰라 전체 데이터 받아오기
+        setTargetPost(res.data);
         setPost(res.data);
         setLikes(res.data.likeCount);
         setViews(res.data.searchCount);
         setWriter(res.data.writerDto.nickname);
         setTitle(res.data.title);
         setContent(res.data.content);
-        // setPostdate(targetPost.postDate);
         setCommentData(res.data.commentInfoDtoList);
-        // console.log(res.data.commentInfoDtoList);
         setAttData(res.data.attachmentInfoDto);
         setPostdate(new Date(res.data.createdDate).getTime() + 1000 * 60 * 60 * 18);
       })
@@ -76,9 +59,8 @@ const POST = () => {
         method: "get",
         url: `http://15.165.98.14:8080/users/user`,
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("token")).accessToken
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+            }`,
         },
       }).then((res) => {
         setLoginId(res.data.nickname);
@@ -89,7 +71,6 @@ const POST = () => {
   const createclick = () => {
     if (isLogin) {
       if (comment.length !== 0) {
-        // commentonCreate(id, comment);
         axios({
           method: "post",
           url: `http://15.165.98.14:8080/comments/${id}`,
@@ -97,9 +78,8 @@ const POST = () => {
             content: comment,
           },
           headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("token")).accessToken
-            }`,
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+              }`,
           },
         })
           .then(() => {
@@ -107,18 +87,16 @@ const POST = () => {
               axios
                 .get(`http://15.165.98.14:8080/posts/post/${id}`)
                 .then((res) => {
-                  // ...이전 코드...
                   setCommentData(res.data.commentInfoDtoList);
                 })
                 .catch((err) => {
-                  console.log("댓글을 불러오지 못했습니다.", err.data);
+                  window.alert("댓글을 불러오지 못했습니다.", err.data);
                 });
             }, 300);
             setComment("");
-            // window.location.reload();
           })
           .catch((err) => {
-            console.log(err.data);
+            window.alert(err.data);
           });
       } else {
         window.alert("댓글을 입력해주세요.");
@@ -128,25 +106,22 @@ const POST = () => {
     }
   };
 
-  console.log(loginId);
-
   const postdeletehandler = () => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       axios({
         method: "delete",
         url: `http://15.165.98.14:8080/posts/post/${id}`,
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("token")).accessToken
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")).accessToken
+            }`,
         },
       })
         .then((res) => {
-          console.log("게시글이 삭제되었습니다.");
+          window.alert("게시글이 삭제되었습니다.");
           navigate("/postlist", { replace: true });
         })
         .catch((err) => {
-          console.log(err.data);
+          window.alert(err.data);
         });
     }
   };
@@ -164,12 +139,6 @@ const POST = () => {
       new Date(date).toISOString().slice(11, 19);
     return title_d;
   };
-
-  // console.log(JSON.parse(localStorage.getItem("userId")));
-  // console.log(writer);
-  // console.log(writer === JSON.parse(localStorage.getItem("userId")));
-  // console.log(commentsData);
-  console.log(commentsData);
 
   if (writer === loginId) {
     return (
@@ -304,7 +273,6 @@ const POST = () => {
               >
                 목록으로
               </Button>
-              {/* <button>추천</button> */}
               <Button
                 variant="dark"
                 className="coomment_submit"

@@ -14,11 +14,9 @@ const FAQ = () => {
     if (session && session !== "null") {
       setSessionId(true);
     }
-  }, []);
+  }, [session]);
 
-  // email contact
   const form = useRef();
-
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -38,7 +36,6 @@ const FAQ = () => {
             form.current.reset();
           },
           (error) => {
-            console.log(error.text);
             alert("전송이 실패되었습니다.");
           }
         );
@@ -61,9 +58,7 @@ const FAQ = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: "center",
-            // margin: "auto",
-            // marginTop: 30,
+            alignItems: "center"
           }}
         >
           <h2 style={{ fontWeight: "bold", marginTop: "25px" }}>자주묻는질문</h2>

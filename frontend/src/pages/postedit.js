@@ -1,5 +1,3 @@
-// edit  게시글 수정 페이지
-
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -74,7 +72,7 @@ const POSTEDIT = () => {
           navigate("/postlist", { replace: true });
         })
         .catch((err) => {
-          console.log("게시글을 수정하지 못했습니다.", err.data);
+          window.alert("게시글을 수정하지 못했습니다.", err.data);
         });
     }
   };

@@ -315,7 +315,6 @@ const SIGNUP = () => {
       phoneNumber: idInfo.phone,
       email: idInfo.email,
     };
-    console.log("보내는 데이터", data);
 
     axios({
       method: "post",
@@ -332,7 +331,6 @@ const SIGNUP = () => {
       .then((res) => {
         alert("회원가입 성공!");
         navigate("/login");
-        console.log("회원가입 성공!");
       })
       .catch((err) => {
         if (err.response) {
@@ -349,7 +347,6 @@ const SIGNUP = () => {
       });
   };
 
-  // 시리얼 번호 찾기 안내 Modal
   const [showModal, setShowModal] = useState(false);
   const previewImgage = jaerong;
 
@@ -482,7 +479,6 @@ const SIGNUP = () => {
                     onChange={setinfo}
                     disabled={!isCheck}
                   />
-                  {/* 시리얼번호 안내 버튼 */}
                   <Button
                     className="btn-custom"
                     onClick={() => {

@@ -36,7 +36,6 @@
   flex-direction: column;
   width: 670px;
   height: 600px;
-  /* border: 1px solid red; */
 }
 
 .logContainer {
@@ -54,7 +53,6 @@
   margin-bottom: 35px;
 }
 
-/* logList */
 .log_list {
   display: flex;
   align-items: center;
@@ -94,7 +92,6 @@
   text-decoration: none;
 }
 
-/* log */
 .log {
   display: flex;
   border-bottom: 1px solid black;

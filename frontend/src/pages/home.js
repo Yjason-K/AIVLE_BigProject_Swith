@@ -191,14 +191,6 @@ const HOME = () => {
               </g>
             </svg>
           </div>
-          <div className="view_button">
-            <button
-              className="view_detail"
-              onClick={handleScrollToFeatureDetail1}
-            >
-              자세히 알아보기
-            </button>
-          </div>
         </div>
         <div className="plus_icon">
           <svg
@@ -242,14 +234,6 @@ const HOME = () => {
           >
             <img src={homecamera} width={"50%"} height={"100%"} alt="Image 3" />
           </div>
-          <div className="view_button">
-            <button
-              className="view_detail"
-              onClick={handleScrollToFeatureDetail2}
-            >
-              자세히 알아보기
-            </button>
-          </div>
         </div>
       </div>
 
@@ -274,31 +258,6 @@ const HOME = () => {
               src={wifi_s}
               style={{ height: "85%", width: "90%", marginLeft: "30px" }}
             />
-            {/* <h2>WIFI 신호를 사용하여 더욱 정확하게!!</h2>
-            <br />
-            <p className="wifi_p">
-              가정에 있는 wifi 공유기를 사용하여 신호를 처리하고 AI 모델을
-              사용하여 위험을 감지합니다! <br />
-              카메라 없이 단독으로도 위험을 감지할 수 있을 뿐만 아니라, 카메라
-              화면에서 벗어나는 사각지대 까지의 위험상황을 파악할 수 있습니다.
-            </p>
-            <br />
-            Wi-Fi Pose Estimation은 다음과 같은 과정을 거쳐 동작합니다.
-            <br />
-            <br />
-            1. 신호 수집 :기기에 내장된 wifi공유기를 활용하여 발신되는 Wi-Fi
-            신호를 수집합니다.
-            <br />
-            2. 신호 처리 : 수집된 Wi-Fi 신호 데이터를 처리하여 신호의 세기,
-            강도, 도착 시간 등과 같은 특성을 추출합니다.
-            <br />
-            3. 포즈(위치와 동작) 추정 : 추출된 Wi-Fi 신호 특성을 기반으로
-            사용자의 동작을 추정합니다. 이를 위해 머신러닝, 딥러닝 및 신호 처리
-            기술 등이 사용됩니다.
-            <br />
-            4. 결과 제공 : 추정된 사용자의 동작 정보를 활용하여 위험 상황을
-            감지하고 이용자에게 알림을 제공합니다.
-            <h1 style={{ fontsize: 30 }}>&#10004; HTML</h1> */}
           </div>
           <div className="feature_detail1_picture">
             <img src={wifi} style={{ height: "400px" }} alt="asdf" />

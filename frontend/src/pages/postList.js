@@ -9,9 +9,7 @@ import axios from "axios";
 
 const POSTLIST = () => {
   const navigate = useNavigate();
-
   const [data, setData] = useState([]);
-  // const data = useContext(dataContext);
 
   const [posts, setPosts] = useState(useContext(dataContext));
   const [isLogin, setIsLogin] = useState(false);
@@ -37,10 +35,9 @@ const POSTLIST = () => {
       .then((res) => {
         setTotalPosts(res.data.totalElements);
         setTotalPages(res.data.totalPages);
-        // console.log(res.data);
       })
       .catch((err) => {
-        console.log(err.data);
+        window.alert(err.data);
       });
   }, []);
 
@@ -98,11 +95,8 @@ const POSTLIST = () => {
           setTotalPages(res.data.totalPages);
         })
         .catch((err) => {
-          console.log(err.data);
+          window.alert(err.data);
         });
-
-      // setTotalPosts(res.data.totalElements);
-      // setTotalPages(res.data.totalPages);
     } else {
       setBySearch(false);
       axios({
@@ -110,17 +104,14 @@ const POSTLIST = () => {
         url: `http://15.165.98.14:8080/posts/search?type=${searchBy}&content=&page=0`,
       })
         .then((res) => {
-          console.log(res);
           setTotalPosts(res.data.totalElements);
           setTotalPages(res.data.totalPages);
         })
         .catch((err) => {
-          console.log(err.data);
+          window.alert(err.data);
         });
     }
   };
-
-  console.log(currentPage);
 
   return (
     <div className="postlist">
