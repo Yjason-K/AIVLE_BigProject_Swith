@@ -3,7 +3,7 @@ import Myheader from "../components/header";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import service2 from "../img/home_service2.png";
-import box from "../img/꼬물.gif";
+import box from "../img/main.gif";
 import homecamera from "../img/homecamera.png";
 import skecamera from "../img/camera.gif";
 import family from "../img/hramonius_family.gif";
