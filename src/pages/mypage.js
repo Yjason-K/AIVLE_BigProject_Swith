@@ -75,30 +75,30 @@ const MYPAGE = () => {
 
   const updateUserInfo = (e) => {
     e.preventDefault();
-    
+
     if (newPassword !== newPasswordConfirmation) {
-      window.alert("비밀번호가 일치하지 않습니다!")
+      window.alert("비밀번호가 일치하지 않습니다!");
       return;
     } else {
       axios({
-      method: "put",
-      url: `http://15.165.98.14:8080/users/edit`,
-      data: {
-        nickname: nickname,
-        password: newPasswordConfirmation,
-        serialNumber: serialNumber,
-      },
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("token")).accessToken
-        }`,
-      },
-    }).then((res) => {
-      console.log("회원정보 수정 완료!");
-      window.alert("회원정보 수정 완료!")
-      navigate("/service", { replace: true });
-    });}
-
+        method: "put",
+        url: `http://15.165.98.14:8080/users/edit`,
+        data: {
+          nickname: nickname,
+          password: newPasswordConfirmation,
+          serialNumber: serialNumber,
+        },
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).accessToken
+          }`,
+        },
+      }).then((res) => {
+        console.log("회원정보 수정 완료!");
+        window.alert("회원정보 수정 완료!");
+        navigate("/service", { replace: true });
+      });
+    }
   };
 
   // const withdraw = () => {
@@ -126,16 +126,16 @@ const MYPAGE = () => {
                     height="25"
                     fill="currentColor"
                     style={{
-                      position: 'absolute',
-                      left: '37px',
-                      top: '30px',
-                      cursor: 'pointer',
-                      backgroundColor: 'rgb(242, 242, 242)',
-                      padding: '4px',
-                      borderRadius: '10px',
-                      textDecoration: 'none',
-                      fill: 'black',
-                      transition: 'all ease-in-out 0.15s'
+                      position: "absolute",
+                      left: "37px",
+                      top: "30px",
+                      cursor: "pointer",
+                      backgroundColor: "rgb(242, 242, 242)",
+                      padding: "4px",
+                      borderRadius: "10px",
+                      textDecoration: "none",
+                      fill: "black",
+                      transition: "all ease-in-out 0.15s",
                     }}
                     viewBox="0 0 16 16"
                   >
@@ -149,7 +149,7 @@ const MYPAGE = () => {
                   <form onSubmit={updateUserInfo}>
                     <div>
                       <input
-                        ref={nicknameRef}                      
+                        ref={nicknameRef}
                         type="text"
                         className="idInput"
                         value={nickname}
@@ -244,20 +244,22 @@ const MYPAGE = () => {
                     variant="outline-danger"
                     className="withdraw_button"
                     onClick={() => {
-                      axios({
-                        method: "delete",
-                        url: `http://15.165.98.14:8080/users/withdraw/${serialNumber}`,
-                        headers: {
-                          Authorization: `Bearer ${
-                            JSON.parse(localStorage.getItem("token"))
-                              .accessToken
-                          }`,
-                        },
-                      }).then(() => {
-                        console.log("회원탈퇴 성공!");
-                        localStorage.removeItem("token");
-                        navigate("/main", { replace: true });
-                      });
+                      if (window.alert("정말로 탈퇴하시겠습니까?")) {
+                        axios({
+                          method: "delete",
+                          url: `http://15.165.98.14:8080/users/withdraw/${serialNumber}`,
+                          headers: {
+                            Authorization: `Bearer ${
+                              JSON.parse(localStorage.getItem("token"))
+                                .accessToken
+                            }`,
+                          },
+                        }).then(() => {
+                          console.log("회원탈퇴 성공!");
+                          localStorage.removeItem("token");
+                          navigate("/main", { replace: true });
+                        });
+                      }
                     }}
                   >
                     회원탈퇴
