@@ -2,56 +2,78 @@ import React, { useEffect, useState, useRef } from "react";
 import Myheader from "../components/header";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import service1_1 from "../img/home_service1_1.png";
-import service1_2 from "../img/home_service1_2.png";
 import service2 from "../img/home_service2.png";
-import service3_1 from "../img/home_service3_1.png";
-import service3_2 from "../img/home_service3_2.png";
-import service3_3 from "../img/home_service3_3.png";
-import "../style/home.css"
+import box from "../img/꼬물.gif";
+import homecamera from "../img/homecamera.png";
+import skecamera from "../img/camera.gif";
+import family from "../img/hramonius_family.gif";
+import wifi_s from "../img/wifi_summary.png";
+import wifi from "../img/wifi.png";
+import camera_detec from "../img/camera_detec.png";
+import for_who from "../img/for.png";
+import "../style/home.css";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 
 const UncontrolledExample = () => {
   return (
     <center>
-      <Carousel style={{ width: "80%" }}>
+      <Carousel style={{ width: "100%" }}>
+        <Carousel.Item>
+          <img className="d-bloc" src={service2} height="500px" width="75%" />
+          <Carousel.Caption
+            style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+            className="caption"
+          >
+            <h3>
+              S.with 서비스는 WIFI 신호와 카메라를 활용하여
+              <br />
+              카메라에 보이지 않는 사각 지대까지 감지가 가능합니다.
+            </h3>
+            <p>
+              AI를 통한 실시간 위험감지가 가능하고 실시간 행동 추정으로 위험
+              상황 감지가 가능한 AI 서비스를 이용해서 집에서도 안심하고
+              지내세요!
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
 
         <Carousel.Item>
           <div className="image_container_1">
-            <img src={service1_1} alt="image1" />
-            <img src={service1_2} alt="image1" />
+            <img src={family} alt="image1" />
           </div>
-          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
-            <h3>집에서 한시라도 눈을 뗄 수가 없나요?</h3>
-            사랑하는 이들의 안전을 지키기 위해 많은 고민을 하고 있다면<br /> S.with 서비스를 이용하는 것은 어떠신가요?
+          <Carousel.Caption
+            style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+            className="caption"
+          >
+            <h3>영유아부터 어르신까지</h3>
+            <p>
+              {" "}
+              나이에 따른 사용자 맞춤형 서비스를 제공합니다.
+              <br /> S.with 서비스를 이용하는 것은 어떠신가요?
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
 
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={service2}
-            width="100%"
-            height="500px"
-            alt="2nd slide"
-            style={{ opacity: "0.7" }}
-          />
-          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
-            <h3>S.with 서비스는 WIFI와 IP카메라를 활용한<br /> 위험 상황 감지가 가능합니다!</h3>
-            실시간 행동 추정으로 위험 상황 감지가 가능한 AI 서비스를 이용해서 집에서도 안심하고 지내세요!
-          </Carousel.Caption>
-        </Carousel.Item>
-        
-        <Carousel.Item>
-          <div className="image_container_3">
-            <img src={service3_1} alt="image1" width={"37%"} />
-            <img src={service3_2} alt="image2" width={"26%"} />
-            <img src={service3_3} alt="image3" width={"37%"} />
-          </div>
-          <Carousel.Caption style={{ color: "white", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+          <img src={box} alt="image1" height="500" />
+          <Carousel.Caption
+            style={{
+              color: "white",
+              backgroundColor: "rgba(0, 0, 0, 0.8)",
+              marginBottom: "370px",
+              width: "500px",
+              margin: "345px auto",
+            }}
+            className="caption"
+          >
             <h3>안전사고가 일어나도 걱정마세요!</h3>
-            S.with 서비스는 위험 상황 발생 즉시 알림을 보내 골든 타임을 확보하고,<br />
-            빠른 대처를 통해 2차 사고 예방이 가능합니다.<br />이제 고민을 덜고, 사랑하는 이들을 위해 S.with 서비스를 선택하세요.
+            <p>
+              {" "}
+              S.with 서비스는 위험 상황 발생 즉시 알림을 보내 골든 타임을
+              확보하고,
+              <br />
+              빠른 대처를 통해 2차 사고 예방이 가능합니다.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
@@ -93,33 +115,140 @@ const HOME = () => {
         <UncontrolledExample />
       </div>
 
-      <div style={{ marginBottom: "20px" }}>
-        <center><h1><b>메인 서비스 소개</b></h1></center>
-      </div>
-
       <div className="main_feature">
         <div style={{ flex: 1 }}>
           <div className="feature_name">
-            <center><b>WIFI Pose estimation</b></center>
+            <center>
+              <b>WIFI Signal</b>
+            </center>
           </div>
-          <div className="" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "200px" }}>
-            <img src="https://cdn.icon-icons.com/icons2/1104/PNG/512/wifi_78927.png" width={"50%"} height={"100%"} alt="Image 1" />
+          <div
+            class=""
+            style={{
+              display: "flex",
+              "flex-direction": "column",
+              "align-items": "center",
+              "justify-content": "center",
+              height: "200px",
+            }}
+          >
+            <svg
+              viewBox="-4.5 0 99 99"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                {" "}
+                <g
+                  id="Wifi_Modem"
+                  data-name="Wifi Modem"
+                  transform="translate(-715.03 -211.142)"
+                >
+                  {" "}
+                  <path
+                    id="Path_61"
+                    data-name="Path 61"
+                    d="M715.03,256.144a45,45,0,1,1,45,45A45,45,0,0,1,715.03,256.144Z"
+                    fill="#b6c6ad"
+                  ></path>{" "}
+                  <g id="Group_25" data-name="Group 25">
+                    {" "}
+                    <g id="Group_22" data-name="Group 22">
+                      {" "}
+                      <path
+                        id="Path_62"
+                        data-name="Path 62"
+                        d="M750.607,242.788a13.224,13.224,0,0,1,9.415-3.9h.005a13.25,13.25,0,0,1,9.427,3.909,3,3,0,0,0,4.243-4.241,19.2,19.2,0,0,0-13.668-5.668h-.007a19.177,19.177,0,0,0-13.659,5.661,3,3,0,0,0,4.244,4.24Z"
+                        fill="#293a56"
+                      ></path>{" "}
+                    </g>{" "}
+                    <g id="Group_23" data-name="Group 23">
+                      {" "}
+                      <path
+                        id="Path_63"
+                        data-name="Path 63"
+                        d="M760.066,244.117a13.161,13.161,0,0,0-9.376,3.89,3,3,0,1,0,4.247,4.238,7.2,7.2,0,0,1,5.129-2.128h0a7.242,7.242,0,0,1,5.153,2.143,3,3,0,0,0,4.248-4.237,13.2,13.2,0,0,0-9.4-3.906Z"
+                        fill="#293a56"
+                      ></path>{" "}
+                    </g>{" "}
+                    <g id="Group_24" data-name="Group 24">
+                      {" "}
+                      <path
+                        id="Path_64"
+                        data-name="Path 64"
+                        d="M798.227,258.39a3,3,0,0,0-3.948,1.555l-9.65,22.2h-21.6v-23a3,3,0,0,0-6,0v23h-21.6l-9.651-22.2a3,3,0,1,0-5.5,2.393l8.614,19.81a8.381,8.381,0,0,0-8.307,9.241l.913,10.049a9.765,9.765,0,0,0,9.531,8.7h58a9.764,9.764,0,0,0,9.531-8.7l.914-10.049a8.381,8.381,0,0,0-8.307-9.241l8.613-19.81A3,3,0,0,0,798.227,258.39ZM793.5,290.846l-.913,10.048a3.74,3.74,0,0,1-3.556,3.248h-58a3.739,3.739,0,0,1-3.555-3.248l-.914-10.048a2.4,2.4,0,0,1,2.469-2.7h14.5v5a3,3,0,0,0,6,0v-5h3v5a3,3,0,0,0,6,0v-5h3v5a3,3,0,0,0,6,0v-5h3v5a3,3,0,0,0,6,0v-5h14.5a2.395,2.395,0,0,1,2.469,2.7Z"
+                        fill="#293a56"
+                      ></path>{" "}
+                    </g>{" "}
+                  </g>{" "}
+                </g>{" "}
+              </g>
+            </svg>
           </div>
           <div className="view_button">
-            <button className="view_detail" onClick={handleScrollToFeatureDetail1}>자세히 알아보기</button>
+            <button
+              className="view_detail"
+              onClick={handleScrollToFeatureDetail1}
+            >
+              자세히 알아보기
+            </button>
           </div>
         </div>
-
+        <div className="plus_icon">
+          <svg
+            width="120px"
+            height="120px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              {" "}
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12ZM12.5 5.5C13.0523 5.5 13.5 5.94772 13.5 6.5V10.5H17.5C18.0523 10.5 18.5 10.9477 18.5 11.5V12.5C18.5 13.0523 18.0523 13.5 17.5 13.5H13.5V17.5C13.5 18.0523 13.0523 18.5 12.5 18.5H11.5C10.9477 18.5 10.5 18.0523 10.5 17.5V13.5H6.5C5.94772 13.5 5.5 13.0523 5.5 12.5V11.5C5.5 10.9477 5.94772 10.5 6.5 10.5H10.5V6.5C10.5 5.94772 10.9477 5.5 11.5 5.5H12.5Z"
+                fill="#000000"
+              ></path>{" "}
+            </g>
+          </svg>
+        </div>
         <div style={{ flex: 1 }}>
           <div className="feature_name">
-            <center><b>IP Camera</b></center>
+            <center>
+              <b>Home Camera</b>
+            </center>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "200px" }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNVxHHVicJIFxqQLE1neN1YxY7MzqrbcTX2w&usqp=CAU"
-              width={"50%"} height={"100%"} alt="Image 3" />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "200px",
+            }}
+          >
+            <img src={homecamera} width={"50%"} height={"100%"} alt="Image 3" />
           </div>
           <div className="view_button">
-            <button className="view_detail" onClick={handleScrollToFeatureDetail2}>자세히 알아보기</button>
+            <button
+              className="view_detail"
+              onClick={handleScrollToFeatureDetail2}
+            >
+              자세히 알아보기
+            </button>
           </div>
         </div>
       </div>
@@ -129,20 +258,50 @@ const HOME = () => {
           <hr style={{ width: "80%" }} />
         </center>
       </div>
+      <div className="for_WHO">
+        <center>
+          <img src={for_who} style={{ marginBottom: "20px" }} />
+        </center>
+      </div>
       <div>
-        <div className="feature_detail" id="feature_detail1" ref={featureDetail1Ref}>
+        <div
+          className="feature_detail"
+          id="feature_detail1"
+          ref={featureDetail1Ref}
+        >
           <div className="feature_detail1">
-            <h2>WIFI Pose estimation</h2>
-            WIFI Pose Estimation(와이파이 포즈 추정)은 Wi-Fi 신호를 이용하여 사용자의 위치와 동작을 추정하는 기술입니다.
-            일반적으로 Wi-Fi 신호는 무선 액세스 포인트(AP)를 통해 발신되고 수신되는데, 이 신호의 특성을 활용하여 사용자의 위치를 추정하고 동작을 감지할 수 있습니다.<br /><br />
-            Wi-Fi Pose Estimation은 주로 다음과 같은 과정을 거쳐 동작합니다.<br /><br />
-            1. 신호 수집 : Wi-Fi 액세스 포인트(AP)에서 발신되는 Wi-Fi 신호를 수집합니다.<br />
-            2. 신호 처리 : 수집된 Wi-Fi 신호 데이터를 처리하여 신호의 세기, 강도, 도착 시간 등과 같은 특성을 추출합니다.<br />
-            3. 포즈(위치와 동작) 추정 : 추출된 Wi-Fi 신호 특성을 기반으로 사용자의 동작을 추정합니다. 이를 위해 머신러닝, 딥러닝 및 신호 처리 기술 등이 사용됩니다.<br />
-            4. 결과 제공 : 추정된 사용자의 동작 정보를 활용하여 위험 상황을 감지하고 이용자에게 알림을 제공합니다.
+            <img
+              src={wifi_s}
+              style={{ height: "85%", width: "90%", marginLeft: "30px" }}
+            />
+            {/* <h2>WIFI 신호를 사용하여 더욱 정확하게!!</h2>
+            <br />
+            <p className="wifi_p">
+              가정에 있는 wifi 공유기를 사용하여 신호를 처리하고 AI 모델을
+              사용하여 위험을 감지합니다! <br />
+              카메라 없이 단독으로도 위험을 감지할 수 있을 뿐만 아니라, 카메라
+              화면에서 벗어나는 사각지대 까지의 위험상황을 파악할 수 있습니다.
+            </p>
+            <br />
+            Wi-Fi Pose Estimation은 다음과 같은 과정을 거쳐 동작합니다.
+            <br />
+            <br />
+            1. 신호 수집 :기기에 내장된 wifi공유기를 활용하여 발신되는 Wi-Fi
+            신호를 수집합니다.
+            <br />
+            2. 신호 처리 : 수집된 Wi-Fi 신호 데이터를 처리하여 신호의 세기,
+            강도, 도착 시간 등과 같은 특성을 추출합니다.
+            <br />
+            3. 포즈(위치와 동작) 추정 : 추출된 Wi-Fi 신호 특성을 기반으로
+            사용자의 동작을 추정합니다. 이를 위해 머신러닝, 딥러닝 및 신호 처리
+            기술 등이 사용됩니다.
+            <br />
+            4. 결과 제공 : 추정된 사용자의 동작 정보를 활용하여 위험 상황을
+            감지하고 이용자에게 알림을 제공합니다.
+            <h1 style={{ fontsize: 30 }}>&#10004; HTML</h1> */}
           </div>
           <div className="feature_detail1_picture">
-            <img src="https://d3i71xaburhd42.cloudfront.net/108c50a2de9ea4e912e51d07ae90705221cbbc48/5-Figure1-1.png" style={{ height: "400px" }} alt="asdf" />
+            <img src={wifi} style={{ height: "400px" }} alt="asdf" />
           </div>
         </div>
       </div>
@@ -153,23 +312,16 @@ const HOME = () => {
         </center>
       </div>
       <div>
-        <div className="feature_detail" id="feature_detail2" ref={featureDetail2Ref}>
-          <div className="feature_detail2">
-            <h2>IP Camera</h2>
-            IP 카메라 포즈 추정(IP camera pose estimation)은 컴퓨터 비전과 컴퓨터 그래픽스 분야에서 사용되는 기술입니다. 이 기술은 IP 카메라에서 캡처된 영상을 기반으로 카메라의 위치와 방향(포즈)을 추정하는 것을 의미합니다.<br /><br />
-
-            IP 카메라 포즈 추정은 주로 다음과 같은 과정을 거칩니다.<br /><br />
-
-            1. 영상 처리 : IP 카메라로부터 수신된 영상을 처리합니다. 이 단계에서는 영상 내의 주요 특징점을 탐지하거나 추출하는 등의 작업이 수행됩니다.<br />
-
-            2. 특징점 매칭 : 영상 내의 특징점들을 다른 프레임이나 3D 모델의 특징점과 매칭시킵니다. 이를 통해 영상의 특징점들과 3D 공간 상의 대응점을 찾을 수 있습니다.<br />
-
-            3. 카메라 포즈 추정 : 매칭된 특징점들을 사용하여 카메라의 위치와 방향을 추정합니다.<br />
-
-            4. 결과 제공 : 추정된 카메라 포즈 정보를 활용하여 다양한 응용분야에서 활용할 수 있습니다. 예를 들어 가상 현실(VR), 확장 현실(AR), 실시간 모션 추적 등에 활용될 수 있습니다.
-          </div>
+        <div
+          className="feature_detail"
+          id="feature_detail2"
+          ref={featureDetail2Ref}
+        >
           <div className="feature_detail2_picture">
-            <img src="https://i.ytimg.com/vi/W1ZNFfftx2E/maxresdefault.jpg" style={{ height: "400px" }} alt="asdf" />
+            <img src={skecamera} style={{ height: "400px" }} alt="asdf" />
+          </div>
+          <div className="feature_detail2">
+            <img src={camera_detec} style={{ height: "90%" }} />
           </div>
         </div>
       </div>
