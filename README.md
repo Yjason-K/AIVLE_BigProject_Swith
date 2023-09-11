@@ -6,7 +6,7 @@
 <h3>
 <p align="center">
 <strong>
-<a href = https://d1t41u00w18ofo.cloudfront.net/main">Swith 서비스 바로가기</a></strong><br>
+<a href = https://www.swith.kr">Swith 서비스 바로가기</a></strong><br>
 </p>
 </h3>
 
