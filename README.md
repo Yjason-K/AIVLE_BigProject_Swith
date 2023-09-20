@@ -90,6 +90,9 @@
 ﻿<div align="center">
 <p><img src="/doc/web/second.png"></p>
 </div>
+<div align="center">
+<p><img src="/doc/web/service.png"></p>
+</div>
 ﻿<div align="center">
 <p><img src="/doc/web/team.png"></p>
 </div>
