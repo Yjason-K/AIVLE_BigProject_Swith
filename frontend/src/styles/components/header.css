@@ -1,0 +1,74 @@
+:root {
+  --content-width: 1000px;
+  --breakpoint: 799px;
+  --nav-height: 80px;
+  --nav-background: #ebe2cd;
+  --nav-font-color: #353535;
+  --link-hover-color: #c2baa6;
+  --noto-font: "Noto Sans KR", sans-serif;
+}
+
+.header {
+  height: var(--nav-height);
+  max-height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  background-color: var(--nav-background);
+}
+
+/* 헤더 로고 부분 */
+.logo_container {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+.logo_button {
+  padding: 0 0 0 0;
+  height: 70%;
+  /* margin-top: 10%;
+  margin-bottom: 10%; */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.swith_logo {
+  height: 100%;
+}
+
+/* nav 부분 */
+.main_nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.main_nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.main_nav ul li {
+  margin-right: 20px;
+}
+
+.main_nav ul li:last-child {
+  margin-right: 0;
+}
+
+.main_nav ul li a {
+  text-decoration: none;
+  color: var(--nav-font-color);
+  font-family: var(--noto-font);
+  font-weight: 900;
+  font-size: 2.1rem;
+}
+
+.main_nav ul li a:hover {
+  color: var(--link-hover-color);
+}

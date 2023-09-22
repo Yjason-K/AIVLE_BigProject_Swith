@@ -1,3 +1,4 @@
+import HEADER from "./components/header";
 import HOME from "./pages/home";
 import NEWPOST from "./pages/newpost";
 import POSTEDIT from "./pages/postedit";
@@ -18,7 +19,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <HEADER />
         <Routes>
+          {/* 헤더 */}
           {/* 홈헤이지 */}
           <Route path="/" element={<Navigate to="/main" replace />} />
           <Route path="/main" element={<HOME />} />
