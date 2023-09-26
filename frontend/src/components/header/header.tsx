@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import logo from "../assets/imgs/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { loginState } from "../libs/atoms/state";
+import { loginState } from "../../libs/atoms/state";
 import "../styles/components/header.css";
 
 const HEADER = () => {

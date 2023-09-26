@@ -1,4 +1,4 @@
-import HEADER from "./components/header";
+import HEADER from "./components/header/header";
 import HOME from "./pages/home";
 import NEWPOST from "./pages/newpost";
 import POSTEDIT from "./pages/postedit";
